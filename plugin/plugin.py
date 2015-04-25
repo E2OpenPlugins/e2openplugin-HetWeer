@@ -130,8 +130,8 @@ class secondmenu(Screen):
 			#Temperatuur
 			self.options = []
 			self.options.append((_("Knmi Actueel"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuur.000001.png&extension=png",'knmi actuele temperatuur kaart \n\nKaart is stilstaand.'))
-			self.options.append((_("Knmi Maximum"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=maxtemperatuur.000001.png&extension=png",'knmi maximum temperatuur kaart \n\nKaart is stilstaand.'))
-                        self.options.append((_("Knmi Minimum"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=mintemperatuur.000001.png&extension=png",'knmi actuele minimum temperatuur kaart \n\nKaart is stilstaand.'))
+			self.options.append((_("Knmi Maximum"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurmax.000001.png&extension=png",'knmi maximum temperatuur kaart \n\nKaart is stilstaand.'))
+                        self.options.append((_("Knmi Minimum"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurmin.000001.png&extension=png"",'knmi actuele minimum temperatuur kaart \n\nKaart is stilstaand.'))
                         self.options.append((_("Knmi Grond"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurgrond.000001.png&extension=png",'knmi actuele grond temperatuur kaart \n\nKaart is stilstaand.'))
                         self.options.append((_("Knmi Wind"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=wind.000001.png&extension=png",'knmi actuele wind kaart \n\nKaart is stilstaand.'))
                         self.options.append((_("Knmi Zicht"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=zicht.000001.png&extension=png",'knmi actuele zicht kaart \n\nKaart is stilstaand.'))
