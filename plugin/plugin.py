@@ -135,6 +135,7 @@ class secondmenu(Screen):
                         self.options.append((_("Knmi Grond"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurgrond.000001.png&extension=png",'knmi actuele grond temperatuur kaart \n\nKaart is stilstaand.'))
                         self.options.append((_("Knmi Wind"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=wind.000001.png&extension=png",'knmi actuele wind kaart \n\nKaart is stilstaand.'))
                         self.options.append((_("Knmi Zicht"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=zicht.000001.png&extension=png",'knmi actuele zicht kaart \n\nKaart is stilstaand.'))
+                        self.options.append((_("Neerslag afgelopen uur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=neerslaguur.000001.png&extension=png",'knmi actuele neerslag van het afgelopen uur \n\nKaart is stilstaand.'))
                         self.options.append((_("Gevoelstemperatuur"),"http://www.onweer-online.nl/images/maps/knmi_windchill.png",'Actuele gevoelstemperatuur kaart \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza Weerbeeld"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza \n\nKaart is stilstaand.'))
