@@ -14,7 +14,7 @@ from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_PLUGINS
 from Screens.HelpMenu import HelpableScreen
 from Components.FileList import FileList
 
-labeltext = "=--Weer App--=\nMade by DEG 2012~2015!"
+labeltext = "=--Weer App--=\nMade by DEG & PD1LOI 2012~2015!"
 
 def getScale():
 	return AVSwitch().getFramebufferScale()
@@ -188,8 +188,8 @@ class secondmenu(Screen):
 		elif self.iweertext == "Sat foto's":
 			#Pluimen
 			self.options = []
+			self.options.append((_("Benelux"),"http://sat24.com/nl/nl"))
 			self.options.append((_("Europa"),"http://sat24.com/nl/eu"))
-                        self.options.append((_("Benelux"),"http://sat24.com/nl/nl"))
 			self.options.append((_("De alpen"),"http://sat24.com/nl/alps"))
 			self.options.append((_("Duitsland"),"http://sat24.com/nl/de"))
 			self.options.append((_("Groot Brittanie"),"http://sat24.com/nl/gb"))
@@ -210,8 +210,8 @@ class secondmenu(Screen):
 		elif self.iweertext == "Sat infrarood kaarten":
 			#Pluimen
 			self.options = []
-			self.options.append((_("Europa"),"http://sat24.com/nl/eu?ir=true"))
 			self.options.append((_("Benelux"),"http://sat24.com/nl/nl?ir=true"))
+			self.options.append((_("Europa"),"http://sat24.com/nl/eu?ir=true"))
 			self.options.append((_("De alpen"),"http://sat24.com/nl/alps?ir=true"))
 			self.options.append((_("Duitsland"),"http://sat24.com/nl/de?ir=true"))
 			self.options.append((_("Groot Brittanie"),"http://sat24.com/nl/gb?ir=true"))
