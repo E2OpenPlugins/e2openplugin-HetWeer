@@ -140,7 +140,7 @@ class secondmenu(Screen):
                         self.options.append((_("Neerslag afgelopen 24 uur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=neerslag24uur.000001.png&extension=png",'Knmi actuele neerslag van het afgelopen 24 uur \n\nKaart is stilstaand.'))
 			self.options.append((_("Relative Luchtvochtigheid"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=luchtvochtigheid.000001.png&extension=png",'Luchtvochtigheid \n\nKaart is stilstaand.'))
 			self.options.append((_("Zonuren in Nederland"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=zonneschijn.000001.png&extension=png",'Knmi aantal zonuren in Nederland \n\nKaart is stilstaand.'))
-                        self.options.append((_("Gevoelstemperatuur"),"http://www.onweer-online.nl/images/maps/knmi_windchill.png",'Actuele gevoelstemperatuur kaart \n\nKaart is stilstaand.'))
+                        self.options.append((_("Gevoelstemperatuur"),"http://www.buienradar.nl//image/?type=weathermap-large&amp;fn=gevoelstemperatuur.000001.png&amp;extension=png",'Actuele gevoelstemperatuur kaart \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza Weerbeeld"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
