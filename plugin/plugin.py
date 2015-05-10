@@ -37,7 +37,7 @@ class Weermenu(Screen):
 		self.weer.append("Neerslag Radars")
 		self.weer.append("Sat foto's")
 		self.weer.append("Sat infrarood kaarten")
-		self.weer.append("Temperatuur kaarten")
+		self.weer.append("Temp & Waarschuwing kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
 		self["list"].setList(self.weer)
@@ -126,7 +126,7 @@ class secondmenu(Screen):
 			self.options.append((_("Buienradar UK"),"http://www.meteoradar.co.uk/",'Bekijk de buien boven United Kingdom.'))
 			self["list"].setList(self.options)
 
-		elif self.iweertext == 'Temperatuur kaarten':
+		elif self.iweertext == 'Temp & Waarschuwing kaarten':
 			#Temperatuur
 			self.options = []
 			self.options.append((_("Knmi Actuele temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuur.000001.png&extension=png",'knmi actuele temperatuur kaart \n\nKaart is stilstaand.'))
@@ -146,6 +146,22 @@ class secondmenu(Screen):
 			self.options.append((_("Uv Straling"),"http://www.buienradar.nl/image/other?type=uv",'Uv stralen grafiek \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza Weerbeeld"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza \n\nKaart is stilstaand.'))
+                        self.options.append((_("Waarschuwingen in Nederland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_neder.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Groningen"),"http://www.onweer-online.nl/images/maps/waarschuwingen_groni.png",'Waarschuwingen in Groningen. \n\nKaart is stilstaand.'))
+	                self.options.append((_("Waarschuwingen in Friesland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_fries.png",'Waarschuwingen in Friesland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Drente"),"http://www.onweer-online.nl/images/maps/waarschuwingen_drent.png",'Waarschuwingen in Drente. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Overijsel"),"http://www.onweer-online.nl/images/maps/waarschuwingen_overi.png",'Waarschuwingen in Overijsel. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Gelderland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_gelde.png",'Waarschuwingen in Gelderland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Flevoland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_flevo.png",'Waarschuwingen in Flevoland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Utrecht"),"http://www.onweer-online.nl/images/maps/waarschuwingen_utrec.png",'Waarschuwingen in Utrecht. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in N Holland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_noord.png",'Waarschuwingen in N Holland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Z Holland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_zuid-.png",'Waarschuwingen in Z Holland. \n\nKaart is stilstaand.'))
+	                self.options.append((_("Waarschuwingen in Zeeland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_zeela.png",'Waarschuwingen in Zeeland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Noordbrabant"),"http://www.onweer-online.nl/images/maps/waarschuwingen_braba.png",'Waarschuwingen in Noordbrabant. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Limburg"),"http://www.onweer-online.nl/images/maps/waarschuwingen_limbu.png",'Waarschuwingen in Limburg. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Nederland Vandaag"),"http://www.onweer-online.nl/images/maps/knmi_vandaag.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Nederland Morgen"),"http://www.onweer-online.nl/images/maps/knmi_morgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Nederland Overmorgen"),"http://www.onweer-online.nl/images/maps/knmi_overmorgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
 
