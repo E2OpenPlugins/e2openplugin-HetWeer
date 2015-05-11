@@ -37,7 +37,8 @@ class Weermenu(Screen):
 		self.weer.append("Neerslag Radars")
 		self.weer.append("Sat foto's")
 		self.weer.append("Sat infrarood kaarten")
-		self.weer.append("Temp & Waarschuwing kaarten")
+                self.weer.append("Temperatuur kaarten")
+                self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
 		self["list"].setList(self.weer)
@@ -72,7 +73,7 @@ class secondmenu(Screen):
 			print 'Path doesnt exists! Make it.'
 			os.makedirs(dir)
 		if self.iweertext == 'pluim2':
-			self["Text"] = Label(_("=--%s--=\nMade by DEG 2012~2015!") %(ktekst))
+			self["Text"] = Label(_("=--%s--=\nMade by DEG & PD1LOI 2012~2015!") %(ktekst))
 		else:
 			self["Text"] = Label(labeltext)
 		self["Info"] = Label("")
@@ -126,7 +127,7 @@ class secondmenu(Screen):
 			self.options.append((_("Buienradar UK"),"http://www.meteoradar.co.uk/",'Bekijk de buien boven United Kingdom.'))
 			self["list"].setList(self.options)
 
-		elif self.iweertext == 'Temp & Waarschuwing kaarten':
+		elif self.iweertext == 'Temperatuur kaarten':
 			#Temperatuur
 			self.options = []
 			self.options.append((_("Knmi Actuele temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuur.000001.png&extension=png",'knmi actuele temperatuur kaart \n\nKaart is stilstaand.'))
@@ -146,6 +147,12 @@ class secondmenu(Screen):
 			self.options.append((_("Uv Straling"),"http://www.buienradar.nl/image/other?type=uv",'Uv stralen grafiek \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza Weerbeeld"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza \n\nKaart is stilstaand.'))
+                        self["list"].setList(self.options)
+                        
+                        
+                elif self.iweertext == 'Waarschuwings kaarten':
+			#waarschuwing
+			self.options = []
                         self.options.append((_("Waarschuwingen in Nederland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_neder.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Groningen"),"http://www.onweer-online.nl/images/maps/waarschuwingen_groni.png",'Waarschuwingen in Groningen. \n\nKaart is stilstaand.'))
 	                self.options.append((_("Waarschuwingen in Friesland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_fries.png",'Waarschuwingen in Friesland. \n\nKaart is stilstaand.'))
@@ -725,7 +732,7 @@ class PictureScreen(Screen):
 	skin="""
 		<screen name="Na Regen Komt Zonneschijn" position="center,center" size="%d,%d" title="Picture Screen" backgroundColor="noTransBG" scrollbarMode="showOnDemand" >
 			<widget name="myPic" position="center,center" size="%d,%d" zPosition="1" alphatest="on" scrollbarMode="showOnDemand" />
-		</screen>"""%( sz_w, sz_h, (sz_w - 55), (sz_h - 50) )
+		</screen>"""%( sz_w, sz_h, (sz_w - 75), (sz_h - 70) )
 
 
 	def __init__(self, session):
