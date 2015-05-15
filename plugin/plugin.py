@@ -123,7 +123,7 @@ class secondmenu(Screen):
 			self.options.append((_("Sneeuw NL"),"http://www.onweer-online.nl/images/maps/sneeuwradar.gif",'Sneeuwt het in Nederland ja of nee!'))
 			self.options.append((_("Buienradar Belgie"),"http://www.buienradar.be",'Live buienradar voor de Belgen.'))
 			self.options.append((_("Buienradar Duitsland"),"http://www.niederschlagsradar.de",'Live buienradar voor de Duitsers.'))
-			self.options.append((_("Buienradar UK"),"http://www.meteoradar.co.uk/",'Bekijk de buien boven United Kingdom.'))
+			#self.options.append((_("Buienradar UK"),"http://www.meteoradar.co.uk/",'Bekijk de buien boven United Kingdom.'))
 			self["list"].setList(self.options)
 
 		elif self.iweertext == 'Temperatuur kaarten':
