@@ -157,6 +157,7 @@ class secondmenu(Screen):
 			#waarschuwing
 			self.options = []
                         self.options.append((_("Waarschuwingen in Nederland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_neder.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Waarschuwingen in Kustdistricten"),"http://www.buienradar.nl/image/?type=weerwaarschuwing&fn=nederland-kust.png",'Waarschuwingen langs de kust. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Groningen"),"http://www.onweer-online.nl/images/maps/waarschuwingen_groni.png",'Waarschuwingen in Groningen. \n\nKaart is stilstaand.'))
 	                self.options.append((_("Waarschuwingen in Friesland"),"http://www.onweer-online.nl/images/maps/waarschuwingen_fries.png",'Waarschuwingen in Friesland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Drente"),"http://www.onweer-online.nl/images/maps/waarschuwingen_drent.png",'Waarschuwingen in Drente. \n\nKaart is stilstaand.'))
