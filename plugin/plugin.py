@@ -137,6 +137,7 @@ class secondmenu(Screen):
                         self.options.append((_("Maximum Wind"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=windmax.000001.png&extension=png",'Knmi maximum wind. \n\nKaart is stilstaand.'))
 			self.options.append((_("Windsnelheid midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6269&type=windspeed",'Windsnelheid in De Bilt. \n\nKaart is stilstaand.'))
 			self.options.append((_("Windrichting midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6260&type=wind",'Windrichting Midden Nederland. \n\nKaart is stilstaand.'))
+			self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
 			self.options.append((_("Luchtdruk midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6260&type=airpressure",'Luchtdruk in De Bilt. \n\nKaart is stilstaand.'))
 			self.options.append((_("Actuele Zicht"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=zicht.000001.png&extension=png",'Knmi actuele zicht kaart. \n\nKaart is stilstaand.'))
                         self.options.append((_("Neerslag afgelopen uur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=neerslaguur.000001.png&extension=png",'Knmi actuele neerslag van het afgelopen uur. \n\nKaart is stilstaand.'))
