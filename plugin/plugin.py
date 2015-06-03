@@ -183,6 +183,7 @@ class secondmenu(Screen):
 		elif self.iweertext == 'Onweer kaarten':
 			#Onweer
 			self.options = []
+			self.options.append((_("Atlantische Oceaan"),"http://www.onweer-online.nl/images/maps/eumetsat.jpg",'Atlantische Oceaan. \n\nKaart is stilstaand.'))
 			self.options.append((_("Bliksem.nu"),"http://www.onweer-online.nl/images/maps/Bliksem.nu.png",'Onweer kaart van bliksem.nu \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Woerden"),"http://www.onweer-online.nl/images/maps/weerstation_woerden.png",'Onweer kaart van weerstation Woerden \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Mechelen"),"http://www.onweer-online.nl/images/maps/weerstation_mechelen.png",'Onweer kaart van weerstation Mechelen \n\nKaart is stilstaand.'))
