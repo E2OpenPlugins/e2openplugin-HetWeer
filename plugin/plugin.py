@@ -148,7 +148,7 @@ class secondmenu(Screen):
                         self.options.append((_("Actuele gevoelstemperatuur"),"http://www.buienradar.nl//image/?type=weathermap-large&fn=gevoelstemperatuur.000001.png&amp;extension=png",'Actuele gevoelstemperatuur kaart. \n\nKaart is stilstaand.'))
 			self.options.append((_("Hoogste temperatuur Wereldkaart"),"http://www.onweer-online.nl/images/maps/tempwunderground.gif",'Actuele hoogste temperatuur kaart. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zeetemperatuur Noordelijk Halfrond"),"http://www7320.nrlssc.navy.mil/hycomARC/navo/arcticsstnowcast.gif",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
-			self.options.append((_("Zeetemperatuur Noordzee"),"http://www.onweer-online.nl/images/maps/zeetempknmi.png",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
+			self.options.append((_("Zeetemperatuur Noordzee"),"http://www.buienradar.nl/image/seatemperature?region=nl",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zeetemperatuur Europa"),"http://www.buienradar.nl/image/seatemperature?region=eu",'Kaart wordt niet elke dag vernieuwt,er worden maar 28 metingen per week verricht.. \n\nKaart is stilstaand.'))
 			self.options.append((_("Uv Straling"),"http://www.buienradar.nl/image/other?type=uv",'Uv stralen grafiek. \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza. \n\nKaart is stilstaand.'))
