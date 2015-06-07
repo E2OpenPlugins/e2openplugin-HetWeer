@@ -41,6 +41,7 @@ class Weermenu(Screen):
                 self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
+		self.weer.append("Overige kaarten"
 		self["list"].setList(self.weer)
 
 	def cancel(self):
@@ -137,7 +138,6 @@ class secondmenu(Screen):
                         self.options.append((_("Maximum Wind"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=windmax.000001.png&extension=png",'Knmi maximum wind. \n\nKaart is stilstaand.'))
 			self.options.append((_("Windsnelheid midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6269&type=windspeed",'Windsnelheid in De Bilt. \n\nKaart is stilstaand.'))
 			self.options.append((_("Windrichting midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6260&type=wind",'Windrichting Midden Nederland. \n\nKaart is stilstaand.'))
-			self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
 			self.options.append((_("Luchtdruk midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6260&type=airpressure",'Luchtdruk in De Bilt. \n\nKaart is stilstaand.'))
 			self.options.append((_("Actuele Zicht"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=zicht.000001.png&extension=png",'Knmi actuele zicht kaart. \n\nKaart is stilstaand.'))
                         self.options.append((_("Neerslag afgelopen uur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=neerslaguur.000001.png&extension=png",'Knmi actuele neerslag van het afgelopen uur. \n\nKaart is stilstaand.'))
@@ -179,11 +179,15 @@ class secondmenu(Screen):
                         #self.options.append((_("Estofex storm west Europa"),"http://www.onweer-online.nl/images/maps/estofex.png",'European Storm Forecast Experiment. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
+                elif self.iweertext == 'Overige kaarten':
+		        self.options.append((_("Atlantische Oceaan"),"http://www.onweer-online.nl/images/maps/eumetsat.jpg",'Atlantische Oceaan. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
+			self.options.append((_("Temperatuur en Stroming"),"http://wxmaps.org/pix/euro4.00hr.png",'Actuele Temperatuur en Stroming in Europa.'))
+                        self["list"].setList(self.options)
 
 		elif self.iweertext == 'Onweer kaarten':
 			#Onweer
 			self.options = []
-			self.options.append((_("Atlantische Oceaan"),"http://www.onweer-online.nl/images/maps/eumetsat.jpg",'Atlantische Oceaan. \n\nKaart is stilstaand.'))
 			self.options.append((_("Bliksem.nu"),"http://www.onweer-online.nl/images/maps/Bliksem.nu.png",'Onweer kaart van bliksem.nu \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Woerden"),"http://www.onweer-online.nl/images/maps/weerstation_woerden.png",'Onweer kaart van weerstation Woerden \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Mechelen"),"http://www.onweer-online.nl/images/maps/weerstation_mechelen.png",'Onweer kaart van weerstation Mechelen \n\nKaart is stilstaand.'))
