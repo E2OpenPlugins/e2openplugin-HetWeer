@@ -41,7 +41,7 @@ class Weermenu(Screen):
                 self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
-		self.weer.append("Overige kaarten"
+		self.weer.append("Overige kaarten")
 		self["list"].setList(self.weer)
 
 	def cancel(self):
