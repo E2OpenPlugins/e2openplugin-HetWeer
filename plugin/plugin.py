@@ -134,6 +134,7 @@ class secondmenu(Screen):
 			self.options.append((_("Maximum temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurmax.000001.png&extension=png",'knmi maximum temperatuur kaart. \n\nKaart is stilstaand.'))
                         self.options.append((_("Minimum temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurmin.000001.png&extension=png",'Knmi actuele minimum temperatuur kaart. \n\nKaart is stilstaand.'))
                         self.options.append((_("Actuele grond temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurgrond.000001.png&extension=png",'Knmi actuele grond temperatuur kaart. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Actuele grond temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuurgrond.000001.png&extension=png",'Knmi actuele grond temperatuur kaart. \n\nKaart is stilstaand.'))
                         self.options.append((_("Actuele Wind"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=wind.000001.png&extension=png",'Knmi actuele wind kaart. \n\nKaart is stilstaand.'))
                         self.options.append((_("Maximum Wind"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=windmax.000001.png&extension=png",'Knmi maximum wind. \n\nKaart is stilstaand.'))
 			self.options.append((_("Windsnelheid midden Nederland"),"http://www.buienradar.nl/weatherstation/gaugeimage?stationCode=6269&type=windspeed",'Windsnelheid in De Bilt. \n\nKaart is stilstaand.'))
