@@ -34,14 +34,14 @@ class Weermenu(Screen):
 		self["myActionMap"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.cancel}, -1)
 
 		self.weer = []
-		self.weer.append("Neerslag Radars.")
-		self.weer.append("Sat foto's.")
-		self.weer.append("Sat infrarood kaarten.")
-                self.weer.append("Diverse Weer en Temperatuur kaarten.")
-                self.weer.append("Waarschuwings kaarten.")
-		self.weer.append("Onweer kaarten.")
-		self.weer.append("Pluimgrafieken.")
-		self.weer.append("Overige kaarten.")
+		self.weer.append("Neerslag Radars")
+		self.weer.append("Sat foto's")
+		self.weer.append("Sat infrarood kaarten")
+                self.weer.append("Diverse Weer en Temperatuur kaarten")
+                self.weer.append("Waarschuwings kaarten")
+		self.weer.append("Onweer kaarten")
+		self.weer.append("Pluimgrafieken")
+		self.weer.append("Overige kaarten")
 		self["list"].setList(self.weer)
 
 	def cancel(self):
@@ -127,7 +127,7 @@ class secondmenu(Screen):
 			#self.options.append((_("Buienradar UK"),"http://www.meteoradar.co.uk/",'Bekijk de buien boven United Kingdom.'))
 			self["list"].setList(self.options)
 
-		elif self.iweertext == 'Diverse Weer en Temperatuur kaarten.':
+		elif self.iweertext == 'Diverse Weer en Temperatuur kaarten':
 			#Temperatuur
 			self.options = []
 			self.options.append((_("Knmi Actuele temperatuur"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=temperatuur.000001.png&extension=png",'knmi actuele temperatuur kaart. \n\nKaart is stilstaand.'))
