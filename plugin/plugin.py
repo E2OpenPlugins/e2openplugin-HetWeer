@@ -36,7 +36,7 @@ class Weermenu(Screen):
 		self.weer = []
 		self.weer.append("Neerslag Radars.")
 		self.weer.append("Sat foto's.")
-		self.weer.append("Sat infrarood kaarten")
+		self.weer.append("Sat infrarood kaarten.")
                 self.weer.append("Diverse Weer en Temperatuur kaarten.")
                 self.weer.append("Waarschuwings kaarten.")
 		self.weer.append("Onweer kaarten.")
