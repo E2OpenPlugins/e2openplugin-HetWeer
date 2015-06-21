@@ -184,6 +184,7 @@ class secondmenu(Screen):
 		        self.options.append((_("Atlantische Oceaan"),"http://www.onweer-online.nl/images/maps/eumetsat.jpg",'Atlantische Oceaan, blauwe kleur is hoge bewolking met neerslag. \n\nKaart is stilstaand.'))
                         self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
 			self.options.append((_("Temperatuur en Stroming"),"http://wxmaps.org/pix/euro4.00hr.png",'Actuele Temperatuur en Stroming in Europa.'))
+                        self.options.append((_("Pollenradar Nederland"),"http://zomerradar.buienradar.nl/image/pollen",'Kaart voor hoeveelheid Pollen in Nederland .'))
                         self["list"].setList(self.options)
 
 		elif self.iweertext == 'Onweer kaarten':
