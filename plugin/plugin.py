@@ -185,6 +185,7 @@ class secondmenu(Screen):
                         self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
 			self.options.append((_("Temperatuur en Stroming"),"http://wxmaps.org/pix/euro4.00hr.png",'Actuele Temperatuur en Stroming in Europa.'))
                         self.options.append((_("Pollenradar Nederland"),"http://zomerradar.buienradar.nl/image/pollen",'Kaart voor hoeveelheid Pollen in Nederland .'))
+                        self.options.append((_("Aurora Forecast"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_n.png",'Aurora Ovation Oval Zichtbaar noordelicht.'))
                         self["list"].setList(self.options)
 
 		elif self.iweertext == 'Onweer kaarten':
