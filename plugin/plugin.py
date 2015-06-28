@@ -124,7 +124,6 @@ class secondmenu(Screen):
 			self.options.append((_("Sneeuw NL"),"http://www.onweer-online.nl/images/maps/sneeuwradar.gif",'Sneeuwt het in Nederland ja of nee!'))
 			self.options.append((_("Buienradar Belgie"),"http://www.buienradar.be",'Live buienradar voor de Belgen.'))
 			self.options.append((_("Buienradar Duitsland"),"http://www.niederschlagsradar.de",'Live buienradar voor de Duitsers.'))
-			#self.options.append((_("Buienradar UK"),"http://www.meteoradar.co.uk/",'Bekijk de buien boven United Kingdom.'))
 			self["list"].setList(self.options)
 
 		elif self.iweertext == 'Diverse Weer en Temperatuur kaarten':
@@ -177,7 +176,7 @@ class secondmenu(Screen):
 		        self.options.append((_("Waarschuwingen in Nederland Vandaag"),"http://www.onweer-online.nl/images/maps/knmi_vandaag.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Morgen"),"http://www.onweer-online.nl/images/maps/knmi_morgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Overmorgen"),"http://www.onweer-online.nl/images/maps/knmi_overmorgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
-                        #self.options.append((_("Estofex storm west Europa"),"http://www.onweer-online.nl/images/maps/estofex.png",'European Storm Forecast Experiment. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Waarschuwingen in Europa"),"http://www.meteoalarm.eu/maps/EU-150628.gif",'Waarschuwingen in Europa. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
                 elif self.iweertext == 'Overige kaarten':
@@ -185,7 +184,8 @@ class secondmenu(Screen):
                         self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
 			self.options.append((_("Temperatuur en Stroming"),"http://wxmaps.org/pix/euro4.00hr.png",'Actuele Temperatuur en Stroming in Europa.'))
                         self.options.append((_("Pollenradar Nederland"),"http://zomerradar.buienradar.nl/image/pollen",'Kaart voor hoeveelheid Pollen in Nederland .'))
-                        self.options.append((_("Aurora Forecast"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_n.png",'Aurora Ovation Oval Zichtbaar noordelicht.'))
+                        self.options.append((_("Aurora Forecast Noordpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_n.png",'Aurora Ovation Oval Zichtbaar noordelicht.'))
+                        self.options.append((_("Aurora Forecast Zuidpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_s.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
                         self["list"].setList(self.options)
 
 		elif self.iweertext == 'Onweer kaarten':
