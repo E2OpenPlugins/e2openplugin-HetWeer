@@ -235,7 +235,6 @@ class secondmenu(Screen):
 			self.options.append((_("De alpen"),"http://sat24.com/en/alps"))
 			self.options.append((_("Duitsland"),"http://sat24.com/en/de"))
 			self.options.append((_("Groot Brittanie"),"http://sat24.com/en/gb"))
-			self.options.append((_("Afrika"),"http://sat24.com/en/af"))
 			self.options.append((_("Italie"),"http://sat24.com/en/it"))
                         self.options.append((_("Turkye"),"http://sat24.com/en/tu"))
                         self.options.append((_("Zuid Oost Europa"),"http://sat24.com/en/se"))
@@ -246,6 +245,7 @@ class secondmenu(Screen):
                         self.options.append((_("Spanje en Portugal"),"http://sat24.com/en/sp"))
 			self.options.append((_("Frankrijk"),"http://sat24.com/en/fr"))
 			self.options.append((_("Canarische Eilanden"),"http://sat24.com/en/ce"))
+                        self.options.append((_("Afrika"),"http://sat24.com/en/af"))
                         self.options.append((_("Zuid Afrika"),"http://sat24.com/en/za"))
                         self["list"].setList(self.options)
 			
@@ -257,7 +257,6 @@ class secondmenu(Screen):
 			self.options.append((_("De alpen"),"http://sat24.com/en/alps?ir=true"))
 			self.options.append((_("Duitsland"),"http://sat24.com/en/de?ir=true"))
 			self.options.append((_("Groot Brittanie"),"http://sat24.com/en/gb?ir=true"))
-			self.options.append((_("Afrika"),"http://sat24.com/en/af?ir=true"))
                         self.options.append((_("Italie"),"http://sat24.com/en/it?ir=true"))
                         self.options.append((_("Turkye"),"http://sat24.com/en/tu?ir=true"))
                         self.options.append((_("Zuid Oost Europa"),"http://sat24.com/en/se?ir=true"))
@@ -268,6 +267,7 @@ class secondmenu(Screen):
 			self.options.append((_("Spanje en Portugal"),"http://sat24.com/en/sp?ir=true"))
 			self.options.append((_("Frankrijk"),"http://sat24.com/en/fr?ir=true"))
                         self.options.append((_("Canarische Eilanden"),"http://sat24.com/en/ce?ir=true"))
+                        self.options.append((_("Afrika"),"http://sat24.com/en/af?ir=true"))
                         self.options.append((_("Zuid Afrika"),"http://sat24.com/en/za?ir=true"))
 			self["list"].setList(self.options)
 		
