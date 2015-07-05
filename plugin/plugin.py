@@ -21,8 +21,8 @@ def getScale():
 
 class Weermenu(Screen):
 	skin = """
-		<screen position="center,center" size="360,290" title="Het weer" >
-			<widget name="list" position="10,0" size="350,190" scrollbarMode="showOnDemand" />
+		<screen position="center,center" size="560,490" title="Het weer" >
+			<widget name="list" position="10,0" size="450,290" scrollbarMode="showOnDemand" />
 			<widget name="Text" position="center,190" size="360,100" halign="center" font="Regular;22" />
                 </screen>"""
 
