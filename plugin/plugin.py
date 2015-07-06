@@ -176,7 +176,7 @@ class secondmenu(Screen):
 		        self.options.append((_("Waarschuwingen in Nederland Vandaag"),"http://www.onweer-online.nl/images/maps/knmi_vandaag.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Morgen"),"http://www.onweer-online.nl/images/maps/knmi_morgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Overmorgen"),"http://www.onweer-online.nl/images/maps/knmi_overmorgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
-                        #self.options.append((_("Waarschuwingen in Europa"),"http://www.meteoalarm.eu/maps/EU-150628.gif",'Waarschuwingen in Europa. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Waarschuwingen in Europa"),"http://www.unwetterzentrale.de/images/map/europe_index.png",'Waarschuwingen in Europa. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
                 elif self.iweertext == 'Overige kaarten':
