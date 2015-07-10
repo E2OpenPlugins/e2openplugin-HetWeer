@@ -176,6 +176,7 @@ class secondmenu(Screen):
 		        self.options.append((_("Waarschuwingen in Nederland Vandaag"),"http://www.onweer-online.nl/images/maps/knmi_vandaag.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Morgen"),"http://www.onweer-online.nl/images/maps/knmi_morgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Overmorgen"),"http://www.onweer-online.nl/images/maps/knmi_overmorgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Waarschuwingen in Belgie"),"http://alarm.meteo-info.be/images/map/belgique_index.png",'Waarschuwingen in Belgie. \n\nKaart is stilstaand.'))
                         self.options.append((_("Waarschuwingen in Europa"),"http://www.unwetterzentrale.de/images/map/europe_index.png",'Waarschuwingen in Europa. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
