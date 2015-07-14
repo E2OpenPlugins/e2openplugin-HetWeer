@@ -120,7 +120,7 @@ class secondmenu(Screen):
 			self.options.append((_("Zomerradar Bewolking NL"),"http://zomerradar.buienradar.nl/wolken-afgelopen-uur",'Wolkenradar hier kun je de bewolking boven ons land zien.'))
 			self.options.append((_("Zomerradar Temperatuur NL"),"http://zomerradar.buienradar.nl/temperatuur",'Temperatuur verloop in Nederland.'))
 			self.options.append((_("Zomerradar Zonkracht NL"),"http://zomerradar.buienradar.nl/zonkracht-verwacht",'Waar schijnt de zon het sterkst!'))
-			self.options.append((_("Radar Europa"),"http://sat24.com/?ir=true&ra=true&li=false",'Live radar voor west Europa, voor als je op de fiets naar Frankrijk wil.'))
+			self.options.append((_("Radar Europa"),"http://sat24.com/?ir=true&ra=true&li=true",'Live radar voor west Europa, voor als je op de fiets naar Frankrijk wil.'))
 			self.options.append((_("Sneeuw NL"),"http://www.onweer-online.nl/images/maps/sneeuwradar.gif",'Sneeuwt het in Nederland ja of nee!'))
 			self.options.append((_("Buienradar Belgie"),"http://www.buienradar.be",'Live buienradar voor de Belgen.'))
 			self.options.append((_("Buienradar Duitsland"),"http://www.niederschlagsradar.de",'Live buienradar voor de Duitsers.'))
