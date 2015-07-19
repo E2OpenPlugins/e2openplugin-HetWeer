@@ -196,6 +196,7 @@ class secondmenu(Screen):
 			#Onweer
 			self.options = []
 			self.options.append((_("Bliksem.nu"),"http://www.onweer-online.nl/images/maps/Bliksem.nu.png",'Onweer kaart van bliksem.nu \n\nKaart is stilstaand.'))
+			self.options.append((_("Grootegast nl"),"http://www.onweer-online.nl/images/maps/meteo_grootegast.png",'Onweer kaart van Station Grootegast \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Woerden"),"http://www.onweer-online.nl/images/maps/weerstation_woerden.png",'Onweer kaart van weerstation Woerden \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Mechelen"),"http://www.onweer-online.nl/images/maps/weerstation_mechelen.png",'Onweer kaart van weerstation Mechelen \n\nKaart is stilstaand.'))
 			self.options.append((_("Blitzortung"),"http://www.onweer-online.nl/images/maps/blitzortung_centraal.png",'Onweer kaart van Centraal Europa \n\nKaart is stilstaand.'))
