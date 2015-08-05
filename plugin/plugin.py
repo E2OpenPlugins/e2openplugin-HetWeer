@@ -190,6 +190,9 @@ class secondmenu(Screen):
                         self.options.append((_("Aurora Forecast Zuidpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_s.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
                         self.options.append((_("Isobarenkaart"),"http://www.meteo-info.be/uploads/pics/UWZ_EURO_ISO_NL_00.jpg",'isobaren boven Europa. \n\nKaart is stilstaand.'))
                         self.options.append((_("Vervuiling in Nederland"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'.'))
+                         self.options.append((_("NO2 waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_no2.png",'NO2 wordt elk uur gemeten.'))
+                        self.options.append((_("PM waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_pm10.png",'PM Gelijdend 24 uur gemiddelde.'))
+                        self.options.append((_("O3 waarde per uur in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_o3.png",'O3 wordt elk uur gemeten.'))
                         self.options.append((_("Pluim-KNMI"),"http://www.onweer-online.nl/images/maps/knmi_pluim.png",'Pluim Knmi.'))
                         self["list"].setList(self.options)
 
