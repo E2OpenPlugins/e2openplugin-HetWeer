@@ -183,9 +183,6 @@ class secondmenu(Screen):
 
                 elif self.iweertext == 'Vervuiling in Nederland':        
                         self.options.append((_("Vervuiling in Nederland"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'Luchtvervuiling in Nederland en omgeving.'))
-                        self.options.append((_("NO2 Stikstofoxiden waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_no2.png",'NO2 wordt elk uur gemeten.'))
-                        self.options.append((_("PM Fijnstof waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_pm10.png",'PM Gelijdend 24 uur gemiddelde.'))
-                        self.options.append((_("O3 Ozon waarde per uur in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_o3.png",'O3 wordt elk uur gemeten.'))
                         self["list"].setList(self.options)
 
                 elif self.iweertext == 'Overige kaarten':
