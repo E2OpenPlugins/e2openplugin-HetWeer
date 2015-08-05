@@ -41,6 +41,7 @@ class Weermenu(Screen):
                 self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
+		self.weer.append("Vervuiling in Nederland")
 		self.weer.append("Overige kaarten")
 		self["list"].setList(self.weer)
 
@@ -180,6 +181,13 @@ class secondmenu(Screen):
                         self.options.append((_("Waarschuwingen in Europa"),"http://www.unwetterzentrale.de/images/map/europe_index.png",'Waarschuwingen in Europa. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
+                elif self.iweertext == 'Vervuiling in Nederland':        
+                        self.options.append((_("Vervuiling in Nederland"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'Luchtvervuiling in Nederland en omgeving.'))
+                        self.options.append((_("NO2 Stikstofoxiden waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_no2.png",'NO2 wordt elk uur gemeten.'))
+                        self.options.append((_("PM Fijnstof waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_pm10.png",'PM Gelijdend 24 uur gemiddelde.'))
+                        self.options.append((_("O3 Ozon waarde per uur in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_o3.png",'O3 wordt elk uur gemeten.'))
+                        self["list"].setList(self.options)
+
                 elif self.iweertext == 'Overige kaarten':
 		        self.options.append((_("Atlantische Oceaan"),"http://www.onweer-online.nl/images/maps/eumetsat.jpg",'Atlantische Oceaan, blauwe kleur is hoge bewolking met neerslag. \n\nKaart is stilstaand.'))
                         self.options.append((_("Meteogram ( 6 dagen)"),"http://zomerradar.buienradar.nl/image/meteogram?lat=52.38&lon=5.22",'Meteogram komende 6 dagen.'))
@@ -189,10 +197,6 @@ class secondmenu(Screen):
                         self.options.append((_("Aurora Forecast Noordpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_n.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
                         self.options.append((_("Aurora Forecast Zuidpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_s.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
                         self.options.append((_("Isobarenkaart"),"http://www.meteo-info.be/uploads/pics/UWZ_EURO_ISO_NL_00.jpg",'isobaren boven Europa. \n\nKaart is stilstaand.'))
-                        self.options.append((_("Vervuiling in Nederland"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'.'))
-                        self.options.append((_("NO2 waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_no2.png",'NO2 wordt elk uur gemeten.'))
-                        self.options.append((_("PM waarde in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_pm10.png",'PM Gelijdend 24 uur gemiddelde.'))
-                        self.options.append((_("O3 waarde per uur in Nederland"),"http://www.lml.rivm.nl/kaart/images/2015080508_o3.png",'O3 wordt elk uur gemeten.'))
                         self.options.append((_("Pluim-KNMI"),"http://www.onweer-online.nl/images/maps/knmi_pluim.png",'Pluim Knmi.'))
                         self["list"].setList(self.options)
 
