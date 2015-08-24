@@ -151,10 +151,9 @@ class secondmenu(Screen):
 			self.options.append((_("Hoogste temperatuur Wereldkaart"),"http://www.onweer-online.nl/images/maps/tempwunderground.gif",'Actuele hoogste temperatuur kaart. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zeetemperatuur Noordelijk Halfrond"),"http://www7320.nrlssc.navy.mil/hycomARC/navo/arcticsstnowcast.gif",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zeetemperatuur Noordzee en Oostzee"),"http://ocean.dmi.dk/satellite/plots/satsst.nsb.d-00.png",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
-			self.options.append((_("Zeetemperatuur Europa"),"http://www.buienradar.nl/image/seatemperature?region=eu",'Kaart wordt niet elke dag vernieuwt,er worden maar 28 metingen per week verricht.. \n\nKaart is stilstaand.'))
-			self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Weerbeeld Europa"),"http://www.dwd.de/bvbw/generator/DWDWWW/Content/Oeffentlichkeit/WV/WV11/Warnungen/Wetter__Aktuell/Weltwetter/Weltwetter__aktuell__Karten/Europa__aktuell__default,property=default.jpg",'Actuele weerbeeld in Europa.'))
+                        self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza. \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza Weerbeeld"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza. \n\nKaart is stilstaand.'))
-                        self.options.append((_("Weerbeeld Europa"),"http://www.dwd.de/bvbw/generator/DWDWWW/Content/Oeffentlichkeit/WV/WV11/Warnungen/Wetter__Aktuell/Weltwetter/Weltwetter__aktuell__Karten/Europa__aktuell__default,property=default.jpg",'Actuele weerbeeld in Europa.'))
                         self["list"].setList(self.options)
                         
                         
