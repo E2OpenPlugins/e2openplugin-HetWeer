@@ -318,7 +318,7 @@ class secondmenu(Screen):
 				elif self.keuzetekst == "Buienradar Belgie":
 					getPage(self.url).addCallback(self.done,'/radar','be').addErrback(self.downloadError)
 				elif self.keuzetekst == "Buienradar Duitsland":
-					getPage(self.url).addCallback(self.done,'srt=bild','de').addErrback(self.downloadError)
+					getPage(self.url).addCallback(self.done,'srt=loop1stunde','de').addErrback(self.downloadError)
 				elif self.keuzetekst == "3 Dagen vooruit Eu":
 					getPage(self.url).addCallback(self.BR3Ddone).addErrback(self.downloadError)
 				elif self.keuzetekst == "Zomerradar Zonkracht NL":
