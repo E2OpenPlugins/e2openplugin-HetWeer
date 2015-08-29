@@ -41,7 +41,6 @@ class Weermenu(Screen):
                 self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
-		self.weer.append("Vervuiling in Nederland")
 		self.weer.append("Overige kaarten")
 		self["list"].setList(self.weer)
 
@@ -181,9 +180,7 @@ class secondmenu(Screen):
                         self.options.append((_("Waarschuwingen in Europa"),"http://www.unwetterzentrale.de/images/map/europe_index.png",'Waarschuwingen in Europa. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
 
-                elif self.iweertext == 'Vervuiling in Nederland':        
-                        self.options.append((_("Vervuiling in Nederland"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'Luchtvervuiling in Nederland en omgeving.'))
-                        self["list"].setList(self.options)
+             
 
                 elif self.iweertext == 'Overige kaarten':
 		        self.options.append((_("Atlantische Oceaan"),"http://www.onweer-online.nl/images/maps/eumetsat.jpg",'Atlantische Oceaan, blauwe kleur is hoge bewolking met neerslag. \n\nKaart is stilstaand.'))
@@ -195,6 +192,7 @@ class secondmenu(Screen):
                         self.options.append((_("Aurora Forecast Zuidpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_s.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
                         self.options.append((_("Isobarenkaart"),"http://www.meteo-info.be/uploads/pics/UWZ_EURO_ISO_NL_00.jpg",'isobaren boven Europa. \n\nKaart is stilstaand.'))
                         self.options.append((_("Pluim-KNMI"),"http://www.onweer-online.nl/images/maps/knmi_pluim.png",'Pluim Knmi.'))
+                        self.options.append((_("Vervuiling in Nederland"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'Luchtvervuiling in Nederland en omgeving.'))
                         self["list"].setList(self.options)
 
 		elif self.iweertext == 'Onweer kaarten':
@@ -240,45 +238,45 @@ class secondmenu(Screen):
 		elif self.iweertext == "Sat foto's":
 			#Pluimen
 			self.options = []
-			self.options.append((_("Benelux"),"http://sat24.com/en/nl"))
-			self.options.append((_("Europa"),"http://sat24.com/en/eu"))
-			self.options.append((_("De alpen"),"http://sat24.com/en/alps"))
-			self.options.append((_("Duitsland"),"http://sat24.com/en/de"))
-			self.options.append((_("Groot Brittanie"),"http://sat24.com/en/gb"))
-			self.options.append((_("Italie"),"http://sat24.com/en/it"))
-                        self.options.append((_("Turkye"),"http://sat24.com/en/tu"))
-                        self.options.append((_("Zuid Oost Europa"),"http://sat24.com/en/se"))
-                        self.options.append((_("Rusland"),"http://sat24.com/en/ru"))
-                        self.options.append((_("Griekenland"),"http://sat24.com/en/gr"))
-                        self.options.append((_("Baltische Staten"),"http://sat24.com/en/bc"))
-                        self.options.append((_("Scandinavie"),"http://sat24.com/en/scan"))
-                        self.options.append((_("Spanje en Portugal"),"http://sat24.com/en/sp"))
-			self.options.append((_("Frankrijk"),"http://sat24.com/en/fr"))
-			self.options.append((_("Canarische Eilanden"),"http://sat24.com/en/ce"))
-                        self.options.append((_("Afrika"),"http://sat24.com/en/af"))
-                        self.options.append((_("Zuid Afrika"),"http://sat24.com/en/za"))
+			self.options.append((_("Benelux"),"http://en.sat24.com/en/nl"))
+			self.options.append((_("Europa"),"http://en.sat24.com/en/eu"))
+			self.options.append((_("De alpen"),"http://en.sat24.com/en/alps"))
+			self.options.append((_("Duitsland"),"http://en.sat24.com/en/de"))
+			self.options.append((_("Groot Brittanie"),"http://en.sat24.com/en/gb"))
+			self.options.append((_("Italie"),"http://en.sat24.com/en/it"))
+                        self.options.append((_("Turkye"),"http://en.sat24.com/en/tu"))
+                        self.options.append((_("Zuid Oost Europa"),"http://en.sat24.com/en/se"))
+                        self.options.append((_("Rusland"),"http://en.sat24.com/en/ru"))
+                        self.options.append((_("Griekenland"),"http://en.sat24.com/en/gr"))
+                        self.options.append((_("Baltische Staten"),"http://en.sat24.com/en/bc"))
+                        self.options.append((_("Scandinavie"),"http://en.sat24.com/en/scan"))
+                        self.options.append((_("Spanje en Portugal"),"http://en.sat24.com/en/sp"))
+			self.options.append((_("Frankrijk"),"http://en.sat24.com/en/fr"))
+			self.options.append((_("Canarische Eilanden"),"http://en.sat24.com/en/ce"))
+                        self.options.append((_("Afrika"),"http://en.sat24.com/en/af"))
+                        self.options.append((_("Zuid Afrika"),"http://en.sat24.com/en/za"))
                         self["list"].setList(self.options)
 			
 		elif self.iweertext == "Sat infrarood kaarten":
 			#Pluimen
 			self.options = []
-			self.options.append((_("Benelux"),"http://sat24.com/en/nl?ir=true"))
-			self.options.append((_("Europa"),"http://sat24.com/en/eu?ir=true"))
-			self.options.append((_("De alpen"),"http://sat24.com/en/alps?ir=true"))
-			self.options.append((_("Duitsland"),"http://sat24.com/en/de?ir=true"))
-			self.options.append((_("Groot Brittanie"),"http://sat24.com/en/gb?ir=true"))
-                        self.options.append((_("Italie"),"http://sat24.com/en/it?ir=true"))
-                        self.options.append((_("Turkye"),"http://sat24.com/en/tu?ir=true"))
-                        self.options.append((_("Zuid Oost Europa"),"http://sat24.com/en/se?ir=true"))
-                        self.options.append((_("Rusland"),"http://sat24.com/en/ru?ir=true"))
-                        self.options.append((_("Griekenland"),"http://sat24.com/en/gr?ir=true"))
-                        self.options.append((_("Baltische Staten"),"http://sat24.com/en/bc?ir=true"))
-                        self.options.append((_("Scandinavie"),"http://sat24.com/en/scan?ir=true"))
-			self.options.append((_("Spanje en Portugal"),"http://sat24.com/en/sp?ir=true"))
-			self.options.append((_("Frankrijk"),"http://sat24.com/en/fr?ir=true"))
-                        self.options.append((_("Canarische Eilanden"),"http://sat24.com/en/ce?ir=true"))
-                        self.options.append((_("Afrika"),"http://sat24.com/en/af?ir=true"))
-                        self.options.append((_("Zuid Afrika"),"http://sat24.com/en/za?ir=true"))
+			self.options.append((_("Benelux"),"http://en.sat24.com/en/nl?ir=true"))
+			self.options.append((_("Europa"),"http://en.sat24.com/en/eu?ir=true"))
+			self.options.append((_("De alpen"),"http://en.sat24.com/en/alps?ir=true"))
+			self.options.append((_("Duitsland"),"http://en.sat24.com/en/de?ir=true"))
+			self.options.append((_("Groot Brittanie"),"http://en.sat24.com/en/gb?ir=true"))
+                        self.options.append((_("Italie"),"http://en.sat24.com/en/it?ir=true"))
+                        self.options.append((_("Turkye"),"http://en.sat24.com/en/tu?ir=true"))
+                        self.options.append((_("Zuid Oost Europa"),"http://en.sat24.com/en/se?ir=true"))
+                        self.options.append((_("Rusland"),"http://en.sat24.com/en/ru?ir=true"))
+                        self.options.append((_("Griekenland"),"http://en.sat24.com/en/gr?ir=true"))
+                        self.options.append((_("Baltische Staten"),"http://en.sat24.com/en/bc?ir=true"))
+                        self.options.append((_("Scandinavie"),"http://en.sat24.com/en/scan?ir=true"))
+			self.options.append((_("Spanje en Portugal"),"http://en.sat24.com/en/sp?ir=true"))
+			self.options.append((_("Frankrijk"),"http://en.sat24.com/en/fr?ir=true"))
+                        self.options.append((_("Canarische Eilanden"),"http://en.sat24.com/en/ce?ir=true"))
+                        self.options.append((_("Afrika"),"http://en.sat24.com/en/af?ir=true"))
+                        self.options.append((_("Zuid Afrika"),"http://en.sat24.com/en/za?ir=true"))
 			self["list"].setList(self.options)
 		
 		self.updatetext()
@@ -620,7 +618,7 @@ class secondmenu(Screen):
 		while i<maxcount:
 			iurl = raw[i]
 			iurl = iurl.replace('"','')
-			iurl = "http://www.sat24.com" + iurl
+			iurl = "http://en.sat24.com" + iurl
 			print iurl
 			
 			if j>9:
