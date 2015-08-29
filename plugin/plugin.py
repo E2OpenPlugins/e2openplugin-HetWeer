@@ -182,6 +182,7 @@ class secondmenu(Screen):
                         self["list"].setList(self.options)
 
                 elif self.iweertext == 'Vervuiling No2':        
+                        self.options.append((_("Luchtkwaliteit in Nederland"),"http://www.temis.nl/aqi/netherlands/mainpol_today.png",'Luchtkwaliteit in Nederland.'))
                         self.options.append((_("Vervuiling in West Europa"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'Luchtvervuiling in West Europa.'))
                         self.options.append((_("Vervuiling in Oost Europa"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_east_europe_today.png",'Luchtvervuiling in Oost Europa'))
                         self.options.append((_("Vervuiling in Azie"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_asia_today.png",'Luchtvervuiling in Azie'))
