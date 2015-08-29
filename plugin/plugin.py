@@ -186,6 +186,8 @@ class secondmenu(Screen):
                         self.options.append((_("Vervuiling in West Europa"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_europe_today.png",'Luchtvervuiling in West Europa.'))
                         self.options.append((_("Vervuiling in Oost Europa"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_east_europe_today.png",'Luchtvervuiling in Oost Europa'))
                         self.options.append((_("Vervuiling in Azie"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_asia_today.png",'Luchtvervuiling in Azie'))
+                        self.options.append((_("Vervuiling in Australie"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_australia_today.png",'Luchtvervuiling in Australie'))
+                        self.options.append((_("Vervuiling in Zuid America"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_south_america_today.png",'Luchtvervuiling in Zuid America'))
                         self.options.append((_("Vervuiling in Africa"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_africa_today.png",'Luchtvervuiling in Africa'))
                         self.options.append((_("Vervuiling in US East"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_us_east_today.png",'Luchtvervuiling in US oost'))
                         self.options.append((_("Vervuiling in US West"),"http://www.temis.nl/airpollution/no2col/data/omi/nrt/omi_no2_us_west_today.png",'Luchtvervuiling in US West'))
