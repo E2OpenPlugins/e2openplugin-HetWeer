@@ -35,8 +35,6 @@ class Weermenu(Screen):
 
 		self.weer = []
 		self.weer.append("Neerslag Radars")
-		#self.weer.append("Sat foto's")
-		#self.weer.append("Sat infrarood kaarten")
                 self.weer.append("Diverse Weer en Temperatuur kaarten")
                 self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
@@ -268,27 +266,7 @@ class secondmenu(Screen):
                         self.options.append((_("Zuid Afrika"),"http://en.sat24.com/en/za"))
                         self["list"].setList(self.options)
 			
-		elif self.iweertext == "Sat infrarood kaarten":
-			#Pluimen
-			self.options = []
-			self.options.append((_("Benelux"),"http://en.sat24.com/en/nl?ir=true"))
-			self.options.append((_("Europa"),"http://en.sat24.com/en/eu?ir=true"))
-			self.options.append((_("De alpen"),"http://en.sat24.com/en/alps?ir=true"))
-			self.options.append((_("Duitsland"),"http://en.sat24.com/en/de?ir=true"))
-			self.options.append((_("Groot Brittanie"),"http://en.sat24.com/en/gb?ir=true"))
-                        self.options.append((_("Italie"),"http://en.sat24.com/en/it?ir=true"))
-                        self.options.append((_("Turkye"),"http://en.sat24.com/en/tu?ir=true"))
-                        self.options.append((_("Zuid Oost Europa"),"http://en.sat24.com/en/se?ir=true"))
-                        self.options.append((_("Rusland"),"http://en.sat24.com/en/ru?ir=true"))
-                        self.options.append((_("Griekenland"),"http://en.sat24.com/en/gr?ir=true"))
-                        self.options.append((_("Baltische Staten"),"http://en.sat24.com/en/bc?ir=true"))
-                        self.options.append((_("Scandinavie"),"http://en.sat24.com/en/scan?ir=true"))
-			self.options.append((_("Spanje en Portugal"),"http://en.sat24.com/en/sp?ir=true"))
-			self.options.append((_("Frankrijk"),"http://en.sat24.com/en/fr?ir=true"))
-                        self.options.append((_("Canarische Eilanden"),"http://en.sat24.com/en/ce?ir=true"))
-                        self.options.append((_("Afrika"),"http://en.sat24.com/en/af?ir=true"))
-                        self.options.append((_("Zuid Afrika"),"http://en.sat24.com/en/za?ir=true"))
-			self["list"].setList(self.options)
+	
 		
 		self.updatetext()
 
