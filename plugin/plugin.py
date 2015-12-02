@@ -115,7 +115,7 @@ class secondmenu(Screen):
 			#neerslag radar
 			self.options = []
 			self.options.append((_("Buienradar NL"),"http://www.buienradar.nl",'Live buienradar waar regent het nu!'))
-		        self.options.append((_("Motregenradar NL"),"http://www.buienradar.nl/motregenradar",'Live buienradar waar het motregent nu! (Beweegt soms)'))
+		        #self.options.append((_("Motregenradar NL"),"http://www.buienradar.nl/motregenradar",'Live buienradar waar het motregent nu! (Beweegt soms)'))
 			self.options.append((_("2 uur vooruit NL"),"http://www.buienradar.nl",'2 uur vooruit kijken of het dan nog regent'))
 			self.options.append((_("Zomerradar NL"),"http://zomerradar.buienradar.nl",'Zomerradar waar schijnt de zon!\Gele kleur is zonnig gebied.'))
 			self.options.append((_("Zomerradar Bewolking NL"),"http://zomerradar.buienradar.nl/wolken-afgelopen-uur",'Wolkenradar hier kun je de bewolking boven ons land zien.'))
