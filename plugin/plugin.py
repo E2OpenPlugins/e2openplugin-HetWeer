@@ -244,29 +244,7 @@ class secondmenu(Screen):
 			self.options.append((_("Bewolking"),"&ecmwftype=20010&ctype=3"))
 			self["list"].setList(self.options)
 
-		elif self.iweertext == "Sat foto's":
-			#Pluimen
-			self.options = []
-			self.options.append((_("Benelux"),"http://en.sat24.com/en/nl"))
-			self.options.append((_("Europa"),"http://en.sat24.com/en/eu"))
-			self.options.append((_("De alpen"),"http://en.sat24.com/en/alps"))
-			self.options.append((_("Duitsland"),"http://en.sat24.com/en/de"))
-			self.options.append((_("Groot Brittanie"),"http://en.sat24.com/en/gb"))
-			self.options.append((_("Italie"),"http://en.sat24.com/en/it"))
-                        self.options.append((_("Turkye"),"http://en.sat24.com/en/tu"))
-                        self.options.append((_("Zuid Oost Europa"),"http://en.sat24.com/en/se"))
-                        self.options.append((_("Rusland"),"http://en.sat24.com/en/ru"))
-                        self.options.append((_("Griekenland"),"http://en.sat24.com/en/gr"))
-                        self.options.append((_("Baltische Staten"),"http://en.sat24.com/en/bc"))
-                        self.options.append((_("Scandinavie"),"http://en.sat24.com/en/scan"))
-                        self.options.append((_("Spanje en Portugal"),"http://en.sat24.com/en/sp"))
-			self.options.append((_("Frankrijk"),"http://en.sat24.com/en/fr"))
-			self.options.append((_("Canarische Eilanden"),"http://en.sat24.com/en/ce"))
-                        self.options.append((_("Afrika"),"http://en.sat24.com/en/af"))
-                        self.options.append((_("Zuid Afrika"),"http://en.sat24.com/en/za"))
-                        self["list"].setList(self.options)
-			
-	
+		
 		
 		self.updatetext()
 
