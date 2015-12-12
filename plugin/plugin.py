@@ -149,7 +149,9 @@ class secondmenu(Screen):
 			self.options.append((_("Hoogste temperatuur Wereldkaart"),"http://www.onweer-online.nl/images/maps/tempwunderground.gif",'Actuele hoogste temperatuur kaart. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zeetemperatuur Noordelijk Halfrond"),"http://www7320.nrlssc.navy.mil/hycomARC/navo/arcticsstnowcast.gif",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zeetemperatuur Noordzee en Oostzee"),"http://ocean.dmi.dk/satellite/plots/satsst.nsb.d-00.png",'Temperatuur van het zeewater. \n\nKaart is stilstaand.'))
-		        self.options.append((_("Weerbeeld Europa"),"http://www.dwd.de/bvbw/generator/DWDWWW/Content/Oeffentlichkeit/WV/WV11/Warnungen/Wetter__Aktuell/Weltwetter/Weltwetter__aktuell__Karten/Europa__aktuell__default,property=default.jpg",'Actuele weerbeeld in Europa.'))
+		        self.options.append((_("Weerbeeld Europa vandaag"),"http://www.dwd.de/DE/wetter/wetter_weltweit/europa/bildgalerie/wetter_aktuell.jpg;jsessionid=17B2B33C3788B957FB3A70794B05FC4B.live11052?view=nasImage&nn=453604",'Actuele weerbeeld in Europa.'))
+                        self.options.append((_("Weerbeeld Europa morgen"),"http://www.dwd.de/DWD/wetter/wv_allg/europa/bilder/vhs_euro_morgen.jpg",' Weerbeeld voor morgen in Europa.'))
+                        self.options.append((_("Weerbeeld Europa overmorgen"),"http://www.dwd.de/DWD/wetter/wv_allg/europa/bilder/vhs_euro_uebermorgen.jpg",'Weerbeeld voor overmorgen in Europa.'))
                         self.options.append((_("Weerplaza"),"http://www.onweer-online.nl/images/maps/weerplaza_temperatuu.png",'Temperatuur kaart van weerplaza. \n\nKaart is stilstaand.'))
 			self.options.append((_("Weerplaza Weerbeeld"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza. \n\nKaart is stilstaand.'))
                         self["list"].setList(self.options)
@@ -405,7 +407,7 @@ class secondmenu(Screen):
 				if Type == '/actueel':
 					iurl = "http://www.buienradar.nl/image/?time=" + href + "&type=lightning&extension=png"
 				elif Type == '/motregenradar':
-					iurl = "http://www.buienradar.nl/image?type=motregen&amp;index=" + href	
+					iurl = "http://www.buienradar.nl/image?type=motregen&index=" + str(i)	
 				elif Type == '/zon':
 					iurl = "http://zomerradar.buienradar.nl/image/zon/" + href
 				elif Type == '/wolken':
