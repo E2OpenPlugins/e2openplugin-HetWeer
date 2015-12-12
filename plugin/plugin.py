@@ -36,6 +36,8 @@ class Weermenu(Screen):
 		self.weer = []
 		self.weer.append("Neerslag Radars")
                 self.weer.append("Diverse Weer en Temperatuur kaarten")
+                #self.weer.append("Sat foto's")
+		#self.weer.append("Sat infrarood kaarten")
                 self.weer.append("Waarschuwings kaarten")
 		self.weer.append("Onweer kaarten")
 		self.weer.append("Pluimgrafieken")
@@ -248,7 +250,49 @@ class secondmenu(Screen):
 			self.options.append((_("Bewolking"),"&ecmwftype=20010&ctype=3"))
 			self["list"].setList(self.options)
 
-		
+		elif self.iweertext == "Sat foto's":
+			#Pluimen
+			self.options = []
+			self.options.append((_("Benelux"),"http://sat24.com/nl/nl"))
+			self.options.append((_("Europa"),"http://sat24.com/nl/eu"))
+			self.options.append((_("De alpen"),"http://sat24.com/nl/alps"))
+			self.options.append((_("Duitsland"),"http://sat24.com/nl/de"))
+			self.options.append((_("Groot Brittanie"),"http://sat24.com/nl/gb"))
+			self.options.append((_("Afrika"),"http://sat24.com/nl/af"))
+			self.options.append((_("Italie"),"http://sat24.com/nl/it"))
+                        self.options.append((_("Turkye"),"http://sat24.com/nl/tu"))
+                        self.options.append((_("Zuid Oost Europa"),"http://sat24.com/nl/se"))
+                        self.options.append((_("Rusland"),"http://sat24.com/nl/ru"))
+                        self.options.append((_("Griekenland"),"http://sat24.com/nl/gr"))
+                        self.options.append((_("Baltische Staten"),"http://sat24.com/nl/bc"))
+                        self.options.append((_("Scandinavie"),"http://sat24.com/nl/scan"))
+                        self.options.append((_("Spanje en Portugal"),"http://sat24.com/nl/sp"))
+			self.options.append((_("Frankrijk"),"http://sat24.com/nl/fr"))
+			self.options.append((_("Canarische Eilanden"),"http://sat24.com/nl/ce"))
+                        self.options.append((_("Zuid Afrika"),"http://sat24.com/nl/za"))
+                        self["list"].setList(self.options)
+			
+		elif self.iweertext == "Sat infrarood kaarten":
+			#Pluimen
+			self.options = []
+			self.options.append((_("Benelux"),"http://sat24.com/nl/nl?ir=true"))
+			self.options.append((_("Europa"),"http://sat24.com/nl/eu?ir=true"))
+			self.options.append((_("De alpen"),"http://sat24.com/nl/alps?ir=true"))
+			self.options.append((_("Duitsland"),"http://sat24.com/nl/de?ir=true"))
+			self.options.append((_("Groot Brittanie"),"http://sat24.com/nl/gb?ir=true"))
+			self.options.append((_("Afrika"),"http://sat24.com/nl/af?ir=true"))
+                        self.options.append((_("Italie"),"http://sat24.com/nl/it?ir=true"))
+                        self.options.append((_("Turkye"),"http://sat24.com/nl/tu?ir=true"))
+                        self.options.append((_("Zuid Oost Europa"),"http://sat24.com/nl/se?ir=true"))
+                        self.options.append((_("Rusland"),"http://sat24.com/nl/ru?ir=true"))
+                        self.options.append((_("Griekenland"),"http://sat24.com/nl/gr?ir=true"))
+                        self.options.append((_("Baltische Staten"),"http://sat24.com/nl/bc?ir=true"))
+                        self.options.append((_("Scandinavie"),"http://sat24.com/nl/scan?ir=true"))
+			self.options.append((_("Spanje en Portugal"),"http://sat24.com/nl/sp?ir=true"))
+			self.options.append((_("Frankrijk"),"http://sat24.com/nl/fr?ir=true"))
+                        self.options.append((_("Canarische Eilanden"),"http://sat24.com/nl/ce?ir=true"))
+                        self.options.append((_("Zuid Afrika"),"http://sat24.com/nl/za?ir=true"))
+			self["list"].setList(self.options)
 		
 		self.updatetext()
 
