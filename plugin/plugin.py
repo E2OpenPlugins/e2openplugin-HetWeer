@@ -564,7 +564,7 @@ class secondmenu(Screen):
 		raw = raw.split("= '")[1].split("';")[0]
 		
 		while i<maxc:
-			#http://europa.buienradar.nl/image/longtermforecast?type=neerslag&index=15
+			
 			iurl = raw.replace("&amp;",'&')
 			iurl = iurl.replace("'+'{index}",'')
 			iurl = iurl+str(i)
