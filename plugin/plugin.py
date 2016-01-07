@@ -166,7 +166,7 @@ class secondmenu(Screen):
                 elif self.iweertext == 'Waarschuwings kaarten':
 			#waarschuwing
 			self.options = []
-                        self.options.append((_("Waarschuwingen in Nederland"),"http://alarm.noodweercentrale.nl/images/map/nederland_index.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Waarschuwingen in Nederland"),"http://www.onweer-online.nl/images/maps/knmi_vandaag.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Kustdistricten"),"http://www.buienradar.nl/image/?type=weerwaarschuwing&fn=nederland-kust.png",'Waarschuwingen langs de kust. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Groningen"),"http://alarm.noodweercentrale.nl/images/map/groningen_index.png",'Waarschuwingen in Groningen. \n\nKaart is stilstaand.'))
 	                self.options.append((_("Waarschuwingen in Friesland"),"http://alarm.noodweercentrale.nl/images/map/friesland_index.png",'Waarschuwingen in Friesland. \n\nKaart is stilstaand.'))
