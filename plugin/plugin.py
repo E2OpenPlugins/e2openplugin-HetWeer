@@ -180,7 +180,7 @@ class secondmenu(Screen):
 	                self.options.append((_("Waarschuwingen in Zeeland"),"http://alarm.noodweercentrale.nl/images/map/zeeland_index.png",'Waarschuwingen in Zeeland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Noordbrabant"),"http://alarm.noodweercentrale.nl/images/map/noordbrabant_index.png",'Waarschuwingen in Noordbrabant. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Limburg"),"http://alarm.noodweercentrale.nl/images/map/limburg_index.png",'Waarschuwingen in Limburg. \n\nKaart is stilstaand.'))
-                        self.options.append((_("Waarschuwingen in Nederland Vandaag"),"http://www.onweer-online.nl/images/maps/knmi_vandaag.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Waarschuwingen in Nederland Vandaag"),"http://www.buienradar.nl/image/?type=weerwaarschuwing&fn=nederland-0.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Morgen"),"http://www.onweer-online.nl/images/maps/knmi_morgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Nederland Overmorgen"),"http://www.onweer-online.nl/images/maps/knmi_overmorgen.png",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
                         self.options.append((_("Waarschuwingen in Belgie"),"http://alarm.meteo-info.be/images/map/belgique_index.png",'Waarschuwingen in Belgie. \n\nKaart is stilstaand.'))
