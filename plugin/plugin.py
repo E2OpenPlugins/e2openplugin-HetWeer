@@ -451,7 +451,7 @@ class secondmenu(Screen):
 				#	print 'geen nummer'
 				#	break
 				if Type == '/actueel':
-					iurl = "http://www.buienradar.nl/image/?time=" + href + "&type=lightning&extension=png"
+					iurl = "http://www.buienradar.nl/image/?time=" + href
 				elif Type == '/motregenradar':
 				        picdownload = 11
 				        picdownload = picdownload - i
