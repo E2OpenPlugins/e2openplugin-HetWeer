@@ -165,6 +165,7 @@ class secondmenu(Screen):
                 elif self.iweertext == 'Waarschuwings kaarten':
 			#waarschuwing
 			self.options = []
+                        self.options.append((_("Pollenradar Nederland"),"http://zomerradar.buienradar.nl/image/pollen",'Kaart voor hoeveelheid Pollen in Nederland .'))
                         self.options.append((_("Waarschuwingen in Nederland"),"http://cdn.knmi.nl/knmi/map/current/weather/warning/waarschuwing_land_0_new.gif",'Waarschuwingen in Nederland. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Kustdistricten"),"http://www.buienradar.nl/image/?type=weerwaarschuwing&fn=nederland-kust.png",'Waarschuwingen langs de kust. \n\nKaart is stilstaand.'))
 		        self.options.append((_("Waarschuwingen in Groningen"),"http://alarm.noodweercentrale.nl/images/map/groningen_index.png",'Waarschuwingen in Groningen. \n\nKaart is stilstaand.'))
@@ -203,9 +204,10 @@ class secondmenu(Screen):
                         self.options.append((_("Meteogram ( 7 dagen)"),"http://zomerradar.buienradar.nl/image/meteogram?lat=52.38&lon=5.22",'Meteogram komende week.'))
                         self.options.append((_("Straalstroom Europa"),"http://wxmaps.org/pix/euro5.00hr.png",'Actueel straalstroom in Europa. \n\nKaart is stilstaand.'))
 			self.options.append((_("Temperatuur en Stroming"),"http://wxmaps.org/pix/euro4.00hr.png",'Actuele Temperatuur en Stroming in Europa.'))
-                        self.options.append((_("Pollenradar Nederland"),"http://zomerradar.buienradar.nl/image/pollen",'Kaart voor hoeveelheid Pollen in Nederland .'))
                         self.options.append((_("Aurora Forecast Noordpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_n.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
                         self.options.append((_("Aurora Forecast Zuidpool"),"http://legacy-www.swpc.noaa.gov/ovation/images/swpc_aurora_map_s.png",'Aurora Ovation Oval Zichtbaar poollicht.'))
+                        self.options.append((_("Wolken Europa"),"http://www.wetterzentrale.de/pics/Rtavn063.gif",'Actueel wolken boven Europa. \n\nKaart is stilstaand.'))
+			self.options.append((_("Luchtdruk & Temperatuur op zee niveau. "),"http://www.wetterzentrale.de/pics/Rnvg005.gif",'Luchtdruk op zee niveau en Temperatuur.'))
                         self.options.append((_("Isobarenkaart"),"http://www.meteo-info.be/uploads/pics/UWZ_EURO_ISO_NL_00.jpg",'isobaren boven Europa. \n\nKaart is stilstaand.'))
                         self.options.append((_("Pluim-KNMI"),"http://www.onweer-online.nl/images/maps/knmi_pluim.png",'Pluim Knmi.'))
                         self["list"].setList(self.options)
