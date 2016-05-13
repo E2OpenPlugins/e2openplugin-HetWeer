@@ -122,8 +122,8 @@ class secondmenu(Screen):
 			self.options.append((_("Zomerradar Temperatuur NL"),"http://zomerradar.buienradar.nl/temperatuur",'Temperatuur verloop in Nederland.'))
 			self.options.append((_("Zomerradar Zonkracht NL"),"http://zomerradar.buienradar.nl/zonkracht-verwacht",'Waar schijnt de zon het sterkst!'))
 			self.options.append((_("Radar Europa"),"http://sat24.com/?ir=true&ra=true&li=true",'Live radar voor west Europa, voor als je op de fiets naar Frankrijk wil.'))
-                        self.options.append((_("Buienradar Belgie"),"http://www.buienradar.be",'Live buienradar voor de Belgen.'))
-			self.options.append((_("Buienradar Duitsland"),"http://www.niederschlagsradar.de",'Live buienradar voor de Duitsers.'))
+                        #self.options.append((_("Buienradar Belgie"),"http://www.buienradar.be",'Live buienradar voor de Belgen.'))
+			#self.options.append((_("Buienradar Duitsland"),"http://www.niederschlagsradar.de",'Live buienradar voor de Duitsers.'))
 			self["list"].setList(self.options)
 
 		elif self.iweertext == 'Diverse Weer en Temperatuur kaarten':
