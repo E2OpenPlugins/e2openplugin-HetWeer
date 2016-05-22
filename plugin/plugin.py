@@ -244,6 +244,7 @@ class secondmenu(Screen):
 			self.options = []
 			self.options.append((_("Neerslag"),"&ecmwftype=13011&ctype=3"))
 			self.options.append((_("Temperatuur"),"&ecmwftype=12004&ctype=3"))
+			self.options.append((_("Maximum Temperatuur"),"&ecmwftype=12199&ctype=3"))
 			self.options.append((_("Dauwpunt"),"&ecmwftype=12006&ctype=3"))
 			self.options.append((_("Windrichting"),"&ecmwftype=11011&ctype=3"))
 			self.options.append((_("Windsnelheid"),"&ecmwftype=11012&ctype=3"))
