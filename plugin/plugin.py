@@ -219,8 +219,7 @@ class secondmenu(Screen):
 			self.options.append((_("Grootegast nl"),"http://www.onweer-online.nl/images/maps/meteo_grootegast.png",'Onweer kaart van Station Grootegast \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Woerden"),"http://www.onweer-online.nl/images/maps/weerstation_woerden.png",'Onweer kaart van weerstation Woerden \n\nKaart is stilstaand.'))
 			self.options.append((_("Station Mechelen"),"http://www.onweer-online.nl/images/maps/weerstation_mechelen.png",'Onweer kaart van weerstation Mechelen \n\nKaart is stilstaand.'))
-			self.options.append((_("Blitzortung"),"http://www.onweer-online.nl/images/maps/blitzortung_centraal.png",'Onweer kaart van Centraal Europa \n\nKaart is stilstaand.'))
-			self.options.append((_("Station Lopik"),"http://www.onweer-online.nl/images/maps/doppler.jpg",'Onweer kaart van Lopik en omgeving. \n\nKaart is stilstaand.'))
+		        self.options.append((_("Station Lopik"),"http://www.onweer-online.nl/images/maps/doppler.jpg",'Onweer kaart van Lopik en omgeving. \n\nKaart is stilstaand.'))
                         self.options.append((_("Blids.de"),"http://www.onweer-online.nl/images/maps/blids.jpg",'Onweer kaart van bilds.de \n\nKaart is stilstaand.'))
 			self["list"].setList(self.options)
 
