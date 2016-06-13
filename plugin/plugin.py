@@ -146,7 +146,7 @@ class secondmenu(Screen):
 			self.options.append((_("Relative Luchtvochtigheid"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=luchtvochtigheid.000001.png&extension=png",'Luchtvochtigheid. \n\nKaart is stilstaand.'))
 			self.options.append((_("Relative Luchtvochtigheid Wereldkaart"),"http://www.onweer-online.nl/images/maps/uwssec.gif",'Luchtvochtigheid wereldkaart. \n\nKaart is stilstaand.'))
 			self.options.append((_("Zonuren in Nederland"),"http://www.buienradar.nl/image/?type=weathermap-large&fn=zonneschijn.000001.png&extension=png",'Knmi aantal zonuren in Nederland. \n\nKaart is stilstaand.'))
-                        self.options.append((_("Uv Straling"),"http://www.buienradar.nl/image/other?type=uv",'Uv stralen grafiek. \n\nKaart is stilstaand.'))
+                        self.options.append((_("Uv Straling"),"http://api.buienradar.nl/image/external/1.0/rivmuvnl",'Uv stralen grafiek. \n\nKaart is stilstaand.'))
                         self.options.append((_("Weerplaza Weerbeeld Nederland"),"http://www.onweer-online.nl/images/maps/weerplaza_weerbeeld.jpg",'Actueel weerbeeld kaart van weerplaza. \n\nKaart is stilstaand.'))
                         self.options.append((_("Weerbeeld Europa vandaag"),"http://www.dwd.de/DE/wetter/wetter_weltweit/europa/bildgalerie/wetter_aktuell.jpg;jsessionid=17B2B33C3788B957FB3A70794B05FC4B.live11052?view=nasImage&nn=453604",'Actuele weerbeeld in Europa.'))
                         self.options.append((_("Weerbeeld Europa morgen"),"http://www.dwd.de/DWD/wetter/wv_allg/europa/bilder/vhs_euro_morgen.jpg",' Weerbeeld voor morgen in Europa.'))
