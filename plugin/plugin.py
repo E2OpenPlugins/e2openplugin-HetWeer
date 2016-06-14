@@ -34,7 +34,7 @@ class Weermenu(Screen):
 		self["myActionMap"] = ActionMap(["OkCancelActions"], {"ok": self.okClicked, "cancel": self.cancel}, -1)
 
 		self.weer = []
-		self.weer.append("Neerslag Radars")
+		#self.weer.append("Neerslag Radars")
                 self.weer.append("Diverse Weer en Temperatuur kaarten")
                 #self.weer.append("Sat foto's")
 		#self.weer.append("Sat infrarood kaarten")
