@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#WeerInfo Versie2.3
+#HetWeer Versie2.3
 import re
 import time
 import json
@@ -28,14 +28,7 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
-
-
-SERVER = "http://www.luxsat.be/hpengine/"
-SERVERPATH = "download_files/"
-FILEUPG = "plugins_upgweer.tar"
-CONFIGUPG = SERVER + SERVERPATH + FILEUPG
-
-WeerInfoCurVer = 2.3
+HetWeerCurVer = 2.3
 
 def icontotext(icon):
     text = ""
@@ -184,24 +177,24 @@ class weatherMenu(Screen):
         skin = """
         <screen name="weatherMenu" position="fill" flags="wfNoBorder">
             <widget name="titles" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
             <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
             <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget><widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
             <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28"
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
                 <convert type="ServiceName">Name</convert>
             </widget>
-            <widget name="list" position="920,110" size="975,375" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list97563.png"/>\n
+            <widget name="list" position="920,110" size="975,375" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
             <widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;24"/>\n
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/nlflaghd.png" position="794,114" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/beflaghd.png" position="794,177" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/euflaghd.png" position="794,240" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/lokaalhd.png" position="794,303" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflaghd.png" position="794,114" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/beflaghd.png" position="794,177" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflaghd.png" position="794,240" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalhd.png" position="794,303" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
             <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
             <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
         </screen>"""
 
@@ -209,9 +202,9 @@ class weatherMenu(Screen):
         skin = """
         <screen name="weatherMenu" position="fill" flags="wfNoBorder">
             <widget name="titles" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
             <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
             <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
@@ -219,15 +212,15 @@ class weatherMenu(Screen):
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
             <convert type="ServiceName">Name</convert>
             </widget>
-            <widget name="list" position="630,106" size="650,250" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list65043.png"/>\n
+            <widget name="list" position="630,106" size="650,250" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
             <widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;18"/>\n
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/nlflagsd.png" position="550,105" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/beflagsd.png" position="550,148" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/euflagsd.png" position="550,191" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/lo/lokaalsd.png" position="550,234" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflagsd.png" position="550,105" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/beflagsd.png" position="550,148" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflagsd.png" position="550,191" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalsd.png" position="550,234" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/> 
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
             <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
         </screen>"""
           
@@ -236,7 +229,7 @@ class weatherMenu(Screen):
     def __init__(self, session, args=None):
         self.session = session
         self["mess1"] = ScrollLabel("")
-        self["titles"] = Label(_("WeerInfo 2.3"))
+        self["titles"] = Label(_("HetWeer 2.3"))
         self["key_red"] = Label(_("Exit"))
         self["key_green"] = Label(_("Ok"))
         self.skin = weatherMenu.skin
@@ -245,10 +238,10 @@ class weatherMenu(Screen):
         response = urllib2.urlopen("http://www.luxsat.be/hpengine/download_files/version_weerinfo.txt")
         curver = float(response.read())
 
-        if WeerInfoCurVer < curver:
+        if HetWeerCurVer < curver:
             from enigma import eTimer
             self.pausetimer = eTimer()
-            self.pausetimer.callback.append(self.weerinfoUpdateMain)
+            self.pausetimer.callback.append(self.HetWeerUpdateMain)
             self.pausetimer.start(500, True)
         list = []
         for x in weatherMenu.titleNames:
@@ -256,22 +249,9 @@ class weatherMenu(Screen):
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit, "green": self.go}, -1)
-        dir = "/tmp/WeerInfo/"
+        dir = "/tmp/HetWeer/"
         if not os.path.exists(dir):
             os.makedirs(dir)
-    
-    def weerinfoUpdateMain(self):
-        self.session.openWithCallback(self.weerinfoUpdate, MessageBox,
-                                      _("Update available, do you want to update and restart Enigma? "))
-    
-    def weerinfoUpdate(self, weerupg):
-        if weerupg is True:
-            self["mess1"].setText(_("Package will be Updated"))
-            try:
-                self.session.open(Console, _("downloading-installing: WeerInfo") , ["echo Met dank aan het LuxSat Forum voor het beschikbaar stellen van de download server!!;opkg install -force-overwrite http://www.luxsat.be/hpengine/download_files/plugins/Plugin_Extensions/enigma2-plugin-extensions-weerinfo_all.ipk;sleep 2;killall -9 enigma2;"]) 
-                        
-            except (IOError, RuntimeError, NameError):
-                self["mess1"].setText(_("Package was NOT Updated"))
     
     def go(self):
         global state
@@ -279,7 +259,7 @@ class weatherMenu(Screen):
         state[0] = weatherMenu.titleNames[index]
         if state[0] == "WeerInfo":
             self.session.open(favoritesscreen)
-        #elif state[0] == "WeerInfo2":
+        #elif state[0] == "HetWeer2":
             #self.session.open(weeroverview)
         else:
             self.session.open(weatherMenuSub1)
@@ -306,9 +286,9 @@ class weeroverview(Screen):
                 if happydays.get("iconcode"):
                     losticon = happydays["iconcode"]    
                 dayinfoblok += """
-                    <widget name="bigWeerIcon1""" + str(day) + """" position="720,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/iconbighd/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
-                    <widget name="bigDirIcon1""" + str(day) + """" position="1146,359" size="42,42" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/windhd/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
+                    <widget name="bigWeerIcon1""" + str(day) + """" position="720,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigDirIcon1""" + str(day) + """" position="1146,359" size="42,42" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1"/>
                     <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1"/>
                     <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="48,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1"/>
@@ -317,7 +297,7 @@ class weeroverview(Screen):
                 dataUrr = dataDagen[day]["hours"]
                 for data in dataUrr:
                     if data.get("hour") and (data["hour"]-1)%3 == 0:
-                        dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                        dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
                         print "maak : "+ str(day)+"|"+str(uurcount)
                         uurcount += 1
             for uur in range(0, 8):
@@ -326,13 +306,13 @@ class weeroverview(Screen):
                     <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,870" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1"/>
                     <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,945" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1"/>
                     <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,986" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/windhd/turbinehd.png" position=\"""" + str(119 + (216 * uur)) + """,983" size="38,38" zPosition="3" alphatest="on"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/windhd/druphd.png" position=\"""" + str(120 + (216 * uur)) + """,945" size="15,23" zPosition="3" alphatest="on"/>"""
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/turbinehd.png" position=\"""" + str(119 + (216 * uur)) + """,983" size="38,38" zPosition="3" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/druphd.png" position=\"""" + str(120 + (216 * uur)) + """,945" size="15,23" zPosition="3" alphatest="on"/>"""
 
 	        skin = """
                 <screen position="fill" flags="wfNoBorder">
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/backgroundhd.png" position="center,center" size="1920,1080" zPosition="0" alphatest="on"/>
-                    <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png" position="center,center" size="1920,1080" zPosition="0" alphatest="on"/>
+                    <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
                     <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1"/>
                     <widget name="bigtemp1" position="930,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1"/>
                     <widget name="bigweathertype1" position="719,312" size="480,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1"/>
@@ -351,9 +331,9 @@ class weeroverview(Screen):
                 if happydays.get("iconcode"):
                     losticon = happydays["iconcode"]
                 dayinfoblok += """
-                    <widget name="bigWeerIcon1""" + str(day) + """" position="480,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/iconbig/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
-                    <widget name="bigDirIcon1""" + str(day) + """" position="764,239" size="28,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/wind/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/icon/""" + str(losticon) + """.png" position=\"""" + str(87 + (165 * day)) + """,348" size="48,48" zPosition="3" transparent="0" alphatest="on"/>
+                    <widget name="bigWeerIcon1""" + str(day) + """" position="480,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbig/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigDirIcon1""" + str(day) + """" position="764,239" size="28,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/""" + str(losticon) + """.png" position=\"""" + str(87 + (165 * day)) + """,348" size="48,48" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,315" size="90,24" zPosition="3" valign="center" halign="left" font="Regular;22" transparent="1"/>
                     <widget name="midtemp2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,400" size="60,36" zPosition="3" font="Regular;32" transparent="1"/>
                     <widget name="minitemp2""" + str(day) + """" position=\"""" + str(160 + (165 * day)) + """,413" size="32,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
@@ -362,7 +342,7 @@ class weeroverview(Screen):
                 dataUrr = dataDagen[day]["hours"]
                 for data in dataUrr:
                     if data.get("hour") and (data["hour"]-1)%3 == 0:
-                        dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,519" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                        dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,519" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
                         print "maak : "+ str(day)+"|"+str(uurcount)
                         uurcount += 1
             for uur in range(0, 8):
@@ -371,13 +351,13 @@ class weeroverview(Screen):
                     <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(80 + (144 * uur)) + """,580" size="120,36" zPosition="3" valign="center" halign="left" font="Regular;32" transparent="1"/>
                     <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,630" size="80,20" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
                     <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,657" size="82,21" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/wind/turbine.png" position=\"""" + str(79 + (144 * uur)) + """,655" size="25,25" zPosition="6" alphatest="on"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/wind/drup.png" position=\"""" + str(80 + (144 * uur)) + """,630" size="10,15" zPosition="6" alphatest="on"/>"""
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/turbine.png" position=\"""" + str(79 + (144 * uur)) + """,655" size="25,25" zPosition="6" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/drup.png" position=\"""" + str(80 + (144 * uur)) + """,630" size="10,15" zPosition="6" alphatest="on"/>"""
 
 	        skin = """
                 <screen position="fill" flags="wfNoBorder">
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/background.png" position="center,center" size="1280,720" zPosition="0" alphatest="on"/>
-                    <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png" position="center,center" size="1280,720" zPosition="0" alphatest="on"/>
+                    <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
                     <widget name="city1" position="405,37" size="470,36" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
                     <widget name="bigtemp1" position="620,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
                     <widget name="bigweathertype1" position="479,210" size="320,22" zPosition="3" valign="center" halign="center" font="Regular;18" transparent="1"/>
@@ -522,9 +502,9 @@ class weatherMenuSub1(Screen):
     if sz_w > 1800: 
         skin = """
         <screen name="weatherMenuSub1" position="fill" flags="wfNoBorder">
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
             <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
             <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
@@ -532,17 +512,17 @@ class weatherMenuSub1(Screen):
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
                 <convert type="ServiceName">Name</convert>
             </widget>
-            <widget name="list" position="840,110" size="975,450" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list97563.png"/>\n
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
+            <widget name="list" position="840,110" size="975,450" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
             <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
         </screen>"""
         
     else: 
         skin = """
         <screen name="weatherMenuSub1" position="fill" flags="wfNoBorder">
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
             <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
             <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
@@ -550,8 +530,8 @@ class weatherMenuSub1(Screen):
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
             <convert type="ServiceName">Name</convert>
             </widget>
-            <widget name="list" position="560,106" size="650,301" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list65043.png"/>\n
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
+            <widget name="list" position="560,106" size="650,301" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
         </screen>"""
            
@@ -646,62 +626,62 @@ class weatherMenuSub1(Screen):
             locurl = "eu"
         if state[0] == "Belgie" and newView:
             if type == "Buienradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Motregenradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Wolkenradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Zonradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Onweerradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Satelliet":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             elif type == "Zonkracht-UV":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             self.session.open(testnew)
         elif state[0] == "Nederland" and newView:
             if type == "Buienradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Motregenradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Wolkenradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Zonradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Onweerradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Satelliet":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             elif type == "Zonkracht-UV":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             self.session.open(testnew)
         elif state[0] == "Europa" and newView:
             if type == "Buienradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapeu/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapeu/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Motregenradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Wolkenradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Zonradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Onweerradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Satelliet":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             elif type == "Zonkracht-UV":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/WeerInfo/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             self.session.open(testnew)
         if not newView:
             picturedownloadurl = "http://api.buienradar.nl/image/1.0/" + loctype
             for x in range(0, aantalfotos):
                 turl = time.strftime("20%y%m%d%H%M", time.localtime(tt))
-                dir = "/tmp/WeerInfo/%02d.png" % (aantalfotos - (x + 1))
+                dir = "/tmp/HetWeer/%02d.png" % (aantalfotos - (x + 1))
                 tt += tijdstap * 60
                 print picturedownloadurl+ turl
                 urllib.urlretrieve(picturedownloadurl + turl, dir)
         
-            if os.path.exists('/tmp/WeerInfo/00.png'):
+            if os.path.exists('/tmp/HetWeer/00.png'):
                 try:
                     self.session.open(View_Slideshow, aantalfotos)
                 except:
@@ -715,8 +695,8 @@ class weatherMenuSub1(Screen):
 class testnew(Screen):
     def __init__(self, session, args=None):
         skin = """
-        <screen position="center,center" size="550,512" title="WeerInfo">
-            <widget name="picd" position="0,0" size="39600,900" pixmap="/tmp/WeerInfo/00.png" zPosition="1" alphatest="on"/>
+        <screen position="center,center" size="550,512" title="HetWeer">
+            <widget name="picd" position="0,0" size="39600,900" pixmap="/tmp/HetWeer/00.png" zPosition="1" alphatest="on"/>
         </screen>"""
                      
         self.session = session
@@ -734,7 +714,7 @@ class testnew(Screen):
         global pos	
         self["picd"].moveTo(pos*-550,0,1)
         pos += 1
-        if pos >= (get_image_info("/tmp/WeerInfo/00.png")[0]/550):
+        if pos >= (get_image_info("/tmp/HetWeer/00.png")[0]/550):
             pos = 0
         self["picd"].startMoving()
 
@@ -745,9 +725,9 @@ class favoritesscreen(Screen):
         skin = """
         <screen name="favoritesscreen" position="fill" flags="wfNoBorder">
             <widget name="favor" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
             <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
             <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
@@ -755,13 +735,13 @@ class favoritesscreen(Screen):
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
                 <convert type="ServiceName">Name</convert>
             </widget>
-            <widget name="list" position="840,210" size="900,630" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list97563.png"/>\n
+            <widget name="list" position="840,210" size="900,630" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
             <widget name="plaatsn" position="840,120" size="375,70" valign="center" halign="left" zPosition="3" foregroundColor="yellow" font="Regular;63" transparent="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
             <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
             <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/yellow34.png" position="1064,1032" size="34,34" alphatest="blend"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow34.png" position="1064,1032" size="34,34" alphatest="blend"/>
             <widget name="key_yellow" position="1114,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
         </screen>"""
         
@@ -769,9 +749,9 @@ class favoritesscreen(Screen):
         skin = """
         <screen name="favoritesscreen" position="fill" flags="wfNoBorder">
             <widget name="favor" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
             <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
             <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
@@ -779,13 +759,13 @@ class favoritesscreen(Screen):
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
             <convert type="ServiceName">Name</convert>
             </widget>
-            <widget name="list" position="560,160" size="600,430" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list65043.png"/>\n
+            <widget name="list" position="560,160" size="600,430" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
             <widget name="plaatsn" position="560,106" size="375,43" valign="center" halign="left" zPosition="3" foregroundColor="yellow" font="Regular;28" transparent="1"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/> 
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
             <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>  
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/yellow26.png" position="695,643" size="26,26" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow26.png" position="695,643" size="26,26" alphatest="on"/>
             <widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
         </screen>"""
                    
@@ -831,7 +811,7 @@ class favoritesscreen(Screen):
             searchterm = " " + searchterm[1:].title()
             global SavedLokaleWeer
             SavedLokaleWeer.append(str(searchterm))
-            file = open("/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/location.save", "w")
+            file = open("/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/location.save", "w")
             for x in SavedLokaleWeer:
                 file.write((str(x)+ "\n"))
             file.close()
@@ -856,7 +836,7 @@ class favoritesscreen(Screen):
             global SavedLokaleWeer
             index = self["list"].getSelectedIndex()
             SavedLokaleWeer.remove(SavedLokaleWeer[index])
-            file = open("/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/location.save", "w")
+            file = open("/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/location.save", "w")
             for x in SavedLokaleWeer:
                 file.write(str(x)+"\n")
             file.close()
@@ -872,21 +852,21 @@ class lokaalTemp(Screen):
         if sz_w > 1800: 
             skin = """
             <screen name="lokaaltempscreen" position="fill" flags="wfNoBorder"> 
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline87.png" position="0,0" size="1920,87" zPosition="0"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87" zPosition="0"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
                 <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget><widget name="listday" position="375,300" size="1065,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list106539.png"/>\n
-                <widget name="listdate" position="450,300" size="120,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list54039.png"/>\n
-                <widget name="listminmax" position="675,300" size="300,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list54039.png"/>\n
-                <widget name="listbeauf" position="1125,300" size="75,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list54039.png"/>\n
-                <widget name="listwind" position="1395,300" size="142,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list54039.png"/>\n
+                <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget><widget name="listday" position="375,300" size="1065,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list106539.png"/>\n
+                <widget name="listdate" position="450,300" size="120,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list54039.png"/>\n
+                <widget name="listminmax" position="675,300" size="300,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list54039.png"/>\n
+                <widget name="listbeauf" position="1125,300" size="75,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list54039.png"/>\n
+                <widget name="listwind" position="1395,300" size="142,585" scrollbarMode="showOnDemand" font="Regular;33" itemHeight="39" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list54039.png"/>\n
                 <widget name="label0" position="160,162" size="750,40" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;34"/>
                 <widget name="label1" position="375,240" size="120,50" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;44"/>
                 <widget name="label2" position="683,240" size="300,50" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;44"/>
                 <widget name="label3" position="1020,240" size="270,50" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;44"/>
                 <widget name="label4" position="1395,240" size="150,50" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;44"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
                 <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
             </screen>"""
         
@@ -894,22 +874,22 @@ class lokaalTemp(Screen):
             skin = """
             
             <screen name="lokaaltempscreen" position="fill" flags="wfNoBorder"> 
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
                 <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
                 <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
-                <widget name="listday" position="250,200" size="710,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list105026.png"/>\n
-                <widget name="listdate" position="300,200" size="80,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list39026.png"/>\n
-                <widget name="listminmax" position="450,200" size="200,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list39026.png"/>\n
-                <widget name="listbeauf" position="750,200" size="50,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list39026.png"/>\n
-                <widget name="listwind" position="930,200" size="95,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list39026.png"/>\n
+                <widget name="listday" position="250,200" size="710,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list105026.png"/>\n
+                <widget name="listdate" position="300,200" size="80,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list39026.png"/>\n
+                <widget name="listminmax" position="450,200" size="200,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list39026.png"/>\n
+                <widget name="listbeauf" position="750,200" size="50,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list39026.png"/>\n
+                <widget name="listwind" position="930,200" size="95,390" scrollbarMode="showOnDemand" font="Regular;22" itemHeight="26" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list39026.png"/>\n
                 <widget name="label0" position="120,115" size="500,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;22"/>
                 <widget name="label1" position="250,160" size="80,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;28"/>
                 <widget name="label2" position="455,160" size="200,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;28"/>
                 <widget name="label3" position="680,160" size="180,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;28"/>
                 <widget name="label4" position="930,160" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;28"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
                 <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
             </screen>"""
 
@@ -1023,16 +1003,16 @@ class lokaalTempSub(Screen):
                 if data.get("iconcode") and data.get("hour") and data.get("winddirection") and data["hour"]%2==0:
                     sz_w = getDesktop(0).size().width()
                     if sz_w > 1800:
-                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/icon/"""+str(data["iconcode"])+""".png" position = "680,"""+str((168*2)+(48*index))+"""" size = "48,48" alphatest = "on" zPosition="3"/>\n"""
-                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/wind/"""+str(data["winddirection"])+""".png" position = "1035,"""+str((173*2)+(48*index))+"""" size = "28,28" alphatest = "on" zPosition="3"/>\n"""
+                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+str(data["iconcode"])+""".png" position = "680,"""+str((168*2)+(48*index))+"""" size = "48,48" alphatest = "on" zPosition="3"/>\n"""
+                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/"""+str(data["winddirection"])+""".png" position = "1035,"""+str((173*2)+(48*index))+"""" size = "28,28" alphatest = "on" zPosition="3"/>\n"""
                         index += 1 
                     else:
-                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/icon/"""+str(data["iconcode"])+""".png" position = "330,"""+str((93*2)+(48*index))+"""" size = "48,48" alphatest = "on" zPosition="3"/>\n"""
-                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/wind/"""+str(data["winddirection"])+""".png" position = "670,"""+str((98*2)+(48*index))+"""" size = "28,28" alphatest = "on" zPosition="3"/>\n"""
+                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+str(data["iconcode"])+""".png" position = "330,"""+str((93*2)+(48*index))+"""" size = "48,48" alphatest = "on" zPosition="3"/>\n"""
+                        icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/"""+str(data["winddirection"])+""".png" position = "670,"""+str((98*2)+(48*index))+"""" size = "28,28" alphatest = "on" zPosition="3"/>\n"""
                         index += 1
         
         else:
-            icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/icon/na.png" position = "600,""" + str((250*2) + (48 *index)) + """" size = "48,48" alphatest = "on" zPosition="3"  />\n"""
+            icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/na.png" position = "600,""" + str((250*2) + (48 *index)) + """" size = "48,48" alphatest = "on" zPosition="3"  />\n"""
         dataDagen = weatherData["days"]
         mydate = dataDagen[selectedWeerDay+1]["date"][:-9]
         unixtimecode = time.mktime(datetime.datetime(int(mydate[:4]), int(mydate[5:][:2]), int(mydate[8:][:2])).timetuple())
@@ -1045,8 +1025,8 @@ class lokaalTempSub(Screen):
         if sz_w > 1800:
             skin = """
             <screen position="fill" flags="wfNoBorder">
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="2"/>
-                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="2"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
                 <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
                 <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                 <widget name="label1" position="470,155" size="500,40" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;34"/>
@@ -1054,12 +1034,12 @@ class lokaalTempSub(Screen):
                 <widget name="label3" position="820,235" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;32"/>
                 <widget name="label4" position="1141,235" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;32"/>
                 <widget name="label5" position="1390,235" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;32"/>
-                <widget name="list1" position="492,290" size="500,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
+                <widget name="list1" position="492,290" size="500,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
 		"""+icons+"""
-	        <widget name="listtemp" position="815,290" size="360,600" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
+	        <widget name="listtemp" position="815,290" size="360,600" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
 		"""+icons+"""
-                <widget name="listwind" position="1170,290" size="360,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
-                <widget name="listbui" position="1385,290" size="95,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
+                <widget name="listwind" position="1170,290" size="360,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
+                <widget name="listbui" position="1385,290" size="95,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
            </screen>"""
            
         else:
@@ -1070,12 +1050,12 @@ class lokaalTempSub(Screen):
                 <widget name="label3" position="470,85" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;32"/>
                 <widget name="label4" position="765,85" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;32"/>
                 <widget name="label5" position="1040,85" size="100,36" zPosition="2" transparent="1" foregroundColor="yellow" font="Regular;32"/>
-                <widget name="list1" position="142,140" size="500,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
+                <widget name="list1" position="142,140" size="500,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
 		"""+icons+"""
-	        <widget name="listtemp" position="465,140" size="340,600" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
+	        <widget name="listtemp" position="465,140" size="340,600" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
 		"""+icons+"""
-                <widget name="listwind" position="790,140" size="360,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
-                <widget name="listbui" position="1035,140" size="95,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/Images/list/list36048.png"/>\n
+                <widget name="listwind" position="790,140" size="360,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
+                <widget name="listbui" position="1035,140" size="95,610" scrollbarMode="showOnDemand" font="Regular;36" itemHeight="48" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list36048.png"/>\n
            </screen>"""
                         
         self.session = session
@@ -1275,7 +1255,7 @@ class View_Slideshow(Screen, InfoBarAspectSelection):
         self.dirlistcount = 0
         self.speed = 15
 
-        devicepath = "/tmp/WeerInfo/"
+        devicepath = "/tmp/HetWeer/"
         currDir = devicepath
         self.filelist = FileList(currDir, showDirectories=False, matchingPattern="^.*\.(png)", useServiceRef=False)
 
@@ -1387,13 +1367,13 @@ class View_Slideshow(Screen, InfoBarAspectSelection):
     def Exit(self):
 
         try:
-            self.removedir = "/tmp/WeerInfo/"
+            self.removedir = "/tmp/HetWeer/"
             start = 0
             print "max files: ", self.maxentry
             print "delete files used"
             if self.maxentry < 10:
                 while start < (self.maxentry + 1):
-                    pngfile = "/tmp/WeerInfo/0" + str(start) + ".png"
+                    pngfile = "/tmp/HetWeer/0" + str(start) + ".png"
                     os.remove(pngfile)
                     start += 1
 
@@ -1401,11 +1381,11 @@ class View_Slideshow(Screen, InfoBarAspectSelection):
             elif self.maxentry > 9:
                 while start < (self.maxentry + 1):
                     if start < 10:
-                        pngfile = "/tmp/WeerInfo/0" + str(start) + ".png"
+                        pngfile = "/tmp/HetWeer/0" + str(start) + ".png"
                         os.remove(pngfile)
                         start += 1
                     else:
-                        pngfile = "/tmp/WeerInfo/" + str(start) + ".png"
+                        pngfile = "/tmp/HetWeer/" + str(start) + ".png"
                         os.remove(pngfile)
                         start += 1
 
@@ -1421,7 +1401,7 @@ def main(session, **kwargs):
     if checkInternet():
         global SavedLokaleWeer
         SavedLokaleWeer = []
-        locdirsave = "/usr/lib/enigma2/python/Plugins/Extensions/WeerInfo/location.save"
+        locdirsave = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/location.save"
         if os.path.exists(locdirsave):
             for line in open(locdirsave):
                 location = line.rstrip()
@@ -1435,6 +1415,6 @@ def main(session, **kwargs):
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
-    return PluginDescriptor(name="WeerInfo", description="BuienRadar",
-                            icon="Images/weerinfo.png",
+    return PluginDescriptor(name="HetWeer", description="Weersinformatie",
+                            icon="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/plugin.png",
                             where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=main)
