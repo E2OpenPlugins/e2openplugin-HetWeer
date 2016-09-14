@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#HetWeer Versie2.3
 import re
 import time
 import json
@@ -28,7 +27,6 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
-HetWeerCurVer = 2.3
 
 def icontotext(icon):
     text = ""
@@ -57,9 +55,9 @@ def icontotext(icon):
     elif icon == "gg":
         text = "Buien en kans op onweer"    
     elif icon == "j":
-        text = "Opklaringen"    
+        text = "Overwegend   zonnig"    
     elif icon == "jj":
-        text = "Opklaringen"
+        text = "Overwegend   helder"
     elif icon == "m":
         text = "Zwaar bewolkt / buien mogelijk"       
     elif icon == "mm":
@@ -176,7 +174,6 @@ class weatherMenu(Screen):
     if sz_w > 1800: 
         skin = """
         <screen name="weatherMenu" position="fill" flags="wfNoBorder">
-            <widget name="titles" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
@@ -201,7 +198,6 @@ class weatherMenu(Screen):
     else: 
         skin = """
         <screen name="weatherMenu" position="fill" flags="wfNoBorder">
-            <widget name="titles" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
@@ -229,20 +225,10 @@ class weatherMenu(Screen):
     def __init__(self, session, args=None):
         self.session = session
         self["mess1"] = ScrollLabel("")
-        self["titles"] = Label(_("HetWeer 2.3"))
         self["key_red"] = Label(_("Exit"))
         self["key_green"] = Label(_("Ok"))
         self.skin = weatherMenu.skin
         Screen.__init__(self, session)
-        
-        response = urllib2.urlopen("http://www.luxsat.be/hpengine/download_files/version_weerinfo.txt")
-        curver = float(response.read())
-
-        if HetWeerCurVer < curver:
-            from enigma import eTimer
-            self.pausetimer = eTimer()
-            self.pausetimer.callback.append(self.HetWeerUpdateMain)
-            self.pausetimer.start(500, True)
         list = []
         for x in weatherMenu.titleNames:
             list.append((_(x)))
@@ -259,7 +245,7 @@ class weatherMenu(Screen):
         state[0] = weatherMenu.titleNames[index]
         if state[0] == "WeerInfo":
             self.session.open(favoritesscreen)
-        #elif state[0] == "HetWeer2":
+        #elif state[0] == "WeerInfo2":
             #self.session.open(weeroverview)
         else:
             self.session.open(weatherMenuSub1)
@@ -896,7 +882,7 @@ class lokaalTemp(Screen):
                 
         self.session = session
         self.skin = skin
-        self["label0"] = Label(_(str("WeerInfo overzicht: "+lockaaleStad)))
+        self["label0"] = Label(_(str("HetWeer overzicht: "+lockaaleStad)))
         self["label1"] = Label(_("DAG"))
         self["label2"] = Label(_("MIN    MAX"))
         self["label3"] = Label(_("BEAUFORD"))
@@ -1415,6 +1401,6 @@ def main(session, **kwargs):
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
-    return PluginDescriptor(name="HetWeer", description="Weersinformatie",
-                            icon="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/plugin.png",
+    return PluginDescriptor(name="HetWeer", description="BuienRadar & WeerInfo",
+                            icon="Images/weerinfo.png",
                             where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=main)
