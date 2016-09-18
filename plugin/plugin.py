@@ -797,7 +797,7 @@ class favoritesscreen(Screen):
             searchterm = " " + searchterm[1:].title()
             global SavedLokaleWeer
             SavedLokaleWeer.append(str(searchterm))
-            file = open("/etc/enigma2/location.save", "w")
+            file = open("/etc/enigma2/hetweer.cfg", "w")
             for x in SavedLokaleWeer:
                 file.write((str(x)+ "\n"))
             file.close()
@@ -822,7 +822,7 @@ class favoritesscreen(Screen):
             global SavedLokaleWeer
             index = self["list"].getSelectedIndex()
             SavedLokaleWeer.remove(SavedLokaleWeer[index])
-            file = open("/etc/enigma2/location.save", "w")
+            file = open("/etc/enigma2/hetweer.cfg", "w")
             for x in SavedLokaleWeer:
                 file.write(str(x)+"\n")
             file.close()
@@ -1387,7 +1387,7 @@ def main(session, **kwargs):
     if checkInternet():
         global SavedLokaleWeer
         SavedLokaleWeer = []
-        locdirsave = "/etc/enigma2/location.save"
+        locdirsave = "/etc/enigma2/hetweer.cfg"
         if os.path.exists(locdirsave):
             for line in open(locdirsave):
                 location = line.rstrip()
