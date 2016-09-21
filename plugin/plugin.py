@@ -47,39 +47,39 @@ def icontotext(icon):
 	elif icon == "dd":
 		text = "Wisselvallig met kans op nevel"	
 	elif icon == "f":
-		text = "Zonnig met kans op buien"	
+		text = "Zonnig met kans op buien"
 	elif icon == "ff":
-		text = "Bewolkt met kans op buien"	
+		text = "Bewolkt met kans op buien"
 	elif icon == "g":
-		text = "Zon met kans op buien of onweer"	
+		text = "Zon met kans op buien of onweer"
 	elif icon == "gg":
-		text = "Buien en kans op onweer"	
+		text = "Buien en kans op onweer"
 	elif icon == "j":
-		text = "Overwegend   zonnig"	
+		text = "Overwegend   zonnig"
 	elif icon == "jj":
 		text = "Overwegend   helder"
 	elif icon == "m":
-		text = "Zwaar bewolkt / buien mogelijk"	   
+		text = "Zwaar bewolkt / buien mogelijk"	
 	elif icon == "mm":
-		text = "Zwaar bewolkt / buien mogelijk"	   
+		text = "Zwaar bewolkt / buien mogelijk"	
 	elif icon == "n":
-		text = "Zon met kans op nevel"	   
+		text = "Zon met kans op nevel"
 	elif icon == "nn":
-		text = "Helder met kans nevel"	   
+		text = "Helder met kans nevel"
 	elif icon == "q":
-		text = "Zwaar bewolkt / hevige buien"	   
+		text = "Zwaar bewolkt / hevige buien"
 	elif icon == "qq":
 		text = "Zwaar bewolkt / hevige buien"
 	elif icon == "r":
-		text = "Bewolkt"	   
+		text = "Bewolkt"
 	elif icon == "rr":
-		text = "Bewolkt"	   
+		text = "Bewolkt"
 	elif icon == "s":
-		text = "Zwaar bewolkt / onweersbuien"	   
+		text = "Zwaar bewolkt / onweersbuien"
 	elif icon == "ss":
-		text = "Zwaar bewolkt / onweersbuien"	   
+		text = "Zwaar bewolkt / onweersbuien"
 	else:
-		text = "Geen info"	   
+		text = "Geen info"
 	return text
 
 def winddirtext(dirtext):
@@ -112,7 +112,7 @@ def get_image_info(pic):
 		width = int(w)
 		height = int(h)
 	else:
-		return 0  
+		return 0
 	return width, height
 
 def is_png(data):
@@ -439,22 +439,22 @@ class weeroverview(Screen):
 
 		temptext = "na"
 		if dataDagen[self.selected+0].get("temperature"):
-			temptext = dataDagen[self.selected+0]["temperature"]  
-		self["bigtemp1"].setText(str(temptext)+"°C")	  
+			temptext = dataDagen[self.selected+0]["temperature"]
+		self["bigtemp1"].setText(str(temptext)+"°C")
 
 		windtext = "na"
 		if dataDagen[self.selected+0].get("winddirection"):
-			windtext = dataDagen[self.selected+0]["winddirection"]  
+			windtext = dataDagen[self.selected+0]["winddirection"]
 		self["winddir1"].setText("Windrichting "+str(winddirtext(windtext)))
 
 		typetext = "na"
 		if dataDagen[self.selected+0].get("iconcode"):
-			typetext = dataDagen[self.selected+0]["iconcode"]  
+			typetext = dataDagen[self.selected+0]["iconcode"]
 		self["bigweathertype1"].setText(icontotext(str(typetext))) 
 
 		feeltext = "na"
 		if dataDagen[self.selected+0].get("feeltemperature"):
-			feeltext = dataDagen[self.selected+0]["feeltemperature"]  
+			feeltext = dataDagen[self.selected+0]["feeltemperature"]
 		self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"°C")
 
 		for day in range(0, 7):
@@ -687,8 +687,8 @@ class testnew(Screen):
 		if sz_w > 1800: 
 			self.scaler= 2.0 
 		skin = """
-		<screen position="center,center" size=\""""+str(550*self.scaler-16)+""","""+str(512*self.scaler)+"""" title="HetWeer">
-			<widget name="picd" position="0,0" size=\""""+str(picformat[0]*self.scaler)+""","""+str(picformat[1]*self.scaler)+"""" zPosition="5" alphatest="on"/>
+ 		<screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""" title="HetWeer">
+ 			<widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>
 		</screen>"""
 
 		self.session = session
@@ -779,7 +779,7 @@ class favoritesscreen(Screen):
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
 			<widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/> 
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
-			<widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>  
+			<widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow26.png" position="695,643" size="26,26" alphatest="on"/>
 			<widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
 		</screen>"""
@@ -1010,7 +1010,7 @@ class lokaalTempSub(Screen):
 						index += 1
 
 		else:
-			icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/na.png" position = "600,""" + str((250*2) + (48 *index)) + """" size = "48,48" alphatest = "on" zPosition="3"  />\n"""
+			icons += """<ePixmap pixmap = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/na.png" position = "600,""" + str((250*2) + (48 *index)) + """" size = "48,48" alphatest = "on" zPosition="3"/>\n"""
 		dataDagen = weatherData["days"]
 		mydate = dataDagen[selectedWeerDay+1]["date"][:-9]
 		unixtimecode = time.mktime(datetime.datetime(int(mydate[:4]), int(mydate[5:][:2]), int(mydate[8:][:2])).timetuple())
@@ -1069,7 +1069,7 @@ class lokaalTempSub(Screen):
 		list1 = []
 		listtemp = []
 		listwind = []
-		listbui = []  
+		listbui = []
 		if huurData.get("hours"):
 			for huur in huurData["hours"]:
 				info1 = ""
@@ -1147,10 +1147,10 @@ class InfoBarAspectSelection:
 
 	def __init__(self):
 		self["AspectSelectionAction"] = HelpableActionMap(self, "InfobarAspectSelectionActions",
-														  {
-															  "aspectSelection": (
-																  self.ExGreen_toggleGreen, _("Aspect list...")),
-														  })
+														{
+															"aspectSelection": (
+																self.ExGreen_toggleGreen, _("Aspect list...")),
+														})
 		self.__ExGreen_state = self.STATE_HIDDEN
 
 	def ExGreen_doAspect(self):
@@ -1192,7 +1192,7 @@ class InfoBarAspectSelection:
 				selection = x
 		keys = ["green", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 		self.session.openWithCallback(self.aspectSelected, ChoiceBox, title=_("Please select an aspect ratio..."),
-									  list=tlist, selection=selection, keys=keys)
+									list=tlist, selection=selection, keys=keys)
 
 	def aspectSelected(self, aspect):
 		if not aspect is None:
@@ -1203,20 +1203,20 @@ class InfoBarAspectSelection:
 					open("/proc/stb/video/policy", "w").write(aspect[1])
 					self.ExGreen_doHide()
 		return
-  
+
 class View_Slideshow(Screen, InfoBarAspectSelection):
 	sz_w = getDesktop(0).size().width()
 	if sz_w > 1800:				
 		skin = """
 		<screen name="lieverZon" position="center,center" size="1920, 1080" flags="wfNoBorder"> 
 			<widget name="pic" position="center,center" size="1080, 1005" zPosition="2" alphatest="on"/>
-			<widget name="file" position="1,1" size="1, 1"  />
+			<widget name="file" position="1,1" size="1, 1"/>
 		</screen>"""
 	else:	
 		skin = """
 		<screen name="lieverZon" position="center,center" size="1280, 720" flags="wfNoBorder"> 
 			<widget name="pic" position="center,center" size="720, 670" zPosition="2" alphatest="on"/>
-			<widget name="file" position="1,1" size="1, 1"  />
+			<widget name="file" position="1,1" size="1, 1"/>
 		</screen>"""
 	
 	def __init__(self, session, pindex, startslide=True):
