@@ -154,19 +154,20 @@ def getLocWeer(iscity=None):
 
 	lockaaleStad = inputCity
 	mydata = inputCity
-	response = urllib.urlopen("http://www.buienradar.be/weer/"+mydata)
+	req = urllib2.Request("http://www.luxsat.be/hpengine/download_files/plugins/tvmovies.php?cn="+mydata)
+	response = urllib2.urlopen(req)
 	kaas = response.read()
-	regx = '''data-location="{&quot;id&quot;:(.*?),&quot;name&quot;:&quot;.*?&quot;'''
+	regx = '''(.*?),(.*?),'''
 	match = re.findall(regx, kaas, re.DOTALL)
 
-	if len(match) > 0:		
-		response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0])
-		kaas = response.read()
-		global weatherData
-		weatherData = json.loads(kaas)
-		return True 
-	else:
-		return False
+        if match:         
+	    response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
+	    kaas = response.read()
+            global weatherData
+	    weatherData = json.loads(kaas)
+	    return True
+        else:
+	    return False 
 
 
 class weatherMenu(Screen):
@@ -805,12 +806,13 @@ class favoritesscreen(Screen):
 		self.close()
 
 	def addLoc(self):
-		self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=(_("Enter plaatsnaam ")), text=" ")
+		self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=(_("Enter plaatsnaam ")), text="")
 
 	def searchCity(self, searchterm = None):
 		if searchterm is not None:
-			searchterm = " " + searchterm[1:].title()
-			global SavedLokaleWeer
+			#searchterm = "" + searchterm[1:].title()
+			searchterm = "" + searchterm.title()
+                        global SavedLokaleWeer
 			SavedLokaleWeer.append(str(searchterm))
 			file = open("/etc/enigma2/hetweer.cfg", "w")
 			for x in SavedLokaleWeer:
@@ -829,7 +831,7 @@ class favoritesscreen(Screen):
 				time.sleep(1)
 				self.session.open(weeroverview)
 			else:
-				self.session.open(MessageBox, _("Download fout probeer het later opnieuw a.u.b."), MessageBox.TYPE_INFO)
+				self.session.open(MessageBox, _("Download fout: Controleer spelling of vraag om de plaatsnaam toe te voegen aan de database."), MessageBox.TYPE_INFO)
 
 	def removeLoc(self):
 		if len(SavedLokaleWeer)>0:
