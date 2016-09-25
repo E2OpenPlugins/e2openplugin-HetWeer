@@ -102,7 +102,6 @@ def winddirtext(dirtext):
 		text = "NoordWest"	
 	return text
 
-
 def get_image_info(pic):
 	data = None
 	with open(pic, "rb") as f:
@@ -155,21 +154,20 @@ def getLocWeer(iscity=None):
 	lockaaleStad = inputCity
 	mydata = inputCity
 	text = mydata.replace(' ', '%20')
-        req = urllib2.Request("http://www.luxsat.be/hpengine/download_files/plugins/tvmovies.php?cn="+text)
+	req = urllib2.Request("http://www.luxsat.be/hpengine/download_files/plugins/tvmovies.php?cn="+text)
 	response = urllib2.urlopen(req)
 	kaas = response.read()
 	regx = '''(.*?),(.*?),'''
 	match = re.findall(regx, kaas, re.DOTALL)
 
-        if match:         
-	    response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
-	    kaas = response.read()
-            global weatherData
-	    weatherData = json.loads(kaas)
-	    return True
-        else:
-	    return False 
-
+	if match:
+		response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
+		kaas = response.read()
+		global weatherData
+		weatherData = json.loads(kaas)
+		return True
+	else:
+		return False 
 
 class weatherMenu(Screen):
 	sz_w = getDesktop(0).size().width()
@@ -366,7 +364,7 @@ class weeroverview(Screen):
 		self["yellowdot"] = MovingPixmap()
 		for uur in range(0, 8):
 			self["dayhour3"+str(uur)] = Label(_("00h"))
-			self["daytemp3"+str(uur)] = Label(_("--Â°C"))
+			self["daytemp3"+str(uur)] = Label(_("--°C"))
 			self["daypercent3"+str(uur)] = Label(_("--%"))
 			self["dayspeed3"+str(uur)] = Label(_("--km/u"))
 			for day in range(0, 7):
@@ -391,17 +389,17 @@ class weeroverview(Screen):
 				info1 += str(strftime("%A", gmtime(unixtimecode))).title()[:2]
 				info1 += str(strftime(" %d", gmtime(unixtimecode)))
 			if dagen.get("mintemp"):
-				info2 += ""+str("%02.0f" % dagen["mintemp"])+"Â°"
+				info2 += ""+str("%02.0f" % dagen["mintemp"])+"°"
 			elif dagen.get("mintemperature"):
-				info2 += "" + str("%02.0f" % dagen["mintemperature"])+"Â°"
+				info2 += "" + str("%02.0f" % dagen["mintemperature"])+"°"
 			else:
-				info2 += "--.-Â°C"
+				info2 += "--.-°C"
 			if dagen.get("maxtemp"):
-				info3 += "" + str("%02.0f" % dagen["maxtemp"])+"Â°"
+				info3 += "" + str("%02.0f" % dagen["maxtemp"])+"°"
 			elif dagen.get("maxtemperature"):
-				info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"Â°"
+				info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"°"
 			else:
-				info3 += "--.-Â°C"
+				info3 += "--.-°C"
 			if dagen.get("beaufort"):
 				info4 += str(dagen["beaufort"])
 			else:
@@ -442,7 +440,7 @@ class weeroverview(Screen):
 		temptext = "na"
 		if dataDagen[self.selected+0].get("temperature"):
 			temptext = dataDagen[self.selected+0]["temperature"]
-		self["bigtemp1"].setText(str(temptext)+"Â°C")
+		self["bigtemp1"].setText(str(temptext)+"°C")
 
 		windtext = "na"
 		if dataDagen[self.selected+0].get("winddirection"):
@@ -457,7 +455,7 @@ class weeroverview(Screen):
 		feeltext = "na"
 		if dataDagen[self.selected+0].get("feeltemperature"):
 			feeltext = dataDagen[self.selected+0]["feeltemperature"]
-		self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"Â°C")
+		self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"°C")
 
 		for day in range(0, 7):
 			self["bigWeerIcon1"+str(day)].hide()
@@ -471,7 +469,7 @@ class weeroverview(Screen):
 			self["dayIcon"+str(self.selected)+str(perUurUpdate)].show()
 			if (perUurUpdate*3)+1 < len(dataPerUur):
 				self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["hour"])+"h")
-				self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"Â°C")
+				self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"°C")
 				self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["precipation"])+"%")
 				self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["windspeed"])+"Km/u")
 			else:
@@ -813,7 +811,7 @@ class favoritesscreen(Screen):
 		if searchterm is not None:
 			#searchterm = "" + searchterm[1:].title()
 			searchterm = "" + searchterm.title()
-                        global SavedLokaleWeer
+			global SavedLokaleWeer
 			SavedLokaleWeer.append(str(searchterm))
 			file = open("/etc/enigma2/hetweer.cfg", "w")
 			for x in SavedLokaleWeer:
@@ -925,17 +923,17 @@ class lokaalTemp(Screen):
 				info2 += str(strftime("%d", gmtime(unixtimecode))) 
 				info2 += str(strftime(" %B", gmtime(unixtimecode)))[:4]
 			if dagen.get("mintemp"):
-				info3 += ""+str("%04.1f" % dagen["mintemp"])+"Â°C"
+				info3 += ""+str("%04.1f" % dagen["mintemp"])+"°C"
 			elif dagen.get("mintemperature"):
-				info3 += "" + str("%04.1f" % dagen["mintemperature"])+"Â°C"
+				info3 += "" + str("%04.1f" % dagen["mintemperature"])+"°C"
 			else:
-				info3 += "  --.-Â°C"
+				info3 += "  --.-°C"
 			if dagen.get("maxtemp"):
-				info3 += "	" + str("%04.1f" % dagen["maxtemp"])+"Â°C"
+				info3 += "	" + str("%04.1f" % dagen["maxtemp"])+"°C"
 			elif dagen.get("maxtemperature"):
-				info3 += "	" + str("%04.1f" % dagen["maxtemperature"])+"Â°C"
+				info3 += "	" + str("%04.1f" % dagen["maxtemperature"])+"°C"
 			else:
-				info3 += "  --.-Â°C"
+				info3 += "  --.-°C"
 			if dagen.get("beaufort"):
 				info4 += str(dagen["beaufort"])
 			else:
@@ -1084,9 +1082,9 @@ class lokaalTempSub(Screen):
 					if huur.get("hour") and huur["hour"] < 10:
 						info1 = "  " + str(huur["hour"])+":00"
 					if huur.get("temperature"):
-						info2 += str(huur["temperature"])+"Â°C"
+						info2 += str(huur["temperature"])+"°C"
 					else:
-						info2 += "--.-Â°C"
+						info2 += "--.-°C"
 					if huur.get("winddirection"):
 						info3 +str(huur["winddirection"])
 					else:
@@ -1378,7 +1376,6 @@ class View_Slideshow(Screen, InfoBarAspectSelection):
 			pass
 
 		self.close()
-
 
 def main(session, **kwargs):
 	if checkInternet():
