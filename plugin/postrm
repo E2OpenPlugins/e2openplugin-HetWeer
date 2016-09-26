@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/HetWeer
+
+exit 0
