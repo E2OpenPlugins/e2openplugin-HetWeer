@@ -661,7 +661,8 @@ class weertext(Screen):
         sz_w = getDesktop(0).size().width()
         if sz_w > 1800: 
             skin = """
-            <screen name="weerbericht" position="fill" flags="wfNoBorder" title="weerbericht"> 
+            <screen name="weerbericht" position="fill" flags="wfNoBorder"> 
+                <eLabel text="Weerbericht" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
@@ -675,7 +676,8 @@ class weertext(Screen):
         
         else:    
             skin = """
-            <screen name="weerbericht" position="fill" flags="wfNoBorder" title="weerbericht"> 
+            <screen name="weerbericht" position="fill" flags="wfNoBorder"> 
+                <eLabel text="Weerbericht" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
