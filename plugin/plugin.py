@@ -27,6 +27,12 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
+def transhtml(text):
+    text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
+    text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
+    text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace('&#214;', '\xc3\x96').replace('&#220;', '\xc3\x9c').replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc')
+    text = text.replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'").replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
+    return text
 
 def icontotext(icon):
 	text = ""
@@ -160,14 +166,25 @@ def getLocWeer(iscity=None):
 	regx = '''(.*?),(.*?),'''
 	match = re.findall(regx, kaas, re.DOTALL)
 
-	if match:
-		response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
-		kaas = response.read()
-		global weatherData
-		weatherData = json.loads(kaas)
-		return True
-	else:
-		return False 
+	if match:         
+	    response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
+	    kaas = response.read()
+            global weatherData
+	    weatherData = json.loads(kaas)
+	    return True
+        else:
+	    return False 
+
+def weatherchat(country):
+    req = urllib2.Request("http://www.buienradar."+country+"/weerbericht")
+    response = urllib2.urlopen(req)
+    kaas = response.read()
+    kaas = kaas.replace("\t", "").replace("\r", "").replace("\n", "").replace("<strong>", "")
+    kaas = kaas.replace("<br />", "").replace("</strong>", "").replace("</a>", "")
+    kaas = re.sub("""<a href=".*?">""" , "", kaas)
+    regx = '''<div id="readarea" class="description">(.*?)</div>'''
+    match = re.findall(regx, kaas, re.DOTALL)
+    return match[0] 
 
 class weatherMenu(Screen):
 	sz_w = getDesktop(0).size().width()
@@ -180,9 +197,7 @@ class weatherMenu(Screen):
 			<widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
 			<widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget><widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
 			<widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28"
-			borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
-				<convert type="ServiceName">Name</convert>
-			</widget>
+			borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
 			<widget name="list" position="920,110" size="975,375" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
 			<widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;24"/>\n
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflaghd.png" position="794,114" size="71,49" alphatest="on"/>
@@ -204,10 +219,7 @@ class weatherMenu(Screen):
 			<widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
 			<widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
 			<widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
-			<widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19"
-			borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
-			<convert type="ServiceName">Name</convert>
-			</widget>
+			<widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19" borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
 			<widget name="list" position="630,106" size="650,250" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
 			<widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;18"/>\n
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflagsd.png" position="550,105" size="47,32" alphatest="on"/>
@@ -495,7 +507,7 @@ class weatherMenuSub1(Screen):
 			borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
 				<convert type="ServiceName">Name</convert>
 			</widget>
-			<widget name="list" position="840,110" size="975,450" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
+			<widget name="list" position="840,110" size="975,700" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
 			<widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
 		</screen>"""
@@ -513,12 +525,12 @@ class weatherMenuSub1(Screen):
 			borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
 			<convert type="ServiceName">Name</convert>
 			</widget>
-			<widget name="list" position="560,106" size="650,301" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
+			<widget name="list" position="560,106" size="650,500" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
 			<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
 			<widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
 		</screen>"""
 
-	titleNames = ["Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Zonradar", "Satelliet", "Zonkracht-UV"]
+	titleNames = ["Weerbericht", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
 	def __init__(self, session, args=None):
 		self.session = session
 		self["key_red"] = Label(_("Exit"))
@@ -546,115 +558,83 @@ class weatherMenuSub1(Screen):
 		locurl = ""
 		picturedownloadurl = ""
 		loctype = ""
-		if state[0] == "Belgie":
-			if type == "Buienradar":
-				loctype = "radarmapbe/png/?t="
-			elif type == "Motregenradar":
-				loctype = "drizzlemapnl/png/?t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Wolkenradar":
-				loctype = "cloudmapnl/png/?t="
-				tt -= 60 * 50
-				print time.strftime("ttmap - 20%y%m%d%H%M", time.localtime(tt))
-				aantalfotos = 10
-			elif type == "Zonradar":
-				loctype = "sunmapnl/png/?t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Onweerradar":
-				loctype = "lightningnl/?ext=png&t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Satelliet":
-				loctype = "satvisual2/png/?t="
-				tt -= (60 * 60) * 6
-				aantalfotos = 15
-				tijdstap = 15
-			elif type == "Zonkracht-UV":
-				loctype = "sunpowereu/png/?t="
-				aantalfotos = 20
-				tijdstap = 60
-		elif state[0] == "Nederland":
-			if type == "Buienradar":
-				loctype = "radarmapnl/png/?t="
-			elif type == "Motregenradar":
-				loctype = "drizzlemapnl/png/?t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Wolkenradar":
-				loctype = "cloudmapnl/png/?t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Zonradar":
-				loctype = "sunmapnl/png/?t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Onweerradar":
-				loctype = "lightningnl/?ext=png&t="
-				tt -= 60 * 50
-				aantalfotos = 10
-			elif type == "Satelliet":
-				loctype = "satvisual2/png/?t="
-				tt -= (60 * 60) * 6
-				aantalfotos = 15
-				tijdstap = 15
-			elif type == "Zonkracht-UV":
-				loctype = "sunpowereu/png/?t="
-				aantalfotos = 20
-				tijdstap = 60
-		elif state[0] == "Europa":
-			aantalfotos = 8
-			tijdstap = 15
-			locurl = "eu"
-		if state[0] == "Belgie" and newView:
-			if type == "Buienradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Motregenradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Wolkenradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Zonradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Onweerradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Satelliet":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
-			elif type == "Zonkracht-UV":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
-			self.session.open(testnew)
-		elif state[0] == "Nederland" and newView:
-			if type == "Buienradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Motregenradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Wolkenradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Zonradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Onweerradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Satelliet":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
-			elif type == "Zonkracht-UV":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
-			self.session.open(testnew)
-		elif state[0] == "Europa" and newView:
-			if type == "Buienradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapeu/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Motregenradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Wolkenradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Zonradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Onweerradar":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarcloudseu/?ext=png&l=2&hist=30&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
-			elif type == "Satelliet":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=10&forc=1&step=0&type=eu&w=550&h=512', '/tmp/HetWeer/00.png')
-			elif type == "Zonkracht-UV":
-				urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
-			self.session.open(testnew)
+		if state[0] == "Belgie" and newView: 	
+                    if type == "Weerbericht":
+                        global wchat
+                     	wchat = weatherchat("be/Belgie/weerbericht")
+                        self.session.open(weertext)    
+                    elif type == "Buienradar":
+		        urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Motregenradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Wolkenradar":
+		 	urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Zonradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Onweerradar":
+		    	urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Hagelradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/hailnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    elif type == "Sneeuwradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    elif type == "Satelliet":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+		    elif type == "Zonkracht-UV":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+		    if not type == "Weerbericht":
+                        self.session.open(testnew)
+		
+                elif state[0] == "Nederland" and newView:
+		    if type == "Weerbericht":
+                     	global wchat
+                     	wchat = weatherchat("nl/Nederland/weerbericht")
+                        self.session.open(weertext)
+		    elif type == "Buienradar":	
+                        urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Motregenradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Wolkenradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Sneeuwradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    elif type == "Zonradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Onweerradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/lightningnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Hagelradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/hailnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    elif type == "Satelliet":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+		    elif type == "Zonkracht-UV":
+		        urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+		    if not type == "Weerbericht":
+                        self.session.open(testnew)
+		
+                elif state[0] == "Europa" and newView:
+		    if type == "Weerbericht":
+                     	global wchat
+                     	wchat = weatherchat("be/wereldwijd/europa")
+                        self.session.open(weertext)
+                    elif type == "Buienradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapeu/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Motregenradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Wolkenradar":
+		 	urllib.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Zonradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunmapnl/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Onweerradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarcloudseu/?ext=png&l=2&hist=30&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+		    elif type == "Hagelradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/hailnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    elif type == "Sneeuwradar":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    elif type == "Satelliet":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=10&forc=1&step=0&type=eu&w=550&h=512', '/tmp/HetWeer/00.png')
+		    elif type == "Zonkracht-UV":
+			urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+		    if not type == "Weerbericht":
+                        self.session.open(testnew)
 		if not newView:
 			picturedownloadurl = "http://api.buienradar.nl/image/1.0/" + loctype
 			for x in range(0, aantalfotos):
@@ -673,7 +653,75 @@ class weatherMenuSub1(Screen):
 				print '00.png doenst exists, go back!'
 				return
 	def exit(self):
-		self.close()
+		self.close(weatherMenuSub1)
+
+class weertext(Screen):
+    def __init__(self, session, args=None):
+        self.session = session
+        sz_w = getDesktop(0).size().width()
+        if sz_w > 1800: 
+            skin = """
+            <screen name="weerbericht" position="fill" flags="wfNoBorder"> 
+                <eLabel text="Weerbericht" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
+                <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                <widget name="PAG" position="1780,940" size="104,52" valign="top" halign="left" zPosition="11" font="Regular;46" transparent="1"/>
+                <widget name="weerchat" position="150,150" size="1620,782" zPosition="11" font="Regular;46" transparent="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
+                <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            </screen>"""
+        
+        else:    
+            skin = """
+            <screen name="weerbericht" position="fill" flags="wfNoBorder"> 
+                <eLabel text="Weerbericht" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
+                <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                <widget name="PAG" position="1180,580" size="72,36" valign="top" halign="left" zPosition="11" font="Regular;32" transparent="1"/>
+                <widget name="weerchat" position="100,100" size="1100,500" valign="top" halign="left" zPosition="11" font="Regular;32" transparent="1"/>
+                <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
+                <widget name="key_red" position="185,643" size="220,28" zPosition="3" transparent="1" font="Regular;24" halign="left"/> 
+            </screen>"""
+        
+        Screen.__init__(self, session)
+        self.skin = skin
+        global wchat
+        self.indexpage = 0
+        list = []
+        regx = '''<p>(.*?)</p>'''
+        match = re.findall(regx, wchat, re.DOTALL)
+        self.wchattext=match
+        self["weerchat"] = Label(_(transhtml(match[self.indexpage])))
+        self["PAG"] = Label(_("1/"+str(len(self.wchattext))))
+    
+        self["actions"] = ActionMap(["WizardActions"], {"left": self.left, "right": self.right, "back": self.close}, -1)
+        self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit}, -1)
+        self["key_red"] = Label(_("Exit"))
+
+    def left(self):
+	if self.indexpage<=0: 
+            self.indexpage=0
+        else:
+            self.indexpage=self.indexpage-1    	
+	self["weerchat"].setText(transhtml(self.wchattext[self.indexpage]))
+        self["PAG"].setText(str(self.indexpage+1)+"/"+str(len(self.wchattext)))
+        	
+    def right(self):
+        if self.indexpage>=len(self.wchattext)-1: 
+            self.indexpage=len(self.wchattext)-1
+        else:
+            self.indexpage=self.indexpage+1  
+        self["weerchat"].setText(transhtml(self.wchattext[self.indexpage]))
+        self["PAG"].setText(str(self.indexpage+1)+"/"+str(len(self.wchattext)))
+                    
+    def exit(self):
+        self.close(weertext)
 
 class testnew(Screen):
 	def __init__(self, session, args=None):
@@ -686,10 +734,18 @@ class testnew(Screen):
 		sz_w = getDesktop(0).size().width()
 		if sz_w > 1800: 
 			self.scaler= 2.0 
-		skin = """
- 		<screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""" title="HetWeer">
+		if sz_w > 1800:
+                    skin = """
+ 		    <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
  			<widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>
-		</screen>"""
+		        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legendehd.png" zPosition="6" position="20,630" size="270,333" alphatest="on"/>
+		    </screen>"""
+		else:
+		    skin = """
+ 		    <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
+ 			<widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>
+		        <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="14,460" size="180,222" alphatest="on"/>
+		    </screen>"""
 
 		self.session = session
 		self.skin = skin
@@ -733,7 +789,7 @@ class testnew(Screen):
 		if pos >= (get_image_info(self.weerpng)[0]/550):
 			pos = 0
 		self["picd"].startMoving()
-
+		
 class favoritesscreen(Screen):
 	sz_w = getDesktop(0).size().width()
 	if sz_w > 1800:
