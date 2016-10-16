@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#HetWeer3.5r1
 import re
 import time
 import json
@@ -27,7 +28,7 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
-WeerInfoCurVer = 3.5
+WeerInfoCurVer = 3.51
 
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
@@ -561,7 +562,7 @@ class weatherMenuSub1(Screen):
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
         </screen>"""
 
-    listNamesnl = ["Weerbericht", "Actuele Temp", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Mistradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
+    listNamesnl = ["Weerbericht", "Temperatuur", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Mistradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
     listNamesbe = ["Weerbericht", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
     listNameseu = ["Weerbericht", "Buienradar", "Onweerradar", "Zonkracht-UV", "Satelliet"]
     def __init__(self, session, args=None):
@@ -634,7 +635,7 @@ class weatherMenuSub1(Screen):
             if type == "Weerbericht":
                 wchat = weatherchat("nl/Nederland/weerbericht")
                 self.session.open(weertext)
-            elif type == "Actuele temp":
+            elif type == "Temperatuur":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?ext=png&l=2&hist=12&forc=1&step=0&type=temperatuur&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
             elif type == "Buienradar":
