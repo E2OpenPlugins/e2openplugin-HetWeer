@@ -1,9 +1,0 @@
-Package: enigma2-plugin-extensions-hetweer
-Version: 3.1.0
-Description: Weather forecast for the Netherlands, Belgium and Eurpoe
-Priority: optional
-Maintainer: Caught @http://forums.openpli.org
-Architecture: all
-OE: 
-Depends: enigma2
-Source: https://github.com/E2OpenPlugins/e2openplugin-HetWeer
