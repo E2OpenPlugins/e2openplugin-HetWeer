@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.5r1
+#HetWeer3.5r2
 import re
 import time
 import json
@@ -28,7 +28,7 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
-WeerInfoCurVer = 3.51
+WeerInfoCurVer = 3.52
 
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
@@ -537,7 +537,7 @@ class weatherMenuSub1(Screen):
             <widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
             <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28"
             borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
-                <convert type="ServiceName">Name</convert>
+            <convert type="ServiceName">Name</convert>
             </widget>
             <widget name="list" position="840,110" size="975,800" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
@@ -600,8 +600,10 @@ class weatherMenuSub1(Screen):
         locurl = ""
         picturedownloadurl = ""
         loctype = ""
+        global typename
         global wchat
         global legend
+        typename = type
         legend = True 
         if state[0] == "Belgie" and newView:
             if type == "Weerbericht":
@@ -770,6 +772,8 @@ class weertext(Screen):
 
 class testnew(Screen):
     def __init__(self, session, args=None):
+        global typename
+        self["radarname"] = Label(_(typename))
         self.weerpng = "/tmp/HetWeer/00.png"
         picformat = get_image_info("/tmp/HetWeer/00.png")
         if not picformat:
@@ -786,15 +790,17 @@ class testnew(Screen):
                 legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legendehd.png" zPosition="6" position="20,630" size="270,333" alphatest="on"/>"""
             skin = """
             <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
-            <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>
-            """+legendinfo+"""</screen>"""
+            <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
+            <widget name="radarname" position="250,20" size="600,64" zPosition="6" halign="center" transparent="1" font="Regular;60" foregroundColor="blanc" shadowColor="black" shadowOffset="4,4"/>
+            </screen>"""
         else:
             if legend:
                 legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="14,460" size="180,222" alphatest="on"/>"""
             skin = """
             <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
-            <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>
-                </screen>"""
+            <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
+            <widget name="radarname" position="240,25" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" foregroundColor="blanc" shadowColor="black" shadowOffset="4,4"/>
+            </screen>"""
 
         self.session = session
         self.skin = skin
