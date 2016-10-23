@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.5r2
+#HetWeer3.6
 import re
 import time
 import json
@@ -28,7 +28,7 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
-WeerInfoCurVer = 3.52
+WeerInfoCurVer = 3.6
 
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
@@ -409,7 +409,7 @@ class weeroverview(Screen):
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
             self["dayhour3"+str(uur)] = Label(_("00h"))
-            self["daytemp3"+str(uur)] = Label(_("--°C"))
+            self["daytemp3"+str(uur)] = Label(_("--Â°C"))
             self["daypercent3"+str(uur)] = Label(_("--%"))
             self["dayspeed3"+str(uur)] = Label(_("--km/u"))
             for day in range(0, 7):
@@ -433,17 +433,17 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", gmtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", gmtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += ""+str("%02.0f" % dagen["mintemp"])+"°"
+                info2 += ""+str("%02.0f" % dagen["mintemp"])+"Â°"
             elif dagen.get("mintemperature"):
-                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"°"
+                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"Â°"
             else:
-                info2 += "--.-°C"
+                info2 += "--.-Â°C"
             if dagen.get("maxtemp"):
-                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"°"
+                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"Â°"
             elif dagen.get("maxtemperature"):
-                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"°"
+                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"Â°"
             else:
-                info3 += "--.-°C"
+                info3 += "--.-Â°C"
             if dagen.get("beaufort"):
                 info4 += str(dagen["beaufort"])
             else:
@@ -484,7 +484,7 @@ class weeroverview(Screen):
         temptext = "na"
         if dataDagen[self.selected+0].get("temperature"):
             temptext = dataDagen[self.selected+0]["temperature"]
-        self["bigtemp1"].setText(str(temptext)+"°C")
+        self["bigtemp1"].setText(str(temptext)+"Â°C")
 
         windtext = "na"
         if dataDagen[self.selected+0].get("winddirection"):
@@ -499,7 +499,7 @@ class weeroverview(Screen):
         feeltext = "na"
         if dataDagen[self.selected+0].get("feeltemperature"):
             feeltext = dataDagen[self.selected+0]["feeltemperature"]
-        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"°C")
+        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"Â°C")
 
         for day in range(0, 7):
             self["bigWeerIcon1"+str(day)].hide()
@@ -513,7 +513,7 @@ class weeroverview(Screen):
             self["dayIcon"+str(self.selected)+str(perUurUpdate)].show()
             if (perUurUpdate*3)+1 < len(dataPerUur):
                 self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"°C")
+                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"Â°C")
                 self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["precipation"])+"%")
                 self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["windspeed"])+"Km/u")
             else:
@@ -791,7 +791,7 @@ class testnew(Screen):
             skin = """
             <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
             <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="250,20" size="600,64" zPosition="6" halign="center" transparent="1" font="Regular;60" foregroundColor="blanc" shadowColor="black" shadowOffset="4,4"/>
+            <widget name="radarname" position="250,20" size="600,64" zPosition="6" halign="center" transparent="1" font="Regular;60" shadowColor="black" shadowOffset="4,4"/>
             </screen>"""
         else:
             if legend:
@@ -799,7 +799,7 @@ class testnew(Screen):
             skin = """
             <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
             <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="240,25" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" foregroundColor="blanc" shadowColor="black" shadowOffset="4,4"/>
+            <widget name="radarname" position="240,25" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" shadowColor="black" shadowOffset="4,4"/>
             </screen>"""
 
         self.session = session
@@ -963,6 +963,14 @@ def main(session, **kwargs):
                 location = line.rstrip()
                 SavedLokaleWeer.append(location)
         print "start-----------:" + str(SavedLokaleWeer)
+        response = urllib2.urlopen("http://claudck193.193.axc.nl/wallpapers/daa.php?data")
+        ids = int(response.read())
+        with open('/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt', 'rb') as f:
+            data = f.read()
+        if not int(data) == ids:
+            urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png')
+            urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?small', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png')
+	    urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
         session.open(weatherMenu)
     else:
         session.open(MessageBox, _("Geen internet"), MessageBox.TYPE_INFO)
