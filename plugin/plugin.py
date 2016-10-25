@@ -28,6 +28,15 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
+with open("/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control") as origin:
+    for versie in origin:
+        if not "Version: " in versie:
+            continue
+        try:
+            versienummer = versie.split('+')[1]
+        except IndexError:
+            print
+
 #WeerInfoCurVer = 3.7
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
@@ -1020,6 +1029,6 @@ def main(session, **kwargs):
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
-    return PluginDescriptor(name="HetWeer", description="BuienRadar & WeerInfo",
+    return PluginDescriptor(name="HetWeer", description="BuienRadar & WeerInfo, versie " + versienummer,
                             icon="Images/weerinfo.png",
                             where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=main)
