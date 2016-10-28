@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7
+#HetWeer3.7r1
 import re
 import time
 import json
@@ -28,16 +28,19 @@ from time import gmtime, strftime, time
 import datetime, time
 import struct
 
-with open("/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control") as origin:
-    for versie in origin:
-        if not "Version: " in versie:
-            continue
-        try:
-            versienummer = versie.split('+')[1]
-        except IndexError:
-            print
+if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'):
+    with open('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control') as origin:
+        for versie in origin:
+            if 'Version: ' not in versie:
+                continue
+            try:
+                versienummer = versie.split('+')[1]
+            except IndexError:
+                print
+else:
+    versienummer = ''
 
-#WeerInfoCurVer = 3.7
+#WeerInfoCurVer = 3.7r1
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -413,7 +416,7 @@ class weeroverview(Screen):
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
             self["dayhour3"+str(uur)] = Label(_("00h"))
-            self["daytemp3"+str(uur)] = Label(_("--째C"))
+            self["daytemp3"+str(uur)] = Label(_("--캜"))
             self["daypercent3"+str(uur)] = Label(_("--%"))
             self["dayspeed3"+str(uur)] = Label(_("--km/u"))
             for day in range(0, 7):
@@ -437,17 +440,17 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", gmtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", gmtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += ""+str("%02.0f" % dagen["mintemp"])+"째"
+                info2 += ""+str("%02.0f" % dagen["mintemp"])+"�"
             elif dagen.get("mintemperature"):
-                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"째"
+                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"�"
             else:
-                info2 += "--.-째C"
+                info2 += "--.-캜"
             if dagen.get("maxtemp"):
-                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"째"
+                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"�"
             elif dagen.get("maxtemperature"):
-                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"째"
+                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"�"
             else:
-                info3 += "--.-째C"
+                info3 += "--.-캜"
             if dagen.get("beaufort"):
                 info4 += str(dagen["beaufort"])
             else:
@@ -488,7 +491,7 @@ class weeroverview(Screen):
         temptext = "na"
         if dataDagen[self.selected+0].get("temperature"):
             temptext = dataDagen[self.selected+0]["temperature"]
-        self["bigtemp1"].setText(str(temptext)+"째C")
+        self["bigtemp1"].setText(str(temptext)+"캜")
 
         windtext = "na"
         if dataDagen[self.selected+0].get("winddirection"):
@@ -503,7 +506,7 @@ class weeroverview(Screen):
         feeltext = "na"
         if dataDagen[self.selected+0].get("feeltemperature"):
             feeltext = dataDagen[self.selected+0]["feeltemperature"]
-        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"째C")
+        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"캜")
 
         for day in range(0, 7):
             self["bigWeerIcon1"+str(day)].hide()
@@ -517,7 +520,7 @@ class weeroverview(Screen):
             self["dayIcon"+str(self.selected)+str(perUurUpdate)].show()
             if (perUurUpdate*3)+1 < len(dataPerUur):
                 self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"째C")
+                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"캜")
                 self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["precipation"])+"%")
                 self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["windspeed"])+"Km/u")
             else:
@@ -604,6 +607,23 @@ class weatherMenuSub1(Screen):
         locurl = ""
         picturedownloadurl = ""
         loctype = ""
+        
+        def openScreenRadar():
+            if not type == 'Weerbericht':
+                distro = 'unknown'
+                try:
+                    f = open('/etc/opkg/all-feed.conf', 'r')
+                    oeline = f.readline().strip().lower()
+                    f.close()
+                    distro = oeline.split()[1].replace('-all', '')
+                except:
+                    pass
+
+                if distro == 'openpli':
+                    self.session.open(radarScreenop)
+                else:
+                    self.session.open(radarScreenoatv)
+        
         global typename
         global wchat
         global legend
@@ -635,10 +655,7 @@ class weatherMenuSub1(Screen):
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
             if not type == "Weerbericht":
-                if os.path.exists("/usr/share/enigma2/MetrixHD"):
-                    self.session.open(radarScreenoatv)
-                else:
-                    self.session.open(radarScreenop)
+                openScreenRadar()
 
         elif state[0] == "Nederland" and newView:
             if type == "Weerbericht":
@@ -672,10 +689,7 @@ class weatherMenuSub1(Screen):
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
             if not type == "Weerbericht":
-                if os.path.exists("/usr/share/enigma2/MetrixHD"):
-                    self.session.open(radarScreenoatv)
-                else:
-                    self.session.open(radarScreenop)
+                openScreenRadar()
 
         elif state[0] == "Europa" and newView:
             if type == "Weerbericht":
@@ -692,10 +706,7 @@ class weatherMenuSub1(Screen):
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
             if not type == "Weerbericht":
-                if os.path.exists("/usr/share/enigma2/MetrixHD"):
-                    self.session.open(radarScreenoatv)
-                else:
-                    self.session.open(radarScreenop)
+                openScreenRadar()
         
         if not newView:
             picturedownloadurl = "http://api.buienradar.nl/image/1.0/" + loctype
@@ -796,10 +807,10 @@ class radarScreenoatv(Screen):
         legendinfo = ''
         if legend:
             legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="10,250" size="180,222" alphatest="on"/>"""
-            skin = """
+        skin = """
             <screen position="center,center" size="550,512" title="HetWeer">
             <widget name="picd" position="0,0" size="39600,900" pixmap="/tmp/HetWeer/00.png" zPosition="1" alphatest="on"/>""" + legendinfo + """
-            <widget name="radarname" position="center,8" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" shadowColor="black" shadowOffset="4,4"/>
+            <widget name="radarname" position="center,8" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" shadowColor="black" shadowOffset="1,1"/>
             </screen>"""
         
         self.session = session
