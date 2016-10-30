@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7r2
+#HetWeer3.7r4
 import re
 import time
 import json
@@ -39,8 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-
-#WeerInfoCurVer = 3.7r2
+#WeerInfoCurVer = 3.7r4
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -619,11 +618,11 @@ class weatherMenuSub1(Screen):
                 except:
                     pass
 
-                if distro == 'openpli':
-                    self.session.open(radarScreenop)
-                else:
+                if distro == 'openatv':
                     self.session.open(radarScreenoatv)
-        
+                else:
+                    self.session.open(radarScreenop)
+                    
         global typename
         global wchat
         global legend
