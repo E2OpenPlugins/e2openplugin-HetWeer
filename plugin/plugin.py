@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7r4
+#HetWeer3.7r5
 import re
 import time
 import json
@@ -39,13 +39,13 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.7r4
+#WeerInfoCurVer = 3.7r5
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
     text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace('&#214;', '\xc3\x96').replace('&#220;', '\xc3\x9c').replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc')
     text = text.replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'").replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
-    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '')
+    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', '°')
     return text
 
 def icontotext(icon):
@@ -415,7 +415,7 @@ class weeroverview(Screen):
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
             self["dayhour3"+str(uur)] = Label(_("00h"))
-            self["daytemp3"+str(uur)] = Label(_("--°C"))
+            self["daytemp3"+str(uur)] = Label(_("--Â°C"))
             self["daypercent3"+str(uur)] = Label(_("--%"))
             self["dayspeed3"+str(uur)] = Label(_("--km/u"))
             for day in range(0, 7):
@@ -439,17 +439,17 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", gmtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", gmtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += ""+str("%02.0f" % dagen["mintemp"])+"°"
+                info2 += ""+str("%02.0f" % dagen["mintemp"])+"Â°"
             elif dagen.get("mintemperature"):
-                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"°"
+                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"Â°"
             else:
-                info2 += "--.-°C"
+                info2 += "--.-Â°C"
             if dagen.get("maxtemp"):
-                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"°"
+                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"Â°"
             elif dagen.get("maxtemperature"):
-                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"°"
+                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"Â°"
             else:
-                info3 += "--.-°C"
+                info3 += "--.-Â°C"
             if dagen.get("beaufort"):
                 info4 += str(dagen["beaufort"])
             else:
@@ -490,7 +490,7 @@ class weeroverview(Screen):
         temptext = "na"
         if dataDagen[self.selected+0].get("temperature"):
             temptext = dataDagen[self.selected+0]["temperature"]
-        self["bigtemp1"].setText(str(temptext)+"°C")
+        self["bigtemp1"].setText(str(temptext)+"Â°C")
 
         windtext = "na"
         if dataDagen[self.selected+0].get("winddirection"):
@@ -505,7 +505,7 @@ class weeroverview(Screen):
         feeltext = "na"
         if dataDagen[self.selected+0].get("feeltemperature"):
             feeltext = dataDagen[self.selected+0]["feeltemperature"]
-        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"°C")
+        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"Â°C")
 
         for day in range(0, 7):
             self["bigWeerIcon1"+str(day)].hide()
@@ -519,7 +519,7 @@ class weeroverview(Screen):
             self["dayIcon"+str(self.selected)+str(perUurUpdate)].show()
             if (perUurUpdate*3)+1 < len(dataPerUur):
                 self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"°C")
+                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"Â°C")
                 self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["precipation"])+"%")
                 self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["windspeed"])+"Km/u")
             else:
@@ -852,7 +852,7 @@ class radarScreenop(Screen):
             skin = """
             <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
             <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="250,20" size="600,64" zPosition="6" halign="center" transparent="1" font="Regular;60" shadowColor="black" shadowOffset="4,4"/>
+            <widget name="radarname" position="250,20" size="600,72" zPosition="6" halign="center" transparent="1" font="Regular;60" shadowColor="black" shadowOffset="4,4"/>
             </screen>"""
         else:
             if legend:
