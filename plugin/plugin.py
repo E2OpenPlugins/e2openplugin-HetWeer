@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7r8
+#HetWeer3.7r9
 import re
 import time
 import json
@@ -39,7 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.7r8
+#WeerInfoCurVer = 3.7r9
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -323,10 +323,10 @@ class weeroverview(Screen):
                     <widget name="bigWeerIcon1""" + str(day) + """" position="720,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
                     <widget name="bigDirIcon1""" + str(day) + """" position="1146,359" size="42,42" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
-                    <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1"/>
-                    <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1"/>
-                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="48,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1"/>
-                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1"/>"""
+                    <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="48,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="1,1"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
                 for data in dataUrr:
@@ -336,24 +336,24 @@ class weeroverview(Screen):
                         uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
-                    <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(195 + (216 * uur)) + """,779" size="90,36" zPosition="3" valign="center" halign="right" font="Regular;33" transparent="1"/>
-                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,870" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1"/>
-                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,945" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1"/>
-                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,986" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1"/>
+                    <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(195 + (216 * uur)) + """,779" size="90,36" zPosition="3" valign="center" halign="right" font="Regular;33" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,870" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,945" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,986" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" shadowColor="black" shadowOffset="1,1"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/turbinehd.png" position=\"""" + str(119 + (216 * uur)) + """,983" size="38,38" zPosition="3" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/druphd.png" position=\"""" + str(120 + (216 * uur)) + """,945" size="15,23" zPosition="3" alphatest="on"/>"""
 
             skin = """
                 <screen position="fill" flags="wfNoBorder">
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png" position="center,center" size="1920,1080" zPosition="0" alphatest="on"/>
-                    <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                    <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" shadowColor="black" shadowOffset="1,1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" shadowColor="black" shadowOffset="1,1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
-                    <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1"/>
-                    <widget name="bigtemp1" position="930,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1"/>
-                    <widget name="bigweathertype1" position="719,312" size="480,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1"/>
-                    <widget name="GevoelsTemp1" position="930,256" size="354,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1"/>
-                    <widget name="winddir1" position="767,366" size="345,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1"/>""" + dayinfoblok + """
+                    <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="bigtemp1" position="930,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="bigweathertype1" position="719,312" size="480,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="GevoelsTemp1" position="930,256" size="354,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="winddir1" position="767,366" size="345,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>""" + dayinfoblok + """
                 </screen>"""
         else:
             for day in range(0, 7):
