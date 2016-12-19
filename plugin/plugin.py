@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7r9
+#HetWeer3.7r10
 import re
 import time
 import json
@@ -39,7 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.7r9
+#WeerInfoCurVer = 3.7r10
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -200,11 +200,11 @@ def weatherchat(country):
     match = re.findall(regx, kaas, re.DOTALL)
     return match[0]
 
-class weatherMenu(Screen):
+class startScreen(Screen):
     sz_w = getDesktop(0).size().width()
     if sz_w > 1800:
         skin = """
-        <screen name="weatherMenu" position="fill" flags="wfNoBorder">
+        <screen name="startScreen" position="fill" flags="wfNoBorder">
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
@@ -226,7 +226,7 @@ class weatherMenu(Screen):
 
     else:
         skin = """
-        <screen name="weatherMenu" position="fill" flags="wfNoBorder">
+        <screen name="startScreen" position="fill" flags="wfNoBorder">
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
@@ -253,10 +253,10 @@ class weatherMenu(Screen):
         self["key_red"] = Label(_("Exit"))
         self["key_green"] = Label(_("Ok"))
         #self["key_yellow"] = Label(_("Update Check"))
-        self.skin = weatherMenu.skin
+        self.skin = startScreen.skin
         Screen.__init__(self, session)
         list = []
-        for x in weatherMenu.titleNames:
+        for x in startScreen.titleNames:
             list.append((_(x)))
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
@@ -268,11 +268,11 @@ class weatherMenu(Screen):
     def go(self):
         global state
         index = self["list"].getSelectedIndex()
-        state[0] = weatherMenu.titleNames[index]
+        state[0] = startScreen.titleNames[index]
         if state[0] == "WeerInfo":
-            self.session.open(favoritesscreen)
+            self.session.open(localcityscreen)
         else:
-            self.session.open(weatherMenuSub1)
+            self.session.open(weatherMenuSub)
 
     def exit(self):
         self.close()
@@ -396,7 +396,7 @@ class weeroverview(Screen):
                     <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
                     <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
-                    <widget name="city1" position="405,37" size="470,36" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
+                    <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
                     <widget name="bigtemp1" position="620,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
                     <widget name="bigweathertype1" position="479,210" size="320,22" zPosition="3" valign="center" halign="center" font="Regular;18" transparent="1"/>
                     <widget name="GevoelsTemp1" position="620,165" size="236,30" zPosition="3" valign="center" halign="center" font="Regular;18" transparent="1"/>
@@ -534,11 +534,11 @@ class weeroverview(Screen):
     def cancel(self):
         self.close(None)
 
-class weatherMenuSub1(Screen):
+class weatherMenuSub(Screen):
     sz_w = getDesktop(0).size().width()
     if sz_w > 1800:
         skin = """
-        <screen name="weatherMenuSub1" position="fill" flags="wfNoBorder">
+        <screen name="weatherMenuSub" position="fill" flags="wfNoBorder">
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
@@ -556,7 +556,7 @@ class weatherMenuSub1(Screen):
 
     else:
         skin = """
-        <screen name="weatherMenuSub1" position="fill" flags="wfNoBorder">
+        <screen name="weatherMenuSub" position="fill" flags="wfNoBorder">
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
@@ -578,16 +578,16 @@ class weatherMenuSub1(Screen):
     def __init__(self, session, args=None):
         self.session = session
         self["key_red"] = Label(_("Exit"))
-        self.skin = weatherMenuSub1.skin
+        self.skin = weatherMenuSub.skin
         Screen.__init__(self, session)
         list = []
         self.countries = None 
         if state[0] == "Belgie": 
-            self.countries = weatherMenuSub1.listNamesbe
+            self.countries = weatherMenuSub.listNamesbe
         elif state[0] == "Nederland":
-            self.countries = weatherMenuSub1.listNamesnl
+            self.countries = weatherMenuSub.listNamesnl
         elif state[0] == "Europa":
-            self.countries = weatherMenuSub1.listNameseu    
+            self.countries = weatherMenuSub.listNameseu    
         
         for x in self.countries:
             list.append((_(x)))
@@ -635,7 +635,7 @@ class weatherMenuSub1(Screen):
         if state[0] == "Belgie" and newView:
             if type == "Weerbericht":
                 wchat = weatherchat("be/Belgie/weerbericht")
-                self.session.open(weertext)
+                self.session.open(weathertalk)
             elif type == "Buienradar":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Motregenradar":
@@ -663,7 +663,7 @@ class weatherMenuSub1(Screen):
         elif state[0] == "Nederland" and newView:
             if type == "Weerbericht":
                 wchat = weatherchat("nl/Nederland/weerbericht")
-                self.session.open(weertext)
+                self.session.open(weathertalk)
             elif type == "Temperatuur":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?ext=png&l=2&hist=12&forc=1&step=0&type=temperatuur&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
@@ -697,7 +697,7 @@ class weatherMenuSub1(Screen):
         elif state[0] == "Europa" and newView:
             if type == "Weerbericht":
                 wchat = weatherchat("be/wereldwijd/europa")
-                self.session.open(weertext)
+                self.session.open(weathertalk)
             elif type == "Buienradar":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapeu/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Onweerradar":
@@ -729,9 +729,9 @@ class weatherMenuSub1(Screen):
                 print '00.png doenst exists, go back!'
                 return
     def exit(self):
-        self.close(weatherMenuSub1)
+        self.close(weatherMenuSub)
 
-class weertext(Screen):
+class weathertalk(Screen):
     def __init__(self, session, args=None):
         self.session = session
         sz_w = getDesktop(0).size().width()
@@ -795,7 +795,7 @@ class weertext(Screen):
         self["PAG"].setText(str(self.indexpage+1)+"/"+str(len(self.wchattext)))
 
     def exit(self):
-        self.close(weertext)
+        self.close(weathertalk)
 
 
 class radarScreenoatv(Screen):
@@ -912,11 +912,11 @@ class radarScreenop(Screen):
             pos = 0
         self["picd"].startMoving()
 
-class favoritesscreen(Screen):
+class localcityscreen(Screen):
     sz_w = getDesktop(0).size().width()
     if sz_w > 1800:
         skin = """
-        <screen name="favoritesscreen" position="fill" flags="wfNoBorder">
+        <screen name="localcityscreen" position="fill" flags="wfNoBorder">
             <widget name="favor" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
@@ -940,7 +940,7 @@ class favoritesscreen(Screen):
 
     else:
         skin = """
-        <screen name="favoritesscreen" position="fill" flags="wfNoBorder">
+        <screen name="localcityscreen" position="fill" flags="wfNoBorder">
             <widget name="favor" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
@@ -964,7 +964,7 @@ class favoritesscreen(Screen):
 
     def __init__(self, session, args=None):
         self.session = session
-        self.skin = favoritesscreen.skin
+        self.skin = localcityscreen.skin
         self["favor"] = Label(_("Favoriete Locaties"))
         self["plaatsn"] = Label(_("Locatie:"))
         self["key_red"] = Label(_("Exit"))
@@ -1038,7 +1038,7 @@ def main(session, **kwargs):
             urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png')
             urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?small', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png')
 	    urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
-        session.open(weatherMenu)
+        session.open(startScreen)
     else:
         session.open(MessageBox, _("Geen internet"), MessageBox.TYPE_INFO)
 
