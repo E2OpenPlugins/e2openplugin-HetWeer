@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7r10
+#HetWeer3.7r11
 import re
 import time
 import json
@@ -39,7 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.7r10
+#WeerInfoCurVer = 3.7r11
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -98,6 +98,22 @@ def icontotext(icon):
         text = "Zwaar bewolkt / onweersbuien"
     elif icon == "ss":
         text = "Zwaar bewolkt / onweersbuien"
+    elif icon == "t":
+        text = "Zwaar bewolkt en zware sneeuwval"
+    elif icon == "tt":
+        text = "Zwaar bewolkt en zware sneeuwval"
+    elif icon == "u":
+        text = "Wisselend bewolkt lichte sneeuwval"
+    elif icon == "uu":
+        text = "Wisselend bewolkt lichte sneeuwval"
+    elif icon == "v":
+        text = "Zwaar bewolkt lichte sneeuwval"
+    elif icon == "vv":
+        text = "Zwaar bewolkt lichte sneeuwval"
+    elif icon == "w":
+        text = "Zwaarbewolkt winterse neerslag"
+    elif icon == "ww":
+        text = "Zwaarbewolkt winterse neerslag"
     else:
         text = "Geen info"
     return text
