@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.7r11
+#HetWeer3.9
 import re
 import time
 import json
@@ -24,7 +24,7 @@ import os
 from Tools.Directories import resolveFilename, SCOPE_CONFIG, SCOPE_PLUGINS
 from Screens.HelpMenu import HelpableScreen
 from Components.FileList import FileList
-from time import gmtime, strftime, time
+from time import gmtime, strftime, time, localtime
 import datetime, time
 import struct
 
@@ -39,7 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.7r11
+#WeerInfoCurVer = 3.9
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -79,25 +79,25 @@ def icontotext(icon):
     elif icon == "jj":
         text = "Overwegend   helder"
     elif icon == "m":
-        text = "Zwaar bewolkt / buien mogelijk"
+        text = "Zwaar bewolkt  buien mogelijk"
     elif icon == "mm":
-        text = "Zwaar bewolkt / buien mogelijk"
+        text = "Zwaar bewolkt  buien mogelijk"
     elif icon == "n":
         text = "Zon met kans op nevel"
     elif icon == "nn":
         text = "Helder met kans nevel"
     elif icon == "q":
-        text = "Zwaar bewolkt / hevige buien"
+        text = "Zwaar bewolkt  hevige buien"
     elif icon == "qq":
-        text = "Zwaar bewolkt / hevige buien"
+        text = "Zwaar bewolkt  hevige buien"
     elif icon == "r":
         text = "Bewolkt"
     elif icon == "rr":
         text = "Bewolkt"
     elif icon == "s":
-        text = "Zwaar bewolkt / onweersbuien"
+        text = "Zwaar bewolkt  onweersbuien"
     elif icon == "ss":
-        text = "Zwaar bewolkt / onweersbuien"
+        text = "Zwaar bewolkt  onweersbuien"
     elif icon == "t":
         text = "Zwaar bewolkt en zware sneeuwval"
     elif icon == "tt":
@@ -330,13 +330,17 @@ class weeroverview(Screen):
                 dagen = dataDagen[day+1]
                 happydays = dataDagen[day]
                 windkracht = "na"
-                if happydays.get("winddirection"):
-                    windkracht = happydays["winddirection"]
                 losticon = "na"
+                dataUrr = "na"
+                try:
+                    windkracht = dataDagen[0]["hours"][0]["winddirection"]
+                    dataUrr = dataDagen[0]["hours"][0]["iconcode"]
+                except:
+                    0+0
                 if happydays.get("iconcode"):
                     losticon = happydays["iconcode"]
                 dayinfoblok += """
-                    <widget name="bigWeerIcon1""" + str(day) + """" position="720,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigWeerIcon1""" + str(day) + """" position="720,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
                     <widget name="bigDirIcon1""" + str(day) + """" position="1146,359" size="42,42" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" shadowColor="black" shadowOffset="1,1"/>
@@ -377,13 +381,17 @@ class weeroverview(Screen):
                 dagen = dataDagen[day+1]
                 happydays = dataDagen[day]
                 windkracht = "na"
-                if happydays.get("winddirection"):
-                    windkracht = happydays["winddirection"]
                 losticon = "na"
+                dataUrr = "na"
+                try:
+                    windkracht = dataDagen[0]["hours"][0]["winddirection"]
+                    dataUrr = dataDagen[0]["hours"][0]["iconcode"]
+                except:
+                    0+0
                 if happydays.get("iconcode"):
                     losticon = happydays["iconcode"]
                 dayinfoblok += """
-                    <widget name="bigWeerIcon1""" + str(day) + """" position="480,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbig/""" + str(losticon) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigWeerIcon1""" + str(day) + """" position="480,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbig/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
                     <widget name="bigDirIcon1""" + str(day) + """" position="764,239" size="28,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/""" + str(losticon) + """.png" position=\"""" + str(87 + (165 * day)) + """,348" size="48,48" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,315" size="90,24" zPosition="3" valign="center" halign="left" font="Regular;22" transparent="1"/>
@@ -409,8 +417,8 @@ class weeroverview(Screen):
             skin = """
                 <screen position="fill" flags="wfNoBorder">
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png" position="center,center" size="1280,720" zPosition="0" alphatest="on"/>
-                    <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                    <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1097,2" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="947,22" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
                     <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
                     <widget name="bigtemp1" position="620,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
@@ -456,8 +464,9 @@ class weeroverview(Screen):
                 dagen1 = dataDagen[day]
                 mydate = dagen1["date"][:-9]
                 unixtimecode = time.mktime(datetime.datetime(int(mydate[:4]), int(mydate[5:][:2]), int(mydate[8:][:2])).timetuple())
-                info1 += str(strftime("%A", gmtime(unixtimecode))).title()[:2]
-                info1 += str(strftime(" %d", gmtime(unixtimecode)))
+                unixtimecode = unixtimecode-(86400)
+                info1 += str(strftime("%A", localtime(unixtimecode))).title()[:2]
+                info1 += str(strftime(" %d", localtime(unixtimecode)))
             if dagen.get("mintemp"):
                 info2 += ""+str("%02.0f" % dagen["mintemp"])+"°"
             elif dagen.get("mintemperature"):
@@ -510,29 +519,35 @@ class weeroverview(Screen):
         temptext = "na"
         if dataDagen[self.selected+0].get("temperature"):
             temptext = dataDagen[self.selected+0]["temperature"]
-        self["bigtemp1"].setText(str(temptext)+"°C")
+        dataPerUur = weatherData["days"][0]["hours"]
+        self["bigtemp1"].setText("NA °C")
+        self["bigweathertype1"].setText("na")
+        self["GevoelsTemp1"].setText("GevoelsTemp NA°C")
+        self["winddir1"].setText("Windrichting NA")
+        try:
+            self["bigtemp1"].setText(str("%02.0f" % dataPerUur[(0)]["temperature"])+"°C")
+            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%02.0f" % dataPerUur[(0)]["feeltemperature"])+"°C")
+            self["winddir1"].setText("Windrichting "+str(dataPerUur[(0)]["winddirection"]))		
+            self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
+        except:
+            0+0
+        feeltext = "na"
+        if dataDagen[0].get("feeltemperature"):
+            feeltext = dataDagen[0]["feeltemperature"]
 
         windtext = "na"
-        if dataDagen[self.selected+0].get("winddirection"):
-            windtext = dataDagen[self.selected+0]["winddirection"]
-        self["winddir1"].setText("Windrichting "+str(winddirtext(windtext)))
+        if dataDagen[0].get("winddirection"):
+            windtext = dataDagen[0]["winddirection"]
+
 
         typetext = "na"
-        if dataDagen[self.selected+0].get("iconcode"):
-            typetext = dataDagen[self.selected+0]["iconcode"]
-        self["bigweathertype1"].setText(icontotext(str(typetext)))
-
-        feeltext = "na"
-        if dataDagen[self.selected+0].get("feeltemperature"):
-            feeltext = dataDagen[self.selected+0]["feeltemperature"]
-        self["GevoelsTemp1"].setText("GevoelsTemp "+str(feeltext)+"°C")
-
-        for day in range(0, 7):
-            self["bigWeerIcon1"+str(day)].hide()
-            self["bigDirIcon1"+str(day)].hide()
-        self["bigWeerIcon1"+str(self.selected)].show()
-        self["bigDirIcon1"+str(self.selected)].show()
+        if dataDagen[0].get("iconcode"):
+            typetext = dataDagen[0]["iconcode"]
+                        
         dataPerUur = weatherData["days"][self.selected]["hours"]
+        self["bigWeerIcon1"+str(0)].show()
+        self["bigDirIcon1"+str(0)].show()
+        
         for perUurUpdate in range(0,8):
             for day in range(0, 7):
                 self["dayIcon"+str(day)+str(perUurUpdate)].hide()
