@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.9
+#HetWeer3.9r1
 import re
 import time
 import json
@@ -39,7 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.9
+#WeerInfoCurVer = 3.9r1
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -468,15 +468,15 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", localtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", localtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += ""+str("%02.0f" % dagen["mintemp"])+"°"
+                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"°")
             elif dagen.get("mintemperature"):
-                info2 += "" + str("%02.0f" % dagen["mintemperature"])+"°"
+                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"°")
             else:
                 info2 += "--.-°C"
             if dagen.get("maxtemp"):
-                info3 += "" + str("%02.0f" % dagen["maxtemp"])+"°"
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"°")
             elif dagen.get("maxtemperature"):
-                info3 += "" + str("%02.0f" % dagen["maxtemperature"])+"°"
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"°")
             else:
                 info3 += "--.-°C"
             if dagen.get("beaufort"):
@@ -525,8 +525,8 @@ class weeroverview(Screen):
         self["GevoelsTemp1"].setText("GevoelsTemp NA°C")
         self["winddir1"].setText("Windrichting NA")
         try:
-            self["bigtemp1"].setText(str("%02.0f" % dataPerUur[(0)]["temperature"])+"°C")
-            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%02.0f" % dataPerUur[(0)]["feeltemperature"])+"°C")
+            self["bigtemp1"].setText(('{:>4}'.format(str("%.0f" % dataPerUur[(0)]["temperature"])+"°C")))
+            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"°C")
             self["winddir1"].setText("Windrichting "+str(dataPerUur[(0)]["winddirection"]))		
             self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
         except:
@@ -554,7 +554,7 @@ class weeroverview(Screen):
             self["dayIcon"+str(self.selected)+str(perUurUpdate)].show()
             if (perUurUpdate*3)+1 < len(dataPerUur):
                 self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText(str("%02.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"°C")
+                self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"°C"))
                 self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["precipation"])+"%")
                 self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["windspeed"])+"Km/u")
             else:
