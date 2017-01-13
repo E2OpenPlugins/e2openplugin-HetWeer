@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.9r1
+#HetWeer3.9r2
 import re
 import time
 import json
@@ -39,7 +39,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.9r1
+#WeerInfoCurVer = 3.9r2
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -525,7 +525,7 @@ class weeroverview(Screen):
         self["GevoelsTemp1"].setText("GevoelsTemp NA°C")
         self["winddir1"].setText("Windrichting NA")
         try:
-            self["bigtemp1"].setText(('{:>4}'.format(str("%.0f" % dataPerUur[(0)]["temperature"])+"°C")))
+            self["bigtemp1"].setText(('{:>4}'.format(str("%.1f" % dataPerUur[(0)]["temperature"])+"°C")))
             self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"°C")
             self["winddir1"].setText("Windrichting "+str(dataPerUur[(0)]["winddirection"]))		
             self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
