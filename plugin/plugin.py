@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer3.9r2
+#HetWeer3.9r6
 import re
 import time
 import json
@@ -27,6 +27,7 @@ from Components.FileList import FileList
 from time import gmtime, strftime, time, localtime
 import datetime, time
 import struct
+import math
 
 versienummer = ''
 if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'):
@@ -39,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 3.9r2
+#WeerInfoCurVer = 3.9r6
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -345,15 +346,25 @@ class weeroverview(Screen):
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" shadowColor="black" shadowOffset="1,1"/>
                     <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="48,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="90,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
                     <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="1,1"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
-                for data in dataUrr:
-                    if data.get("hour") and (data["hour"]-1)%3 == 0:
-                        dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
-                        print "maak : "+ str(day)+"|"+str(uurcount)
-                        uurcount += 1
+                if day == 0:
+                    for data in dataUrr:
+                        blocks = len(dataUrr)
+                        if len(dataUrr)<8:
+                            blocks = 8
+                        if data.get("hour") and ((data["hour"]-1)%math.ceil(blocks/8)) == 0:
+                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            uurcount += 1
+                else:
+                    for data in dataUrr:
+                        if data.get("hour") and (data["hour"]-1)%3 == 0:
+                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
                     <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(195 + (216 * uur)) + """,779" size="90,36" zPosition="3" valign="center" halign="right" font="Regular;33" transparent="1" shadowColor="black" shadowOffset="1,1"/>
@@ -371,9 +382,9 @@ class weeroverview(Screen):
                     <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
                     <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
                     <widget name="bigtemp1" position="930,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="bigweathertype1" position="719,312" size="480,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="GevoelsTemp1" position="930,256" size="354,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="winddir1" position="767,366" size="345,40" zPosition="3" valign="center" halign="center" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>""" + dayinfoblok + """
+                    <widget name="bigweathertype1" position="850,312" size="480,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="GevoelsTemp1" position="934,256" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="winddir1" position="850,366" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>""" + dayinfoblok + """
                 </screen>"""
         else:
             for day in range(0, 7):
@@ -400,11 +411,21 @@ class weeroverview(Screen):
                     <widget name="weertype2""" + str(day) + """" position=\"""" + str(77 + (165 * day)) + """,442" size="138,40" zPosition="3" valign="center" halign="center" font="Regular;16" transparent="1"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
-                for data in dataUrr:
-                    if data.get("hour") and (data["hour"]-1)%3 == 0:
-                        dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,519" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
-                        print "maak : "+ str(day)+"|"+str(uurcount)
-                        uurcount += 1
+                if day == 0:
+                    for data in dataUrr:
+                        blocks = len(dataUrr)
+                        if len(dataUrr)<8:
+                            blocks = 8
+                        if data.get("hour") and (data["hour"]-1)%math.ceil(blocks/8) == 0:
+                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,519" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            uurcount += 1
+                else:
+                    for data in dataUrr:
+                        if data.get("hour") and (data["hour"]-1)%3 == 0:
+                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,519" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
                     <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(130 + (144 * uur)) + """,519" size="60,24" zPosition="3" valign="center" halign="right" font="Regular;22" transparent="1"/>
@@ -422,9 +443,9 @@ class weeroverview(Screen):
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
                     <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
                     <widget name="bigtemp1" position="620,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
-                    <widget name="bigweathertype1" position="479,210" size="320,22" zPosition="3" valign="center" halign="center" font="Regular;18" transparent="1"/>
-                    <widget name="GevoelsTemp1" position="620,165" size="236,30" zPosition="3" valign="center" halign="center" font="Regular;18" transparent="1"/>
-                    <widget name="winddir1" position="511,244" size="230,22" zPosition="3" valign="center" halign="center" font="Regular;18" transparent="1"/>""" + dayinfoblok + """
+                    <widget name="bigweathertype1" position="570,210" size="320,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
+                    <widget name="GevoelsTemp1" position="622,165" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
+                    <widget name="winddir1" position="570,244" size="230,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>""" + dayinfoblok + """
                 </screen>"""
 
         self.session = session
@@ -552,11 +573,18 @@ class weeroverview(Screen):
             for day in range(0, 7):
                 self["dayIcon"+str(day)+str(perUurUpdate)].hide()
             self["dayIcon"+str(self.selected)+str(perUurUpdate)].show()
-            if (perUurUpdate*3)+1 < len(dataPerUur):
-                self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*3)+1]["temperature"])+"°C"))
-                self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["precipation"])+"%")
-                self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*3)+1]["windspeed"])+"Km/u")
+            if self.selected == 0:
+                jumppoint = int(math.ceil(len(dataPerUur)/8))
+            else:
+                jumppoint = 3
+            if jumppoint<1:
+                jumppoint=1    
+            print jumppoint
+            if (perUurUpdate*jumppoint) < len(dataPerUur):
+                self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["hour"])+"h")
+                self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
+                self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipation"])+"%")
+                self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+"Km/u")
             else:
                 self["dayhour3"+str(perUurUpdate)].setText("")
                 self["daytemp3"+str(perUurUpdate)].setText("")
@@ -727,7 +755,7 @@ class weatherMenuSub(Screen):
 
         elif state[0] == "Europa" and newView:
             if type == "Weerbericht":
-                wchat = weatherchat("be/wereldwijd/europa")
+                wchat = weatherchat("nl/wereldwijd/europa")
                 self.session.open(weathertalk)
             elif type == "Buienradar":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapeu/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
