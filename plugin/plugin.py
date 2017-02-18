@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.0
+#HetWeer4.1
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.0
+#WeerInfoCurVer = 4.1
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -158,9 +158,9 @@ def checkInternet():
     try:
         response = urllib2.urlopen("http://google.com", None, 5)
         response.close()
-    except urllib2.HTTPError as e:
+    except urllib2.HTTPError:
         return False
-    except urllib2.URLError as e:
+    except urllib2.URLError:
         return False
     except socket.timeout:
         return False
@@ -264,17 +264,17 @@ class startScreen(Screen):
         </screen>"""
 
     titleNames = ["Nederland", "Belgie", "Europa", "WeerInfo"]
-    def __init__(self, session, args=None):
+    def __init__(self, session):
         self.session = session
         self["mess1"] = ScrollLabel("")
-        self["key_red"] = Label(_("Exit"))
-        self["key_green"] = Label(_("Ok"))
-        #self["key_yellow"] = Label(_("Update Check"))
+        self["key_red"] = Label("Exit")
+        self["key_green"] = Label("Ok")
+        #self["key_yellow"] = Label("Update Check")
         self.skin = startScreen.skin
         Screen.__init__(self, session)
         list = []
         for x in startScreen.titleNames:
-            list.append((_(x)))
+            list.append((x))
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit, "green": self.go}, -1)
@@ -304,26 +304,47 @@ class startScreen(Screen):
             self.pausetimer.callback.append(self.htwUpdateMain)
             self.pausetimer.start(500, True)
         else:
-            self.session.open(MessageBox, _("Momenteel geen update beschikbaar"), MessageBox.TYPE_INFO)    
+            self.session.open(MessageBox, "Momenteel geen update beschikbaar", MessageBox.TYPE_INFO)    
     
     def htwUpdateMain(self):
         self.session.openWithCallback(self.htwinfoUpdate, MessageBox,
-                                      _("Update beschikbaar, wil je de update toepassen?"))
+                                      "Update beschikbaar, wil je de update toepassen?")
     def htwinfoUpdate(self, htwmupg):
         if htwmupg is True:
-            self["mess1"].setText(_("Package will be Updated"))
+            self["mess1"].setText("Package will be Updated")
             try:
-                self.session.open(Console, _("downloading-installing: HetWeer") , ["echo Please wait while Downloading and Installing!!;opkg install -force-overwrite http://users.telenet.be/caught/HetWeer/enigma2-plugin-extensions-hetweer_all.ipk;"]) 
+                self.session.open(Console, "downloading-installing: HetWeer", ["echo Please wait while Downloading and Installing!!;opkg install -force-overwrite http://users.telenet.be/caught/HetWeer/enigma2-plugin-extensions-hetweer_all.ipk;"]) 
                        
             except (IOError, RuntimeError, NameError):
-                self["mess1"].setText(_("Package was NOT Updated"))
+                self["mess1"].setText("Package was NOT Updated")
 
 class weeroverview(Screen):
-    def __init__(self, session, args = 0):
+    def __init__(self, session):
         dayinfoblok = ""
         global weatherData
         dataDagen = weatherData["days"]
         self.selected = 0
+
+        protemp = []
+        peocpic = ""
+        try:
+            for procdays in dataDagen:
+                for prochours in procdays["hours"]:
+                    protemp.append(round(prochours["temperature"]))
+                if len(protemp) > 3:
+                    break
+        except:
+            pass
+        if protemp[0] > protemp[1]:
+            peocpic = "tempcold.png"
+        elif protemp[0] < protemp[1]:
+            peocpic = "temphot.png"
+        else:
+            peocpic = "tempeven.png"
+        print "GE0-------->"+str(protemp[0])
+        print "GE1-------->"+str(protemp[1])
+        peocpichd = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/%s" position="1112,155" size="90,80" zPosition="2" transparent="0" alphatest="blend"/>""" % (peocpic)
+        peocpicsd = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/%s" position="752,99" size="60,53" zPosition="2" transparent="0" alphatest="blend"/>""" % (peocpic)
 
         if sz_w > 1800:
             for day in range(0, 7):
@@ -341,7 +362,7 @@ class weeroverview(Screen):
                 if happydays.get("iconcode"):
                     losticon = happydays["iconcode"]
                 dayinfoblok += """
-                    <widget name="bigWeerIcon1""" + str(day) + """" position="720,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigWeerIcon1""" + str(day) + """" position="690,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
                     <widget name="bigDirIcon1""" + str(day) + """" position="1146,359" size="42,42" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" shadowColor="black" shadowOffset="1,1"/>
@@ -381,10 +402,10 @@ class weeroverview(Screen):
                     <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" shadowColor="black" shadowOffset="1,1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
                     <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="bigtemp1" position="930,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="bigtemp1" position="897,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" shadowColor="black" shadowOffset="1,1"/>
                     <widget name="bigweathertype1" position="850,312" size="480,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="GevoelsTemp1" position="934,256" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="winddir1" position="850,366" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>""" + dayinfoblok + """
+                    <widget name="GevoelsTemp1" position="901,256" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="winddir1" position="850,366" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>""" + peocpichd + dayinfoblok + """
                 </screen>"""
         else:
             for day in range(0, 7):
@@ -402,7 +423,7 @@ class weeroverview(Screen):
                 if happydays.get("iconcode"):
                     losticon = happydays["iconcode"]
                 dayinfoblok += """
-                    <widget name="bigWeerIcon1""" + str(day) + """" position="480,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbig/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigWeerIcon1""" + str(day) + """" position="457,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbig/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
                     <widget name="bigDirIcon1""" + str(day) + """" position="764,239" size="28,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/""" + str(losticon) + """.png" position=\"""" + str(87 + (165 * day)) + """,348" size="48,48" zPosition="3" transparent="0" alphatest="on"/>
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,315" size="90,24" zPosition="3" valign="center" halign="left" font="Regular;22" transparent="1"/>
@@ -442,31 +463,31 @@ class weeroverview(Screen):
                     <widget source="global.CurrentTime" render="Label" position="947,22" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
                     <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
-                    <widget name="bigtemp1" position="620,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
+                    <widget name="bigtemp1" position="597,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
                     <widget name="bigweathertype1" position="570,210" size="320,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <widget name="GevoelsTemp1" position="622,165" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <widget name="winddir1" position="570,244" size="230,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>""" + dayinfoblok + """
+                    <widget name="GevoelsTemp1" position="599,165" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
+                    <widget name="winddir1" position="570,244" size="230,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>""" + peocpicsd + dayinfoblok + """
                 </screen>"""
 
         self.session = session
         Screen.__init__(self, session)
         self.skin = skin
-        self["city1"] = Label(_(lockaaleStad))
+        self["city1"] = Label(lockaaleStad)
         for day in range(0, 7):
             self["bigWeerIcon1"+str(day)] = Pixmap()
             self["bigWeerIcon1"+str(day)].hide()
             self["bigDirIcon1"+str(day)] = Pixmap()
             self["bigDirIcon1"+str(day)].hide()
-        self["bigtemp1"] = Label(_(""))
-        self["bigweathertype1"] = Label(_(""))
-        self["GevoelsTemp1"] = Label(_(""))
-        self["winddir1"] = Label(_("East"))
+        self["bigtemp1"] = Label("")
+        self["bigweathertype1"] = Label("")
+        self["GevoelsTemp1"] = Label("")
+        self["winddir1"] = Label("East")
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
-            self["dayhour3"+str(uur)] = Label(_("00h"))
-            self["daytemp3"+str(uur)] = Label(_("--°C"))
-            self["daypercent3"+str(uur)] = Label(_("--%"))
-            self["dayspeed3"+str(uur)] = Label(_("--km/u"))
+            self["dayhour3"+str(uur)] = Label("00h")
+            self["daytemp3"+str(uur)] = Label("--°C")
+            self["daypercent3"+str(uur)] = Label("--%")
+            self["dayspeed3"+str(uur)] = Label("--km/u")
             for day in range(0, 7):
                 self["dayIcon"+str(day)+str(uur)] = Pixmap()
                 self["dayIcon"+str(day)+str(uur)].hide()
@@ -508,10 +529,10 @@ class weeroverview(Screen):
                 info5 += str(dagen["windspeed"])+"KM/H"
             else:
                 info5 += "--KM/H"
-            self["smallday2"+str(day-1)] = Label(_(info1))
-            self["midtemp2"+str(day-1)] = Label(_(info3))
-            self["minitemp2"+str(day-1)] = Label(_(info2))
-            self["weertype2"+str(day-1)] = Label(_(icontotext(iconclass)))
+            self["smallday2"+str(day-1)] = Label(info1)
+            self["midtemp2"+str(day-1)] = Label(info3)
+            self["minitemp2"+str(day-1)] = Label(info2)
+            self["weertype2"+str(day-1)] = Label(icontotext(iconclass))
             self["myActionMap"] = ActionMap(["SetupActions"], {"left": self.left, "right": self.right, "cancel": self.cancel}, -1)
             self.updateFrameselect()
 
@@ -541,12 +562,12 @@ class weeroverview(Screen):
         if dataDagen[self.selected+0].get("temperature"):
             temptext = dataDagen[self.selected+0]["temperature"]
         dataPerUur = weatherData["days"][0]["hours"]
-        self["bigtemp1"].setText("NA °C")
+        self["bigtemp1"].setText("NA")
         self["bigweathertype1"].setText("na")
         self["GevoelsTemp1"].setText("GevoelsTemp NA°C")
         self["winddir1"].setText("Windrichting NA")
         try:
-            self["bigtemp1"].setText(('{:>4}'.format(str("%.1f" % dataPerUur[(0)]["temperature"])+"°C")))
+            self["bigtemp1"].setText('{:>4}'.format(str("%.1f" % dataPerUur[(0)]["temperature"])))
             self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"°C")
             self["winddir1"].setText("Windrichting "+str(dataPerUur[(0)]["winddirection"]))		
             self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
@@ -634,9 +655,9 @@ class weatherMenuSub(Screen):
     listNamesnl = ["Weerbericht", "Temperatuur", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Mistradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
     listNamesbe = ["Weerbericht", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
     listNameseu = ["Weerbericht", "Buienradar", "Onweerradar", "Zonkracht-UV", "Satelliet"]
-    def __init__(self, session, args=None):
+    def __init__(self, session):
         self.session = session
-        self["key_red"] = Label(_("Exit"))
+        self["key_red"] = Label("Exit")
         self.skin = weatherMenuSub.skin
         Screen.__init__(self, session)
         list = []
@@ -649,7 +670,7 @@ class weatherMenuSub(Screen):
             self.countries = weatherMenuSub.listNameseu    
         
         for x in self.countries:
-            list.append((_(x)))
+            list.append((x))
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit}, -1)
@@ -781,7 +802,7 @@ class weatherMenuSub(Screen):
 
             if os.path.exists('/tmp/HetWeer/00.png'):
                 try:
-                    self.session.open(View_Slideshow, aantalfotos)
+                    self.session.open(aantalfotos)
                 except:
                     return
             else:
@@ -791,7 +812,7 @@ class weatherMenuSub(Screen):
         self.close(weatherMenuSub)
 
 class weathertalk(Screen):
-    def __init__(self, session, args=None):
+    def __init__(self, session):
         self.session = session
         sz_w = getDesktop(0).size().width()
         if sz_w > 1800:
@@ -830,12 +851,12 @@ class weathertalk(Screen):
         regx = '''<p>(.*?)</p>'''
         match = re.findall(regx, wchat, re.DOTALL)
         self.wchattext=match
-        self["weerchat"] = Label(_(transhtml(match[self.indexpage])))
-        self["PAG"] = Label(_("1/"+str(len(self.wchattext))))
+        self["weerchat"] = Label(transhtml(match[self.indexpage]))
+        self["PAG"] = Label("1/"+str(len(self.wchattext)))
 
         self["actions"] = ActionMap(["WizardActions"], {"left": self.left, "right": self.right, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit}, -1)
-        self["key_red"] = Label(_("Exit"))
+        self["key_red"] = Label("Exit")
 
     def left(self):
         if self.indexpage<=0:
@@ -858,9 +879,9 @@ class weathertalk(Screen):
 
 
 class radarScreenoatv(Screen):
-    def __init__(self, session, args = None):
+    def __init__(self, session):
         global pos
-        self['radarname'] = Label(_(typename))
+        self['radarname'] = Label(typename)
         self.weerpng = '/tmp/HetWeer/00.png'
         picformat = get_image_info('/tmp/HetWeer/00.png')
         if not picformat:
@@ -895,9 +916,9 @@ class radarScreenoatv(Screen):
 
 
 class radarScreenop(Screen):
-    def __init__(self, session, args=None):
+    def __init__(self, session):
         global typename
-        self["radarname"] = Label(_(typename))
+        self["radarname"] = Label(typename)
         self.weerpng = "/tmp/HetWeer/00.png"
         picformat = get_image_info("/tmp/HetWeer/00.png")
         if not picformat:
@@ -1021,19 +1042,19 @@ class localcityscreen(Screen):
             <widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
         </screen>"""
 
-    def __init__(self, session, args=None):
+    def __init__(self, session):
         self.session = session
         self.skin = localcityscreen.skin
-        self["favor"] = Label(_("Favoriete Locaties"))
-        self["plaatsn"] = Label(_("Locatie:"))
-        self["key_red"] = Label(_("Exit"))
-        self["key_green"] = Label(_("Locatie +"))
-        self["key_yellow"] = Label(_("Locatie -"))
+        self["favor"] = Label("Favoriete Locaties")
+        self["plaatsn"] = Label("Locatie:")
+        self["key_red"] = Label("Exit")
+        self["key_green"] = Label("Locatie +")
+        self["key_yellow"] = Label("Locatie -")
         Screen.__init__(self, session)
         list = []
         global SavedLokaleWeer
         for x in SavedLokaleWeer:
-            list.append((_(str(x))))
+            list.append((str(x)))
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit, "yellow": self.removeLoc, "green": self.addLoc}, -1)
@@ -1042,7 +1063,7 @@ class localcityscreen(Screen):
         self.close()
 
     def addLoc(self):
-        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=(_("Enter plaatsnaam e.g. london or london/gb or london_us")), text="")
+        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=("Enter plaatsnaam e.g. london or london/gb or london_us"), text="")
 
     def searchCity(self, searchterm = None):
         if searchterm is not None:
@@ -1064,7 +1085,7 @@ class localcityscreen(Screen):
                 time.sleep(1)
                 self.session.open(weeroverview)
             else:
-                self.session.open(MessageBox, _("Download fout: Controleer spelling of vraag om de plaatsnaam toe te voegen aan de database."), MessageBox.TYPE_INFO)
+                self.session.open(MessageBox, "Download fout: Controleer spelling of vraag om de plaatsnaam toe te voegen aan de database.", MessageBox.TYPE_INFO)
 
     def removeLoc(self):
         if len(SavedLokaleWeer)>0:
@@ -1099,7 +1120,7 @@ def main(session, **kwargs):
 	    urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
         session.open(startScreen)
     else:
-        session.open(MessageBox, _("Geen internet"), MessageBox.TYPE_INFO)
+        session.open(MessageBox, "Geen internet", MessageBox.TYPE_INFO)
 
 def Plugins(path, **kwargs):
     global plugin_path
