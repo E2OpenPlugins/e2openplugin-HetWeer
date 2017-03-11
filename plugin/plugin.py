@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.2
+#HetWeer4.2r1
 import re
 import time
 import json
@@ -40,13 +40,13 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.2
+#WeerInfoCurVer = 4.2r1
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
     text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace('&#214;', '\xc3\x96').replace('&#220;', '\xc3\x9c').replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc')
     text = text.replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'").replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
-    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', '°').replace('&ordm;', '°').replace('&euml;', 'e')
+    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', 'Â°').replace('&ordm;', 'Â°').replace('&euml;', 'e')
     return text
 
 def icontotext(icon):
@@ -485,7 +485,7 @@ class weeroverview(Screen):
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
             self["dayhour3"+str(uur)] = Label("00h")
-            self["daytemp3"+str(uur)] = Label("--°C")
+            self["daytemp3"+str(uur)] = Label("--Â°C")
             self["daypercent3"+str(uur)] = Label("--%")
             self["dayspeed3"+str(uur)] = Label("--km/u")
             for day in range(0, 7):
@@ -510,17 +510,17 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", localtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", localtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"°")
+                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"Â°")
             elif dagen.get("mintemperature"):
-                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"°")
+                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"Â°")
             else:
-                info2 += "--.-°C"
+                info2 += "--.-Â°C"
             if dagen.get("maxtemp"):
-                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"°")
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"Â°")
             elif dagen.get("maxtemperature"):
-                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"°")
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"Â°")
             else:
-                info3 += "--.-°C"
+                info3 += "--.-Â°C"
             if dagen.get("beaufort"):
                 info4 += str(dagen["beaufort"])
             else:
@@ -564,11 +564,11 @@ class weeroverview(Screen):
         dataPerUur = weatherData["days"][0]["hours"]
         self["bigtemp1"].setText("NA")
         self["bigweathertype1"].setText("na")
-        self["GevoelsTemp1"].setText("GevoelsTemp NA°C")
+        self["GevoelsTemp1"].setText("GevoelsTemp NAÂ°C")
         self["winddir1"].setText("Windrichting NA")
         try:
             self["bigtemp1"].setText('{:>4}'.format(str("%.1f" % dataPerUur[(0)]["temperature"])))
-            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"°C")
+            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"Â°C")
             self["winddir1"].setText("Windrichting "+str(dataPerUur[(0)]["winddirection"]))		
             self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
         except:
@@ -603,7 +603,7 @@ class weeroverview(Screen):
             print jumppoint
             if (perUurUpdate*jumppoint) < len(dataPerUur):
                 self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
+                self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"Â°C"))
                 self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipation"])+"%")
                 self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+"Km/u")
             else:
@@ -702,7 +702,7 @@ class weatherMenuSub(Screen):
                 except:
                     pass
 
-                if distro == 'openatv'or'hdfreaks':
+                if distro == 'openatv'or distro == 'hdfreaks':
                     self.session.open(radarScreenoatv)
                 else:
                     self.session.open(radarScreenop)
