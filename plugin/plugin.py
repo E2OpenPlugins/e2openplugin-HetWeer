@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.2r2
+#HetWeer4.2r3
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.2r2
+#WeerInfoCurVer = 4.2r3
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -225,10 +225,10 @@ class startScreen(Screen):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
-            <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-            <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
-            <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28" borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
+            <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28" borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
             <widget name="list" position="920,110" size="975,375" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
             <widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;24"/>\n
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflaghd.png" position="794,114" size="71,49" alphatest="on"/>
@@ -236,9 +236,9 @@ class startScreen(Screen):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflaghd.png" position="794,240" size="71,49" alphatest="on"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalhd.png" position="794,303" size="71,49" alphatest="on"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
-            <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
-            <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     else:
@@ -247,10 +247,10 @@ class startScreen(Screen):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
-            <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-            <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
-            <widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19" borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
+            <widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19" borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
             <widget name="list" position="630,106" size="650,250" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
             <widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;18"/>\n
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflagsd.png" position="550,105" size="47,32" alphatest="on"/>
@@ -258,9 +258,9 @@ class startScreen(Screen):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflagsd.png" position="550,191" size="47,32" alphatest="on"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalsd.png" position="550,234" size="47,32" alphatest="on"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
-            <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
+            <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
-            <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
+            <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     titleNames = ["Nederland", "Belgie", "Europa", "WeerInfo"]
@@ -365,10 +365,10 @@ class weeroverview(Screen):
                     <widget name="bigWeerIcon1""" + str(day) + """" position="690,114" size="150,150" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbighd/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
                     <widget name="bigDirIcon1""" + str(day) + """" position="1146,359" size="42,42" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/""" + str(losticon) + """.png" position=\"""" + str(131 + (248 * day)) + """,522" size="72,72" zPosition="3" transparent="0" alphatest="on"/>
-                    <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="90,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1" shadowColor="black" shadowOffset="1,1"/>"""
+                    <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="90,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1" borderColor="black" borderWidth="1"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
                 if day == 0:
@@ -388,24 +388,24 @@ class weeroverview(Screen):
                             uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
-                    <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(195 + (216 * uur)) + """,779" size="90,36" zPosition="3" valign="center" halign="right" font="Regular;33" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,870" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,945" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,986" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" shadowColor="black" shadowOffset="1,1"/>
+                    <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(195 + (216 * uur)) + """,779" size="90,36" zPosition="3" valign="center" halign="right" font="Regular;33" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,870" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,945" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,986" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" borderColor="black" borderWidth="1"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/turbinehd.png" position=\"""" + str(119 + (216 * uur)) + """,983" size="38,38" zPosition="3" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/druphd.png" position=\"""" + str(120 + (216 * uur)) + """,945" size="15,23" zPosition="3" alphatest="on"/>"""
 
             skin = """
                 <screen position="fill" flags="wfNoBorder">
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png" position="center,center" size="1920,1080" zPosition="0" alphatest="on"/>
-                    <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" shadowColor="black" shadowOffset="1,1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                    <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" shadowColor="black" shadowOffset="1,1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
-                    <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="bigtemp1" position="897,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="bigweathertype1" position="850,312" size="480,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="GevoelsTemp1" position="901,256" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>
-                    <widget name="winddir1" position="850,366" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" shadowColor="black" shadowOffset="1,1"/>""" + peocpichd + dayinfoblok + """
+                    <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="bigtemp1" position="897,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="bigweathertype1" position="850,312" size="480,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="GevoelsTemp1" position="901,256" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="winddir1" position="850,366" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>""" + peocpichd + dayinfoblok + """
                 </screen>"""
         else:
             for day in range(0, 7):
@@ -424,12 +424,12 @@ class weeroverview(Screen):
                     losticon = happydays["iconcode"]
                 dayinfoblok += """
                     <widget name="bigWeerIcon1""" + str(day) + """" position="457,76" size="100,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconbig/""" + str(dataUrr) + """.png" zPosition="1" alphatest="on"/>
-                    <widget name="bigDirIcon1""" + str(day) + """" position="764,239" size="28,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
+                    <widget name="bigDirIcon1""" + str(day) + """" position="764,235" size="28,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/""" + str(windkracht) + """.png" zPosition="1" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/""" + str(losticon) + """.png" position=\"""" + str(87 + (165 * day)) + """,348" size="48,48" zPosition="3" transparent="0" alphatest="on"/>
-                    <widget name="smallday2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,315" size="90,24" zPosition="3" valign="center" halign="left" font="Regular;22" transparent="1"/>
-                    <widget name="midtemp2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,400" size="60,36" zPosition="3" font="Regular;32" transparent="1"/>
-                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(160 + (165 * day)) + """,413" size="32,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(77 + (165 * day)) + """,442" size="138,40" zPosition="3" valign="center" halign="center" font="Regular;16" transparent="1"/>"""
+                    <widget name="smallday2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,315" size="90,24" zPosition="3" valign="center" halign="left" font="Regular;22" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="midtemp2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,398" size="60,36" zPosition="3" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="minitemp2""" + str(day) + """" position=\"""" + str(160 + (165 * day)) + """,411" size="32,22" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(77 + (165 * day)) + """,438" size="138,44" zPosition="3" valign="center" halign="center" font="Regular;16" borderColor="black" borderWidth="1" transparent="1"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
                 if day == 0:
@@ -449,24 +449,24 @@ class weeroverview(Screen):
                             uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
-                    <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(130 + (144 * uur)) + """,519" size="60,24" zPosition="3" valign="center" halign="right" font="Regular;22" transparent="1"/>
-                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(80 + (144 * uur)) + """,580" size="120,36" zPosition="3" valign="center" halign="left" font="Regular;32" transparent="1"/>
-                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,630" size="80,20" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,657" size="82,21" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
+                    <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(130 + (144 * uur)) + """,519" size="60,24" zPosition="3" valign="center" halign="right" font="Regular;22" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(80 + (144 * uur)) + """,580" size="120,36" zPosition="3" valign="center" halign="left" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,630" size="80,20" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,657" size="82,21" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/turbine.png" position=\"""" + str(79 + (144 * uur)) + """,655" size="25,25" zPosition="6" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/drup.png" position=\"""" + str(80 + (144 * uur)) + """,630" size="10,15" zPosition="6" alphatest="on"/>"""
 
             skin = """
                 <screen position="fill" flags="wfNoBorder">
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png" position="center,center" size="1280,720" zPosition="0" alphatest="on"/>
-                    <widget source="global.CurrentTime" render="Label" position="1097,2" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                    <widget source="global.CurrentTime" render="Label" position="947,22" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1097,0" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="947,20" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
-                    <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" transparent="1"/>
-                    <widget name="bigtemp1" position="597,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" transparent="1"/>
-                    <widget name="bigweathertype1" position="570,210" size="320,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <widget name="GevoelsTemp1" position="599,165" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>
-                    <widget name="winddir1" position="570,244" size="230,22" zPosition="3" valign="center" halign="left" font="Regular;18" transparent="1"/>""" + peocpicsd + dayinfoblok + """
+                    <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="bigtemp1" position="597,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="bigweathertype1" position="570,208" size="320,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="GevoelsTemp1" position="599,165" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="winddir1" position="570,240" size="230,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>""" + peocpicsd + dayinfoblok + """
                 </screen>"""
 
         self.session = session
@@ -622,16 +622,16 @@ class weatherMenuSub(Screen):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
-            <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-            <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
             <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28"
-            borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
+            borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center">
             <convert type="ServiceName">Name</convert>
             </widget>
             <widget name="list" position="840,110" size="975,800" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
-            <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     else:
@@ -640,16 +640,16 @@ class weatherMenuSub(Screen):
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
-            <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-            <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
             <widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19"
-            borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
+            borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center">
             <convert type="ServiceName">Name</convert>
             </widget>
             <widget name="list" position="560,106" size="650,600" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
-            <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
+            <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     listNamesnl = ["Weerbericht", "Temperatuur", "Buienradar", "Motregenradar", "Onweerradar", "Wolkenradar", "Mistradar", "Hagelradar", "Sneeuwradar", "Zonradar", "Zonkracht-UV", "Satelliet"]
@@ -821,12 +821,12 @@ class weathertalk(Screen):
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
-                <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
-                <widget name="PAG" position="1780,940" size="104,52" valign="top" halign="left" zPosition="11" font="Regular;46" transparent="1"/>
-                <widget name="weerchat" position="150,150" size="1620,782" zPosition="11" font="Regular;46" transparent="1"/>
+                <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                <widget name="PAG" position="1780,940" size="104,52" valign="top" halign="left" zPosition="11" font="Regular;46" borderColor="black" borderWidth="1" transparent="1"/>
+                <widget name="weerchat" position="150,150" size="1620,782" zPosition="11" font="Regular;46" borderColor="black" borderWidth="1" transparent="1"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
-                <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+                <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             </screen>"""
 
         else:
@@ -835,12 +835,12 @@ class weathertalk(Screen):
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
-                <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
-                <widget name="PAG" position="1180,580" size="72,36" valign="top" halign="left" zPosition="11" font="Regular;32" transparent="1"/>
-                <widget name="weerchat" position="100,100" size="1100,500" valign="top" halign="left" zPosition="11" font="Regular;32" transparent="1"/>
+                <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                <widget name="PAG" position="1180,580" size="72,36" valign="top" halign="left" zPosition="11" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
+                <widget name="weerchat" position="100,100" size="1100,500" valign="top" halign="left" zPosition="11" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
                 <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
-                <widget name="key_red" position="185,643" size="220,28" zPosition="3" transparent="1" font="Regular;24" halign="left"/>
+                <widget name="key_red" position="185,643" size="220,28" zPosition="3" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             </screen>"""
 
         Screen.__init__(self, session)
@@ -893,7 +893,7 @@ class radarScreenoatv(Screen):
         skin = """
             <screen position="center,center" size="550,512" title="HetWeer">
             <widget name="picd" position="0,0" size="39600,900" pixmap="/tmp/HetWeer/00.png" zPosition="1" alphatest="on"/>""" + legendinfo + """
-            <widget name="radarname" position="center,8" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" shadowColor="black" shadowOffset="1,1"/>
+            <widget name="radarname" position="center,8" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" borderColor="black" borderWidth="2"/>
             </screen>"""
         
         self.session = session
@@ -936,7 +936,7 @@ class radarScreenop(Screen):
             skin = """
             <screen position="center,30" flags="wfNoBorder" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
             <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="250,20" size="600,72" zPosition="6" halign="center" transparent="1" font="Regular;60" shadowColor="black" shadowOffset="4,4"/>
+            <widget name="radarname" position="250,20" size="600,72" zPosition="6" halign="center" transparent="1" font="Regular;60" borderColor="black" borderWidth="2"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/brframe.png" zPosition="6" position="center,center" size="1084,1024" alphatest="on"/>
             </screen>"""
         else:
@@ -945,7 +945,7 @@ class radarScreenop(Screen):
             skin = """
             <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
             <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="240,25" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" shadowColor="black" shadowOffset="4,4"/>
+            <widget name="radarname" position="240,25" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" borderColor="black" borderWidth="2"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
             </screen>"""
 
@@ -997,49 +997,49 @@ class localcityscreen(Screen):
     if sz_w > 1800:
         skin = """
         <screen name="localcityscreen" position="fill" flags="wfNoBorder">
-            <widget name="favor" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="left"/>
+            <widget name="favor" position="30,7" size="1860,75" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline87.png" position="0,0" size="1920,87"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,87" size="1920,3" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline3.png" position="0,1020" size="1920,3" zPosition="1"/>
-            <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-            <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="30,120" size="720,405" backgroundColor="#ff000000" zPosition="1"/>
             <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28"
-            borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
+            borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center">
                 <convert type="ServiceName">Name</convert>
             </widget>
             <widget name="list" position="840,210" size="900,630" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
-            <widget name="plaatsn" position="840,120" size="375,70" valign="center" halign="left" zPosition="3" foregroundColor="yellow" font="Regular;63" transparent="1"/>
+            <widget name="plaatsn" position="840,120" size="375,70" valign="center" halign="left" zPosition="3" foregroundColor="yellow" font="Regular;63" borderColor="black" borderWidth="1" transparent="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
-            <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
-            <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow34.png" position="1064,1032" size="34,34" alphatest="blend"/>
-            <widget name="key_yellow" position="1114,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" halign="left"/>
+            <widget name="key_yellow" position="1114,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     else:
         skin = """
         <screen name="localcityscreen" position="fill" flags="wfNoBorder">
-            <widget name="favor" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="left"/>
+            <widget name="favor" position="85,30" size="1085,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/bigline88.png" position="0,0" size="1280,88"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,88" size="1280,2" zPosition="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/smallline2.png" position="0,630" size="1280,2" zPosition="1"/>
-            <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-            <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="1070,30" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+            <widget source="global.CurrentTime" render="Label" position="920,50" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
             <widget source="session.VideoPicture" render="Pig" position="85,110" size="417,243" backgroundColor="#ff000000" zPosition="1"/>
             <widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19"
-            borderColor="black" borderWidth="2" noWrap="1" valign="center" halign="center">
+            borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center">
             <convert type="ServiceName">Name</convert>
             </widget>
             <widget name="list" position="560,160" size="600,430" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
-            <widget name="plaatsn" position="560,106" size="375,43" valign="center" halign="left" zPosition="3" foregroundColor="yellow" font="Regular;28" transparent="1"/>
+            <widget name="plaatsn" position="560,106" size="375,43" valign="center" halign="left" zPosition="3" foregroundColor="yellow" font="Regular;28" borderColor="black" borderWidth="1" transparent="1"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
-            <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
+            <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
-            <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
+            <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow26.png" position="695,643" size="26,26" alphatest="on"/>
-            <widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" halign="left"/>
+            <widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     def __init__(self, session):
