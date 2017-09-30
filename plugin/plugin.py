@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.2r4
+#HetWeer4.2r7
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.2r4
+#WeerInfoCurVer = 4.2r7
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -702,7 +702,7 @@ class weatherMenuSub(Screen):
                 except:
                     pass
 
-                if distro == 'openatv'or distro == 'hdfreaks':
+                if distro == 'openatv'or distro == 'hdfreaks'or distro == 'openhdf':  
                     self.session.open(radarScreenoatv)
                 else:
                     self.session.open(radarScreenop)
@@ -887,15 +887,28 @@ class radarScreenoatv(Screen):
         if not picformat:
             self.weerpng = '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/busy.png'
             picformat = get_image_info(self.weerpng)
+        sz_w = getDesktop(0).size().width()
         legendinfo = ''
-        if legend:
-            legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="10,250" size="180,222" alphatest="on"/>"""
-        skin = """
-            <screen position="center,center" size="550,512" title="HetWeer">
-            <widget name="picd" position="0,0" size="39600,900" pixmap="/tmp/HetWeer/00.png" zPosition="1" alphatest="on"/>""" + legendinfo + """
-            <widget name="radarname" position="center,8" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" borderColor="black" borderWidth="2"/>
+        if sz_w > 1800:
+	    if legend:
+                legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="705,545" size="270,333" alphatest="on"/>"""
+            skin = """
+            <screen position="fill" title="HetWeer">
+            <widget name="picd" position="685,284" size="39600,900" pixmap="/tmp/HetWeer/00.png" zPosition="1" alphatest="on"/>""" + legendinfo + """
+            <widget name="radarname" position="center,290" size="550,64" zPosition="7" halign="center" transparent="1" font="Regular;30" borderColor="black" borderWidth="2"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/framehdatv.png" zPosition="6" position="center,center" size="1920,1080" alphatest="on"/>
             </screen>"""
-        
+	
+        else:	
+            if legend:
+                legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legendehd.png" zPosition="6" position="370,222" size="270,333" alphatest="on"/>"""
+            skin = """
+            <screen position="fill" title="HetWeer">
+            <widget name="picd" position="365,86" size="19800,512" pixmap="/tmp/HetWeer/00.png" zPosition="1" alphatest="on"/>""" + legendinfo + """
+            <widget name="radarname" position="center,94" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" borderColor="black" borderWidth="2"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/framesdatv.png" zPosition="6" position="0,80" size="1280,523" alphatest="on"/>
+            </screen>"""
+		
         self.session = session
         self.skin = skin
         Screen.__init__(self, session)
@@ -908,10 +921,18 @@ class radarScreenoatv(Screen):
 
     def updatePic(self):
         global pos
-        self['picd'].moveTo(pos * -550, 0, 1)
+        if sz_w > 1800:
+            self['picd'].moveTo((pos * -550)+685, 284, 1)
+	else:
+	    global picadjust
+            postt=(pos * -550)+365
+            if postt<-8000:
+                pos=0
+            self['picd'].moveTo((pos * -550)+365, 86, 1)
         pos += 1
         if pos >= get_image_info('/tmp/HetWeer/00.png')[0] / 550:
             pos = 0
+            
         self['picd'].startMoving()
 
 
@@ -924,7 +945,7 @@ class radarScreenop(Screen):
         if not picformat:
             self.weerpng = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/busy.png"
             picformat = get_image_info(self.weerpng)
-        self.scaler = 1.6
+        self.scaler = 1.25
         sz_w = getDesktop(0).size().width()
         global legend
         legendinfo = ""
@@ -932,21 +953,22 @@ class radarScreenop(Screen):
             self.scaler= 2.0
         if sz_w > 1800:
             if legend:
-                legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legendehd.png" zPosition="6" position="20,630" size="270,333" alphatest="on"/>"""
+                legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legendehd.png" zPosition="6" position="460,630" size="270,333" alphatest="on"/>"""
             skin = """
-            <screen position="center,30" flags="wfNoBorder" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
-            <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="250,20" size="600,72" zPosition="6" halign="center" transparent="1" font="Regular;60" borderColor="black" borderWidth="2"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/brframe.png" zPosition="6" position="center,center" size="1084,1024" alphatest="on"/>
+            <screen position="fill" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
+            <widget name="picd" position="400,28" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
+            <widget name="radarname" position="center,50" size="600,72" zPosition="6" halign="center" transparent="1" font="Regular;60" borderColor="black" borderWidth="2"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/framehdop.png" zPosition="6" position="center,center" size="1920,1080" alphatest="on"/>
             </screen>"""
+        
         else:
             if legend:
-                legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="14,460" size="180,222" alphatest="on"/>"""
+                legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="326,390" size="180,222" alphatest="on"/>"""
             skin = """
-            <screen position="center,center" size=\""""+str(int(550*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
-            <widget name="picd" position="0,0" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
-            <widget name="radarname" position="240,25" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" borderColor="black" borderWidth="2"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
+            <screen position="fill" size=\""""+str(int(370*self.scaler-16))+""","""+str(int(512*self.scaler))+"""">
+            <widget name="picd" position="305,36" size=\""""+str(int(picformat[0]*self.scaler))+""","""+str(int(picformat[1]*self.scaler))+"""" zPosition="5" alphatest="on"/>"""+legendinfo+"""
+            <widget name="radarname" position="center,56" size="400,52" zPosition="6" halign="center" transparent="1" font="Regular;40" borderColor="black" borderWidth="2"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/framesdop.png" zPosition="6" position="center,center" size="1280,650" alphatest="on"/>
             </screen>"""
 
         self.session = session
@@ -984,13 +1006,21 @@ class radarScreenop(Screen):
             self.PicLoad.startDecode(self.picPath)
 
     def updatePic(self):
-
         global pos
-        self["picd"].moveTo((pos*(-550*self.scaler)-15),0,1)
+        if sz_w > 1800:
+            self["picd"].moveTo((pos*(-550*self.scaler)-15+415),28,1)
+                         
+        else:
+	    global picadjust
+            postt=(pos * -687.5)
+            if postt<-8000:
+                pos=0
+            self['picd'].moveTo((pos *(-550*self.scaler))+300, 36, 1)
         pos += 1
-        if pos >= (get_image_info(self.weerpng)[0]/550):
+        if pos >= get_image_info('/tmp/HetWeer/00.png')[0] / (550*self.scaler):
             pos = 0
-        self["picd"].startMoving()
+            
+        self['picd'].startMoving()
 
 class localcityscreen(Screen):
     sz_w = getDesktop(0).size().width()
