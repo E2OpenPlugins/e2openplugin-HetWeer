@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.2r7
+#HetWeer4.2r8
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.2r7
+#WeerInfoCurVer = 4.2r8
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -398,8 +398,8 @@ class weeroverview(Screen):
             skin = """
                 <screen position="fill" flags="wfNoBorder">
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png" position="center,center" size="1920,1080" zPosition="0" alphatest="on"/>
-                    <widget source="global.CurrentTime" render="Label" position="1665,22" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                    <widget source="global.CurrentTime" render="Label" position="1440,52" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1651,37" size="225,37" transparent="1" zPosition="1" font="Regular;36" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1426,68" size="450,37" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
                     <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
                     <widget name="bigtemp1" position="897,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" borderColor="black" borderWidth="1"/>
@@ -459,8 +459,8 @@ class weeroverview(Screen):
             skin = """
                 <screen position="fill" flags="wfNoBorder">
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png" position="center,center" size="1280,720" zPosition="0" alphatest="on"/>
-                    <widget source="global.CurrentTime" render="Label" position="1097,0" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
-                    <widget source="global.CurrentTime" render="Label" position="947,20" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="1086,11" size="150,55" transparent="1" zPosition="1" font="Regular;24" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Format:%-H:%M</convert></widget>
+                    <widget source="global.CurrentTime" render="Label" position="936,31" size="300,55" transparent="1" zPosition="1" font="Regular;16" borderColor="black" borderWidth="1" valign="center" halign="right"><convert type="ClockToText">Date</convert></widget>
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
                     <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
                     <widget name="bigtemp1" position="597,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" borderColor="black" borderWidth="1" transparent="1"/>
@@ -941,7 +941,11 @@ class radarScreenop(Screen):
         global typename
         self["radarname"] = Label(typename)
         self.weerpng = "/tmp/HetWeer/00.png"
-        picformat = get_image_info("/tmp/HetWeer/00.png")
+        picformat= None
+        try:
+            picformat = get_image_info("/tmp/HetWeer/00.png")
+        except:    
+            None     
         if not picformat:
             self.weerpng = "/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/busy.png"
             picformat = get_image_info(self.weerpng)
