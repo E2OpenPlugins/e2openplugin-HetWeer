@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.2r9
+#HetWeer4.3
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.2r9
+#WeerInfoCurVer = 4.3
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -717,7 +717,7 @@ class weatherMenuSub(Screen):
                 wchat = weatherchat("be/Belgie/weerbericht")
                 self.session.open(weathertalk)
             elif type == "Buienradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=50&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=90&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Motregenradar":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=50&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
             elif type == "Wolkenradar":
@@ -730,7 +730,7 @@ class weatherMenuSub(Screen):
             elif type == "Hagelradar":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/hailnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             elif type == "Sneeuwradar":
-                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                urllib.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=100&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
             elif type == "Satelliet":
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=50&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
@@ -848,10 +848,13 @@ class weathertalk(Screen):
         global wchat
         self.indexpage = 0
         list = []
-        regx = '''<p>(.*?)</p>'''
+        regx = '''<p.*?>(.*?)</p>'''
         match = re.findall(regx, wchat, re.DOTALL)
         self.wchattext=match
-        self["weerchat"] = Label(transhtml(match[self.indexpage]))
+        try:
+            self["weerchat"] = Label(transhtml(match[self.indexpage]))
+        except:
+            self["weerchat"] = Label("regx aanpassen")
         self["PAG"] = Label("1/"+str(len(self.wchattext)))
 
         self["actions"] = ActionMap(["WizardActions"], {"left": self.left, "right": self.right, "back": self.close}, -1)
