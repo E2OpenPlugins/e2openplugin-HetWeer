@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.3
+#HetWeer4.4
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.3
+#WeerInfoCurVer = 4.4
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -600,17 +600,21 @@ class weeroverview(Screen):
                 jumppoint = 3
             if jumppoint<1:
                 jumppoint=1    
-            print jumppoint
-            if (perUurUpdate*jumppoint) < len(dataPerUur):
-                self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["hour"])+"h")
-                self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"Â°C"))
-                self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipation"])+"%")
-                self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+"Km/u")
-            else:
-                self["dayhour3"+str(perUurUpdate)].setText("")
-                self["daytemp3"+str(perUurUpdate)].setText("")
-                self["daypercent3"+str(perUurUpdate)].setText("")
-                self["dayspeed3"+str(perUurUpdate)].setText("")
+            try:
+            
+                if (perUurUpdate*jumppoint) < len(dataPerUur):
+                    self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["hour"])+"h")
+                    self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
+                    self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipation"])+"%")
+                    self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+"Km/u")
+                else:
+                    self["dayhour3"+str(perUurUpdate)].setText("")
+                    self["daytemp3"+str(perUurUpdate)].setText("")
+                    self["daypercent3"+str(perUurUpdate)].setText("")
+                    self["dayspeed3"+str(perUurUpdate)].setText("")
+            except:
+                None
+                
     def cancel(self):
         self.close(None)
 
