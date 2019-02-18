@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.5
+#HetWeer4.6
 import re
 import time
 import json
@@ -40,7 +40,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.5
+#WeerInfoCurVer = 4.6
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -178,7 +178,7 @@ SavedLokaleWeer = []
 weatherData = ["ohka"]
 lockaaleStad = ""
 selectedWeerDay = 0
-def getLocWeer(iscity=None):
+def getLocWeer(iscity = None):
     inputCity = iscity
     global lockaaleStad
     mydata = []
@@ -190,12 +190,24 @@ def getLocWeer(iscity=None):
 
     lockaaleStad = inputCity
     mydata = inputCity
-    text = mydata.replace(' ', '%20')
-    req = urllib2.Request("http://claudck193.193.axc.nl/hetweer.php?cn="+text)
-    response = urllib2.urlopen(req)
-    kaas = response.read()
-    regx = '''(.*?),(.*?),'''
-    match = re.findall(regx, kaas, re.DOTALL)
+    match = None 
+    try: 
+        print(mydata)
+        citynumb = int(mydata.split("-")[1])
+        print(citynumb)
+        response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+ str(citynumb))
+        kaas = response.read()
+        global weatherData
+        weatherData = json.loads(kaas)
+        return True
+    except:
+             
+        text = mydata.replace(' ', '%20')
+        req = urllib2.Request("http://claudck193.193.axc.nl/hetweer.php?cn="+text)
+        response = urllib2.urlopen(req)
+        kaas = response.read()
+        regx = '''(.*?),(.*?),'''
+        match = re.findall(regx, kaas, re.DOTALL)
 
     if match:
         response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
@@ -231,10 +243,10 @@ class startScreen(Screen):
             <widget source="session.CurrentService" render="Label" position="30,125" size="720,30" zPosition="1" foregroundColor="white" transparent="1" font="Regular;28" borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
             <widget name="list" position="920,110" size="975,375" scrollbarMode="showOnDemand" font="Regular;51" itemHeight="63" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list97563.png"/>\n
             <widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;24"/>\n
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflaghd.png" position="794,114" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/beflaghd.png" position="794,177" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflaghd.png" position="794,240" size="71,49" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalhd.png" position="794,303" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalhd.png" position="794,114" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflaghd.png" position="794,177" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/beflaghd.png" position="794,240" size="71,49" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflaghd.png" position="794,303" size="71,49" alphatest="on"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red34.png" position="192,1032" size="34,34" alphatest="blend"/>
             <widget name="key_red" position="242,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green34.png" position="628,1032" size="34,34" alphatest="blend"/>
@@ -253,17 +265,17 @@ class startScreen(Screen):
             <widget source="session.CurrentService" render="Label" position="85,89" size="417,20" zPosition="1" foregroundColor="white" transparent="1" font="Regular;19" borderColor="black" borderWidth="1" noWrap="1" valign="center" halign="center"><convert type="ServiceName">Name</convert></widget>
             <widget name="list" position="630,106" size="650,250" scrollbarMode="showOnDemand" font="Regular;28" itemHeight="43" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/list/list65043.png"/>\n
             <widget name="mess1" position="884,1034" size="500,30" foregroundColor="green" font="Console;18"/>\n
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflagsd.png" position="550,105" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/beflagsd.png" position="550,148" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflagsd.png" position="550,191" size="47,32" alphatest="on"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalsd.png" position="550,234" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/lokaalsd.png" position="550,105" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/nlflagsd.png" position="550,148" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/beflagsd.png" position="550,191" size="47,32" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/euflagsd.png" position="550,234" size="47,32" alphatest="on"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/red26.png" position="145,643" size="26,26" alphatest="on"/>
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/green26.png" position="420,643" size="26,26" alphatest="on"/>
             <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
-    titleNames = ["Nederland", "Belgie", "Europa", "WeerInfo"]
+    titleNames = ["WeerInfo", "Nederland", "Belgie", "Europa"]
     def __init__(self, session):
         self.session = session
         self["mess1"] = ScrollLabel("")
@@ -472,7 +484,7 @@ class weeroverview(Screen):
         self.session = session
         Screen.__init__(self, session)
         self.skin = skin
-        self["city1"] = Label(lockaaleStad)
+        self["city1"] = Label(lockaaleStad.split("-")[0])
         for day in range(0, 7):
             self["bigWeerIcon1"+str(day)] = Pixmap()
             self["bigWeerIcon1"+str(day)].hide()
@@ -1077,6 +1089,8 @@ class localcityscreen(Screen):
             <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow34.png" position="1064,1032" size="34,34" alphatest="blend"/>
             <widget name="key_yellow" position="1114,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MenuLux/Images/buttons/blue34.png" position="1500,1032" size="34,34" alphatest="on"/>
+            <widget name="key_blue" position="1550,1030" size="370,38" zPosition="3" transparent="1" font="Regular;36" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     else:
@@ -1101,16 +1115,19 @@ class localcityscreen(Screen):
             <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow26.png" position="695,643" size="26,26" alphatest="on"/>
             <widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MenuLux/Images/buttons/blue26.png" position="970,643" size="26,26" alphatest="on"/>
+            <widget name="key_blue" position="1010,643" size="220,28" zPosition="3" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
     def __init__(self, session):
         self.session = session
         self.skin = localcityscreen.skin
-        self["favor"] = Label("Favoriete Locaties")
-        self["plaatsn"] = Label("Locatie:")
+        self["favor"] = Label("Favorite Locations")
+        self["plaatsn"] = Label("Location:")
         self["key_red"] = Label("Exit")
-        self["key_green"] = Label("Locatie +")
-        self["key_yellow"] = Label("Locatie -")
+        self["key_green"] = Label("Location +")
+        self["key_yellow"] = Label("Location -")
+        self["key_blue"] = Label("Help")
         Screen.__init__(self, session)
         list = []
         global SavedLokaleWeer
@@ -1118,13 +1135,16 @@ class localcityscreen(Screen):
             list.append((str(x)))
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
-        self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit, "yellow": self.removeLoc, "green": self.addLoc}, -1)
+        self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit, "yellow": self.removeLoc, "green": self.addLoc, "blue": self.addcityinf}, -1)
 
     def exit(self):
         self.close()
 
     def addLoc(self):
-        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=("Enter plaatsnaam e.g. london or london/gb or london_us"), text="")
+        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=("Enter cityname e.g. london or london/gb or london_us"), text="")
+
+    def addcityinf(self):
+        self.session.open(MessageBox, "Manual adding Citynumbers:\nGo to www.buienradar...\nSearch city and find citycode in internetlink.\n\nGo back to \"Location+\" and add cityname-number e.g.\n\"Dusseldorf-2934246\" or \"Dusseld-2934246\"\nDon't forget the \"-\" sign.", MessageBox.TYPE_INFO)
 
     def searchCity(self, searchterm = None):
         if searchterm is not None:
@@ -1186,6 +1206,6 @@ def main(session, **kwargs):
 def Plugins(path, **kwargs):
     global plugin_path
     plugin_path = path
-    return PluginDescriptor(name="HetWeer", description="BuienRadar & WeerInfo, versie " + versienummer,
+    return PluginDescriptor(name="HetWeer", description="BuienRadar & WeerInfo" + versienummer,
                             icon="Images/weerinfo.png",
                             where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=main)
