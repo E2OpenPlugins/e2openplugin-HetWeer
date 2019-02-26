@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer4.6
+#HetWeer4.7r01
 import re
 import time
 import json
@@ -40,13 +40,13 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 4.6
+#WeerInfoCurVer = 4.7r01
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
     text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace('&#214;', '\xc3\x96').replace('&#220;', '\xc3\x9c').replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc')
     text = text.replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'").replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
-    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', '째').replace('&ordm;', '째').replace('&euml;', 'e').replace('<em>', '').replace('</em>', '').replace('&aacute;', 'a').replace('&oacute;', 'o')
+    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', '�').replace('&ordm;', '�').replace('&euml;', 'e').replace('<em>', '').replace('</em>', '').replace('&aacute;', 'a').replace('&oacute;', 'o')
     return text
 
 def icontotext(icon):
@@ -366,9 +366,13 @@ class weeroverview(Screen):
                 windkracht = "na"
                 losticon = "na"
                 dataUrr = "na"
+                sunrise = "na"
+                sunset = "na"
                 try:
                     windkracht = dataDagen[0]["hours"][0]["winddirection"]
                     dataUrr = dataDagen[0]["hours"][0]["iconcode"]
+                    sunrise = (str(dataDagen[0]["sunrise"]).split("T")[1])[:-3]
+                    sunset = (str(dataDagen[0]["sunset"]).split("T")[1])[:-3]
                 except:
                     0+0
                 if happydays.get("iconcode"):
@@ -380,8 +384,9 @@ class weeroverview(Screen):
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,473" size="135,40" zPosition="3" valign="center" halign="left" font="Regular;34" transparent="1" borderColor="black" borderWidth="1"/>
                     <widget name="midtemp2""" + str(day) + """" position=\"""" + str(138 + (248 * day)) + """,600" size="90,54" zPosition="3" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
                     <widget name="minitemp2""" + str(day) + """" position=\"""" + str(240 + (248 * day)) + """,616" size="90,36" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
-                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1" borderColor="black" borderWidth="2"/>"""
-
+                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(110 + (248 * day)) + """,660" size="214,70" zPosition="3" valign="center" halign="center" font="Regular;24" transparent="1" borderColor="black" borderWidth="2"/>
+                    <widget name="sunriselab" position="625,374" size="200,40" zPosition="3" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/sunupdownhd.png" zPosition="3" position="635,310" size="120,60" alphatest="blend"/>"""
                 dataUrr = dataDagen[day]["hours"]
                 if day == 0:
                     for data in dataUrr:
@@ -415,9 +420,9 @@ class weeroverview(Screen):
                     <widget name="yellowdot" position="286,481" size="36,36" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="3" alphatest="on"/>
                     <widget name="city1" position="608,56" size="705,64" zPosition="3" valign="center" halign="center" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
                     <widget name="bigtemp1" position="897,134" size="353,118" zPosition="3" valign="center" halign="left" font="Regular;108" transparent="1" borderColor="black" borderWidth="1"/>
-                    <widget name="bigweathertype1" position="850,312" size="480,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
-                    <widget name="GevoelsTemp1" position="901,256" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
-                    <widget name="winddir1" position="850,366" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>""" + peocpichd + dayinfoblok + """
+                    <widget name="bigweathertype1" position="900,310" size="480,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="GevoelsTemp1" position="900,262" size="354,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="winddir1" position="900,358" size="345,40" zPosition="3" valign="center" halign="left" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>""" + peocpichd + dayinfoblok + """
                 </screen>"""
         else:
             for day in range(0, 7):
@@ -427,9 +432,13 @@ class weeroverview(Screen):
                 windkracht = "na"
                 losticon = "na"
                 dataUrr = "na"
+                sunrise = "na"
+                sunset = "na"
                 try:
                     windkracht = dataDagen[0]["hours"][0]["winddirection"]
                     dataUrr = dataDagen[0]["hours"][0]["iconcode"]
+                    sunrise = (str(dataDagen[0]["sunrise"]).split("T")[1])[:-3]
+                    sunset = (str(dataDagen[0]["sunset"]).split("T")[1])[:-3]
                 except:
                     0+0
                 if happydays.get("iconcode"):
@@ -441,7 +450,9 @@ class weeroverview(Screen):
                     <widget name="smallday2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,315" size="90,24" zPosition="3" valign="center" halign="left" font="Regular;22" borderColor="black" borderWidth="1" transparent="1"/>
                     <widget name="midtemp2""" + str(day) + """" position=\"""" + str(92 + (165 * day)) + """,398" size="60,36" zPosition="3" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
                     <widget name="minitemp2""" + str(day) + """" position=\"""" + str(160 + (165 * day)) + """,411" size="32,22" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(77 + (165 * day)) + """,438" size="138,44" zPosition="3" valign="center" halign="center" font="Regular;16" borderColor="black" borderWidth="1" transparent="1"/>"""
+                    <widget name="weertype2""" + str(day) + """" position=\"""" + str(77 + (165 * day)) + """,438" size="138,44" zPosition="3" valign="center" halign="center" font="Regular;16" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="sunriselab" position="416,248" size="200,40" zPosition="3" font="Regular;18" transparent="1" borderColor="black" borderWidth="1"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/sunupdownsd.png" zPosition="3" position="426,206" size="120,60" alphatest="blend"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
                 if day == 0:
@@ -476,9 +487,9 @@ class weeroverview(Screen):
                     <widget name="yellowdot" position="184,314" size="24,24" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yeldot.png" zPosition="6" alphatest="on"/>
                     <widget name="city1" position="405,37" size="470,42" zPosition="3" valign="center" halign="center" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
                     <widget name="bigtemp1" position="597,88" size="235,76" zPosition="3" valign="center" halign="left" font="Regular;72" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="bigweathertype1" position="570,208" size="320,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="GevoelsTemp1" position="599,165" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="winddir1" position="570,240" size="230,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>""" + peocpicsd + dayinfoblok + """
+                    <widget name="bigweathertype1" position="600,208" size="320,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="GevoelsTemp1" position="600,176" size="236,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="winddir1" position="600,240" size="230,30" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>""" + peocpicsd + dayinfoblok + """
                 </screen>"""
 
         self.session = session
@@ -497,7 +508,7 @@ class weeroverview(Screen):
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
             self["dayhour3"+str(uur)] = Label("00h")
-            self["daytemp3"+str(uur)] = Label("--째C")
+            self["daytemp3"+str(uur)] = Label("--캜")
             self["daypercent3"+str(uur)] = Label("--%")
             self["dayspeed3"+str(uur)] = Label("--km/u")
             for day in range(0, 7):
@@ -522,17 +533,17 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", localtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", localtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"째")
+                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"�")
             elif dagen.get("mintemperature"):
-                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"째")
+                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"�")
             else:
-                info2 += "--.-째C"
+                info2 += "--.-캜"
             if dagen.get("maxtemp"):
-                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"째")
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"�")
             elif dagen.get("maxtemperature"):
-                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"째")
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"�")
             else:
-                info3 += "--.-째C"
+                info3 += "--.-캜"
             if dagen.get("beaufort"):
                 info4 += str(dagen["beaufort"])
             else:
@@ -544,6 +555,7 @@ class weeroverview(Screen):
             self["smallday2"+str(day-1)] = Label(info1)
             self["midtemp2"+str(day-1)] = Label(info3)
             self["minitemp2"+str(day-1)] = Label(info2)
+            self["sunriselab"] = Label(sunrise+" - "+sunset)
             self["weertype2"+str(day-1)] = Label(icontotext(iconclass))
             self["myActionMap"] = ActionMap(["SetupActions"], {"left": self.left, "right": self.right, "cancel": self.cancel}, -1)
             self.updateFrameselect()
@@ -576,11 +588,11 @@ class weeroverview(Screen):
         dataPerUur = weatherData["days"][0]["hours"]
         self["bigtemp1"].setText("NA")
         self["bigweathertype1"].setText("na")
-        self["GevoelsTemp1"].setText("GevoelsTemp NA째C")
+        self["GevoelsTemp1"].setText("GevoelsTemp NA캜")
         self["winddir1"].setText("Windrichting NA")
         try:
             self["bigtemp1"].setText('{:>4}'.format(str("%.1f" % dataPerUur[(0)]["temperature"])))
-            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"째C")
+            self["GevoelsTemp1"].setText("GevoelsTemp "+str("%.0f" % dataPerUur[(0)]["feeltemperature"])+"캜")
             self["winddir1"].setText("Windrichting "+str(dataPerUur[(0)]["winddirection"]))		
             self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
         except:
@@ -1089,7 +1101,7 @@ class localcityscreen(Screen):
             <widget name="key_green" position="678,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow34.png" position="1064,1032" size="34,34" alphatest="blend"/>
             <widget name="key_yellow" position="1114,1030" size="370,38" zPosition="1" transparent="1" font="Regular;34" borderColor="black" borderWidth="1" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MenuLux/Images/buttons/blue34.png" position="1500,1032" size="34,34" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/blue34.png" position="1500,1032" size="34,34" alphatest="on"/>
             <widget name="key_blue" position="1550,1030" size="370,38" zPosition="3" transparent="1" font="Regular;36" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
@@ -1115,7 +1127,7 @@ class localcityscreen(Screen):
             <widget name="key_green" position="460,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/yellow26.png" position="695,643" size="26,26" alphatest="on"/>
             <widget name="key_yellow" position="735,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
-            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/MenuLux/Images/buttons/blue26.png" position="970,643" size="26,26" alphatest="on"/>
+            <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/buttons/blue26.png" position="970,643" size="26,26" alphatest="on"/>
             <widget name="key_blue" position="1010,643" size="220,28" zPosition="3" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
 
