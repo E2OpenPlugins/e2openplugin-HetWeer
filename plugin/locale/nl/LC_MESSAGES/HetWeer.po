@@ -1,0 +1,165 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hetweer\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-23 16:09+0200\n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
+
+msgid "Sunny / Clear"
+msgstr "Zonnig / Helder"
+
+msgid "Clear night"
+msgstr "Heldere nacht"
+
+msgid "Sunny few clouds"
+msgstr "Zon met (lichte) bewolking"
+
+msgid "Light cloudy"
+msgstr "Lichte bewolking"
+
+msgid "Heavy clouds"
+msgstr "Zwaar bewolkt"
+
+msgid "Changeable and chance of mist"
+msgstr "Wisselvallig met kans op nevel"
+
+msgid "Sunny and change of showers"
+msgstr "Zonnig met kans op buien"
+
+msgid "Cloudy and change of showers"
+msgstr "Bewolkt met kans op buien"
+
+msgid "Sunny and chance of thundershowers"
+msgstr "Zon met kans op buien of onweer"
+
+msgid "Showers and chance of thunder"
+msgstr "Buien en kans op onweer"
+
+msgid "Mostly sunny"
+msgstr "Overwegend   zonnig"
+
+msgid "Mostly clear"
+msgstr "Overwegend   helder"
+
+msgid "Heavy clouds showers possible"
+msgstr "Zwaar bewolkt  buien mogelijk"
+
+msgid "Sunny and chance of mist"
+msgstr "Zon met kans op nevel"
+
+msgid "Clear and chance of mist"
+msgstr "Helder met kans nevel"
+
+msgid "Heavy clouds  heavy showers"
+msgstr "Zwaar bewolkt  hevige buien"
+
+msgid "Cloudy"
+msgstr "Bewolkt"
+
+msgid "Heavy clouds  thundershowers"
+msgstr "Zwaar bewolkt  onweersbuien"
+
+msgid "Heavy clouds and heavy snowfall"
+msgstr "Zwaar bewolkt en zware sneeuwval"
+
+msgid "Changeable cloudy light snowfall"
+msgstr "Wisselend bewolkt lichte sneeuwval"
+
+msgid "Heavy clouds light snowfall"
+msgstr "Wisselend bewolkt lichte sneeuwval"
+
+msgid "Heavy clouds winter rainfall"
+msgstr "Zwaarbewolkt winterse neerslag"
+
+msgid "North"
+msgstr "Noord"
+
+msgid "NorthEast"
+msgstr "NoordOost"
+
+msgid "Oost"
+msgstr "East"
+
+msgid "ZuidOost"
+msgstr "SouthEast"
+
+msgid "Zuid"
+msgstr "South"
+
+msgid "SouthWest"
+msgstr "ZuidWest"
+
+msgid "West"
+msgstr "West"
+
+msgid "NorthWest"
+msgstr "NoordWest"
+
+msgid "Feels Like "
+msgstr "GevoelsTemp "
+
+msgid "Wind direction "
+msgstr "Windrichting "
+
+msgid "Local Weather"
+msgstr "WeerInfo"
+
+msgid "The Netherlands"
+msgstr "Nederland"
+
+msgid "Belgium"
+msgstr "Belgie"
+
+msgid "Europe"
+msgstr "Europa"
+
+msgid "Weather forecast-nl"
+msgstr "Weerbericht"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "Rainfall radar"
+msgstr "Buienradar"
+
+msgid "Drizzle"
+msgstr "Motregenradar"
+
+msgid "Thunder radar"
+msgstr "Onweerradar"
+
+msgid "Clouds radar"
+msgstr "Wolkenradar"
+
+msgid "Mist radar"
+msgstr "Mistradar"
+
+msgid "Hail radar"
+msgstr "Hagelradar"
+
+msgid "Snow radar"
+msgstr "Sneeuwradar"
+
+msgid "Sun radar"
+msgstr "Zonradar"
+
+msgid "Sunpower-UV"
+msgstr "Zonkracht-UV"
+
+msgid "Satellite"
+msgstr "Satelliet"
+
+msgid "TheWeather"
+msgstr "HetWeer"
+
+msgid "RainfallRadar & WeatherInfo"
+msgstr "BuienRadar & WeerInfo"
