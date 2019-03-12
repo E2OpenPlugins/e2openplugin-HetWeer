@@ -163,3 +163,41 @@ msgstr "HetWeer"
 
 msgid "RainfallRadar & WeatherInfo"
 msgstr "BuienRadar & WeerInfo"
+
+msgid "Favorite Locations"
+msgstr "Favoriete Locaties"
+
+msgid "Location:"
+msgstr "Locatie:"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Location +"
+msgstr "Locatie +"
+
+msgid "Location -"
+msgstr "Locatie -"
+
+msgid "Help"
+msgstr "Help"
+
+msgid ""
+"Manual adding Citynumbers:\n"
+"Go to www.buienradar...\n"
+"Search city and find citycode in internetlink.\n"
+"\n"
+"Go back to \"Location+\" and add cityname-number e.g.\n"
+"\"Dusseldorf-2934246\" or \"Dusseld-2934246\"\n"
+"Don't forget the \"-\" sign."
+msgstr ""
+"Handmatig toevoegen van Steden:\n"
+"Ga naar www.buienradar...\n"
+"Zoek stad en vind stadscode in de internetlink.\n"
+"\n"
+"Ga terug naar \"Locatie+\" en voeg de stadsnaam-number b.v.\n"
+"\"Dusseldorf-2934246\" of \"Dusseld-2934246\" toe.\n"
+"Vergeet het \"-\" teken niet."
+
+msgid "Enter cityname e.g. london or london/gb or london_us"
+msgstr "Vul stad in b.v. london of london/gb of london_us"
