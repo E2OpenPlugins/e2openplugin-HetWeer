@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5.0
+#HetWeer5r04
 import os
 import re 
 import time
@@ -58,7 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.0
+#WeerInfoCurVer = 5.r04
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -297,8 +297,8 @@ class startScreen(Screen):
     def __init__(self, session):
         self.session = session
         self["mess1"] = ScrollLabel("")
-        self["key_red"] = Label("Exit")
-        self["key_green"] = Label("Ok")
+        self["key_red"] = Label(_("Exit"))
+        self["key_green"] = Label("OK")
         #self["key_yellow"] = Label("Update Check")
         self.skin = startScreen.skin
         Screen.__init__(self, session)
@@ -713,12 +713,12 @@ class weatherMenuSub(Screen):
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
           
-    listNamesnl = [_("Temperature"), _("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Mist radar"), _("Mist radar"), _("Snow radar"), _("Sun radar"), _("Zonpower-UV"), _("Satellite"), _("Weather forecast-nl")]
-    listNamesbe = [_("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Hail radar"), _("Snow radar"), _("Sun radar"), _("Zonpower-UV"), _("Satellite"), _("Weather forecast-nl")]
+    listNamesnl = [_("Temperature"), _("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Mist radar"), _("Snow radar"), _("Sun radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
+    listNamesbe = [_("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Hail radar"), _("Snow radar"), _("Sun radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
     listNameseu = [_("Rainfall radar"), _("Thunder radar"), _("Sunpower-UV"), _("Satellite")]
     def __init__(self, session):
         self.session = session
-        self["key_red"] = Label("Exit")
+        self["key_red"] = Label(_("Exit"))
         self.skin = weatherMenuSub.skin
         Screen.__init__(self, session)
         list = []
@@ -920,7 +920,7 @@ class weathertalk(Screen):
 
         self["actions"] = ActionMap(["WizardActions"], {"left": self.left, "right": self.right, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit}, -1)
-        self["key_red"] = Label("Exit")
+        self["key_red"] = Label(_("Exit"))
 
     def left(self):
         if self.indexpage<=0:
@@ -1152,12 +1152,12 @@ class localcityscreen(Screen):
     def __init__(self, session):
         self.session = session
         self.skin = localcityscreen.skin
-        self["favor"] = Label("Favorite Locations")
-        self["plaatsn"] = Label("Location:")
-        self["key_red"] = Label("Exit")
-        self["key_green"] = Label("Location +")
-        self["key_yellow"] = Label("Location -")
-        self["key_blue"] = Label("Help")
+        self["favor"] = Label(_("Favorite Locations"))
+        self["plaatsn"] = Label(_("Location:"))
+        self["key_red"] = Label(_("Exit"))
+        self["key_green"] = Label(_("Location +"))
+        self["key_yellow"] = Label(_("Location -"))
+        self["key_blue"] = Label(_("Help"))
         Screen.__init__(self, session)
         list = []
         global SavedLokaleWeer
@@ -1171,10 +1171,10 @@ class localcityscreen(Screen):
         self.close()
 
     def addLoc(self):
-        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=("Enter cityname e.g. london or london/gb or london_us"), text="")
+        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=(_("Enter cityname e.g. london or london/gb or london_us")), text="")
 
     def addcityinf(self):
-        self.session.open(MessageBox, "Manual adding Citynumbers:\nGo to www.buienradar...\nSearch city and find citycode in internetlink.\n\nGo back to \"Location+\" and add cityname-number e.g.\n\"Dusseldorf-2934246\" or \"Dusseld-2934246\"\nDon't forget the \"-\" sign.", MessageBox.TYPE_INFO)
+        self.session.open(MessageBox, _("Manual adding Citynumbers:\nGo to www.buienradar...\nSearch city and find citycode in internetlink.\n\nGo back to \"Location+\" and add cityname-number e.g.\n\"Dusseldorf-2934246\" or \"Dusseld-2934246\"\nDon't forget the \"-\" sign."), MessageBox.TYPE_INFO)
 
     def searchCity(self, searchterm = None):
         if searchterm is not None:
