@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5r04
+#HetWeer5r05
 import os
 import re 
 import time
@@ -58,7 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.r04
+#WeerInfoCurVer = 5.r05
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -715,7 +715,7 @@ class weatherMenuSub(Screen):
           
     listNamesnl = [_("Temperature"), _("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Mist radar"), _("Snow radar"), _("Sun radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
     listNamesbe = [_("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Hail radar"), _("Snow radar"), _("Sun radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
-    listNameseu = [_("Rainfall radar"), _("Thunder radar"), _("Sunpower-UV"), _("Satellite")]
+    listNameseu = [_("Rainfall radar"), _("Thunder radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
     def __init__(self, session):
         self.session = session
         self["key_red"] = Label(_("Exit"))
@@ -774,7 +774,7 @@ class weatherMenuSub(Screen):
         typename = type
         legend = True 
         if state[0] == _("Belgium") and newView:
-            if type == _("Weather forecast"):
+            if type == _("Weather forecast-nl"):
                 wchat = weatherchat("be/Belgie/weerbericht")
                 self.session.open(weathertalk)
             elif type == _("Rainfall radar"):
@@ -798,11 +798,11 @@ class weatherMenuSub(Screen):
             elif type == _("Sunpower-UV"):
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
-            if not type == _("Weather forecast"):
+            if not type == _("Weather forecast-nl"):
                 openScreenRadar()
 
         elif state[0] == _("The Netherlands") and newView:
-            if type == _("Weather forecast"):
+            if type == _("Weather forecast-nl"):
                 wchat = weatherchat("nl/Nederland/weerbericht")
                 self.session.open(weathertalk)
             elif type == _("Temperature"):
@@ -832,11 +832,11 @@ class weatherMenuSub(Screen):
             elif type == _("Sunpower-UV"):
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
-            if not type == _("Weather forecast"):
+            if not type == _("Weather forecast-nl"):
                 openScreenRadar()
 
         elif state[0] == _("Europe") and newView:
-            if type == _("Weather forecast"):
+            if type == _("Weather forecast-nl"):
                 wchat = weatherchat("nl/wereldwijd/europa")
                 self.session.open(weathertalk)
             elif type == _("Rainfall radar"):
@@ -849,7 +849,7 @@ class weatherMenuSub(Screen):
             elif type == _("Sunpower-UV"):
                 urllib.urlretrieve('http://api.buienradar.nl/image/1.0/sunpowereu/?ext=png&l=2&hist=0&forc=30&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 legend = False
-            if not type == _("Weather forecast"):
+            if not type == _("Weather forecast-nl"):
                 openScreenRadar()
         
         if not newView:
