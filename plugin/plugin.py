@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5.4r01
+#HetWeer5.5
 import os
 import re 
 import time
@@ -58,7 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.4r01
+#WeerInfoCurVer = 5.5
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -406,29 +406,32 @@ class weeroverview(Screen):
                     <widget name="sunriselab" position="625,374" size="200,40" zPosition="3" font="Regular;28" transparent="1" borderColor="black" borderWidth="1"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/sunupdownhd.png" zPosition="3" position="635,310" size="120,60" alphatest="blend"/>"""
                 dataUrr = dataDagen[day]["hours"]
+                #create hourly weatherIcon
                 if day == 0:
                     for data in dataUrr:
                         blocks = len(dataUrr)
                         if len(dataUrr)<8:
                             blocks = 8
                         if data.get("hour") and ((data["hour"]-1)%math.ceil(blocks/8)) == 0:
-                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,771" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
                             print "maak : "+ str(day)+"|"+str(uurcount)
                             uurcount += 1
                 else:
                     for data in dataUrr:
                         if data.get("hour") and (data["hour"]-1)%3 == 0:
-                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,779" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
+                            dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,771" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
                             print "maak : "+ str(day)+"|"+str(uurcount)
                             uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
                     <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(195 + (216 * uur)) + """,779" size="90,36" zPosition="3" valign="center" halign="right" font="Regular;33" transparent="1" borderColor="black" borderWidth="1"/>
-                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,870" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
-                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,945" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(120 + (216 * uur)) + """,846" size="180,54" zPosition="3" valign="center" halign="left" font="Regular;48" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,951" size="120,30" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" borderColor="black" borderWidth="1"/>
                     <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,986" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" borderColor="black" borderWidth="1"/>
+                    <widget name="sunpercent3""" + str(uur) + """" position=\"""" + str(168 + (216 * uur)) + """,916" size="123,32" zPosition="3" valign="center" halign="left" font="Regular;27" transparent="1" borderColor="black" borderWidth="1"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/sunpchd.png" position=\"""" + str(114 + (216 * uur)) + """,912" size="36,36" zPosition="3" alphatest="on"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/turbinehd.png" position=\"""" + str(119 + (216 * uur)) + """,983" size="38,38" zPosition="3" alphatest="on"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/druphd.png" position=\"""" + str(120 + (216 * uur)) + """,945" size="15,23" zPosition="3" alphatest="on"/>"""
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/druphd.png" position=\"""" + str(124 + (216 * uur)) + """,954" size="15,23" zPosition="3" alphatest="on"/>"""
 
             skin = """
                 <screen position="fill" flags="wfNoBorder">
@@ -473,6 +476,7 @@ class weeroverview(Screen):
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/sunupdownsd.png" zPosition="3" position="426,206" size="120,60" alphatest="blend"/>"""
 
                 dataUrr = dataDagen[day]["hours"]
+                #create hourly weatherIcon
                 if day == 0:
                     for data in dataUrr:
                         blocks = len(dataUrr)
@@ -491,11 +495,13 @@ class weeroverview(Screen):
             for uur in range(0, 8):
                 dayinfoblok += """
                     <widget name="dayhour3""" + str(uur) + """" position=\"""" + str(130 + (144 * uur)) + """,519" size="60,24" zPosition="3" valign="center" halign="right" font="Regular;22" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(80 + (144 * uur)) + """,580" size="120,36" zPosition="3" valign="center" halign="left" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,630" size="80,20" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
-                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,657" size="82,21" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/turbine.png" position=\"""" + str(79 + (144 * uur)) + """,655" size="25,25" zPosition="6" alphatest="on"/>
-                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/drup.png" position=\"""" + str(80 + (144 * uur)) + """,630" size="10,15" zPosition="6" alphatest="on"/>"""
+                    <widget name="daytemp3""" + str(uur) + """" position=\"""" + str(80 + (144 * uur)) + """,569" size="120,36" zPosition="3" valign="center" halign="left" font="Regular;32" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="daypercent3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,637" size="80,20" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="dayspeed3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,661" size="82,21" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <widget name="sunpercent3""" + str(uur) + """" position=\"""" + str(112 + (144 * uur)) + """,613" size="82,21" zPosition="3" valign="center" halign="left" font="Regular;18" borderColor="black" borderWidth="1" transparent="1"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/sunpcsd.png" position=\"""" + str(76 + (144 * uur)) + """,611" size="24,24" zPosition="3" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/turbine.png" position=\"""" + str(79 + (144 * uur)) + """,659" size="25,25" zPosition="6" alphatest="on"/>
+                    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/drup.png" position=\"""" + str(83 + (144 * uur)) + """,640" size="10,15" zPosition="6" alphatest="on"/>"""
 
             skin = """
                 <screen position="fill" flags="wfNoBorder">
@@ -529,6 +535,7 @@ class weeroverview(Screen):
             self["daytemp3"+str(uur)] = Label("--°C")
             self["daypercent3"+str(uur)] = Label("--%")
             self["dayspeed3"+str(uur)] = Label(_("--Km/h"))
+            self["sunpercent3"+str(uur)] = Label("--%")
             for day in range(0, 7):
                 self["dayIcon"+str(day)+str(uur)] = Pixmap()
                 self["dayIcon"+str(day)+str(uur)].hide()
@@ -649,11 +656,15 @@ class weeroverview(Screen):
                     self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
                     self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipation"])+"%")
                     self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+_("Km/h"))
+                    self["sunpercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["sunshine"])+"%")
+                
+                
                 else:
                     self["dayhour3"+str(perUurUpdate)].setText("")
                     self["daytemp3"+str(perUurUpdate)].setText("")
                     self["daypercent3"+str(perUurUpdate)].setText("")
                     self["dayspeed3"+str(perUurUpdate)].setText("")
+                    self["sunpercent3"+str(perUurUpdate)].setText("")
             except:
                 try:
                     if (perUurUpdate*jumppoint) < len(dataPerUur):
@@ -661,11 +672,13 @@ class weeroverview(Screen):
                         self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
                         self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipitation"])+"%")
                         self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+_("Km/h"))
+                        self["sunpercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["sunshine"])+"%")
                     else:
                         self["dayhour3"+str(perUurUpdate)].setText("")
                         self["daytemp3"+str(perUurUpdate)].setText("")
                         self["daypercent3"+str(perUurUpdate)].setText("")
                         self["dayspeed3"+str(perUurUpdate)].setText("")    
+                        self["sunpercent3"+str(perUurUpdate)].setText("")
                 except:
                 
                     None
