@@ -1,4 +1,3 @@
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: hetweer\n"
@@ -14,56 +13,68 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: nl\n"
 
-msgid "Sunny / Clear"
-msgstr "Zonnig / Helder"
+msgid "--Km/h"
+msgstr "--Km/u"
 
-msgid "Clear night"
-msgstr "Heldere nacht"
-
-msgid "Sunny few clouds"
-msgstr "Zon met (lichte) bewolking"
-
-msgid "Light cloudy"
-msgstr "Lichte bewolking"
-
-msgid "Heavy clouds"
-msgstr "Zwaar bewolkt"
+msgid "Belgium"
+msgstr "Belgie"
 
 msgid "Changeable and chance of mist"
 msgstr "Wisselvallig met kans op nevel"
 
-msgid "Sunny and change of showers"
-msgstr "Zonnig met kans op buien"
-
-msgid "Cloudy and change of showers"
-msgstr "Bewolkt met kans op buien"
-
-msgid "Sunny and chance of thundershowers"
-msgstr "Zon met kans op buien of onweer"
-
-msgid "Showers and chance of thunder"
-msgstr "Buien en kans op onweer"
-
-msgid "Mostly sunny"
-msgstr "Overwegend   zonnig"
-
-msgid "Mostly clear"
-msgstr "Overwegend   helder"
-
-msgid "Heavy clouds showers possible"
-msgstr "Zwaar bewolkt  buien mogelijk"
-
-msgid "Sunny and chance of mist"
-msgstr "Zon met kans op nevel"
+msgid "Changeable cloudy light snowfall"
+msgstr "Wisselend bewolkt lichte sneeuwval"
 
 msgid "Clear and chance of mist"
 msgstr "Helder met kans nevel"
 
-msgid "Heavy clouds  heavy showers"
-msgstr "Zwaar bewolkt  hevige buien"
+msgid "Clear night"
+msgstr "Heldere nacht"
+
+msgid "Clouds radar"
+msgstr "Wolkenradar"
 
 msgid "Cloudy"
 msgstr "Bewolkt"
+
+msgid "Cloudy and chance of showers"
+msgstr "Bewolkt met kans op buien"
+
+msgid ""
+"Download error: Check spelling or ask to add the CityName to the database."
+msgstr ""
+"Download fout: Controleer spelling of vraag om de plaatsnaam toe te voegen "
+"aan de database."
+
+msgid "Drizzle"
+msgstr "Motregenradar"
+
+msgid "E"
+msgstr "O"
+
+msgid "Enter cityname e.g. london or london/gb or london_us"
+msgstr "Vul stad in b.v. london of london/gb of london_us"
+
+msgid "Europe"
+msgstr "Europa"
+
+msgid "Exit"
+msgstr "Exit"
+
+msgid "Favorite Locations"
+msgstr "Favoriete Locaties"
+
+msgid "Feels Like: "
+msgstr "GevoelsTemp: "
+
+msgid "Hail radar"
+msgstr "Hagelradar"
+
+msgid "Heavy clouds"
+msgstr "Zwaar bewolkt"
+
+msgid "Heavy clouds  heavy showers"
+msgstr "Zwaar bewolkt  hevige buien"
 
 msgid "Heavy clouds  thundershowers"
 msgstr "Zwaar bewolkt  onweersbuien"
@@ -71,107 +82,26 @@ msgstr "Zwaar bewolkt  onweersbuien"
 msgid "Heavy clouds and heavy snowfall"
 msgstr "Zwaar bewolkt en zware sneeuwval"
 
-msgid "Changeable cloudy light snowfall"
-msgstr "Wisselend bewolkt lichte sneeuwval"
-
 msgid "Heavy clouds light snowfall"
 msgstr "Wisselend bewolkt lichte sneeuwval"
+
+msgid "Heavy clouds showers possible"
+msgstr "Zwaar bewolkt  buien mogelijk"
 
 msgid "Heavy clouds winter rainfall"
 msgstr "Zwaarbewolkt winterse neerslag"
 
-msgid "North"
-msgstr "Noord"
+msgid "Help"
+msgstr "Help"
 
-msgid "NorthEast"
-msgstr "NoordOost"
+msgid "Km/h"
+msgstr "Km/u"
 
-msgid "Oost"
-msgstr "East"
-
-msgid "ZuidOost"
-msgstr "SouthEast"
-
-msgid "Zuid"
-msgstr "South"
-
-msgid "SouthWest"
-msgstr "ZuidWest"
-
-msgid "West"
-msgstr "West"
-
-msgid "NorthWest"
-msgstr "NoordWest"
-
-msgid "Feels Like "
-msgstr "GevoelsTemp "
-
-msgid "Wind direction "
-msgstr "Windrichting "
+msgid "Light cloudy"
+msgstr "Lichte bewolking"
 
 msgid "Local Weather"
 msgstr "WeerInfo"
-
-msgid "The Netherlands"
-msgstr "Nederland"
-
-msgid "Belgium"
-msgstr "Belgie"
-
-msgid "Europe"
-msgstr "Europa"
-
-msgid "Weather forecast-nl"
-msgstr "Weerbericht"
-
-msgid "Temperature"
-msgstr "Temperatuur"
-
-msgid "Rainfall radar"
-msgstr "Buienradar"
-
-msgid "Drizzle"
-msgstr "Motregenradar"
-
-msgid "Thunder radar"
-msgstr "Onweerradar"
-
-msgid "Clouds radar"
-msgstr "Wolkenradar"
-
-msgid "Mist radar"
-msgstr "Mistradar"
-
-msgid "Hail radar"
-msgstr "Hagelradar"
-
-msgid "Snow radar"
-msgstr "Sneeuwradar"
-
-msgid "Sun radar"
-msgstr "Zonradar"
-
-msgid "Sunpower-UV"
-msgstr "Zonkracht-UV"
-
-msgid "Satellite"
-msgstr "Satelliet"
-
-msgid "TheWeather"
-msgstr "HetWeer"
-
-msgid "RainfallRadar & WeatherInfo"
-msgstr "BuienRadar & WeerInfo"
-
-msgid "Favorite Locations"
-msgstr "Favoriete Locaties"
-
-msgid "Location:"
-msgstr "Locatie:"
-
-msgid "Exit"
-msgstr "Exit"
 
 msgid "Location +"
 msgstr "Locatie +"
@@ -179,15 +109,15 @@ msgstr "Locatie +"
 msgid "Location -"
 msgstr "Locatie -"
 
-msgid "Help"
-msgstr "Help"
+msgid "Location:"
+msgstr "Locatie:"
 
 msgid ""
 "Manual adding Citynumbers:\n"
 "Go to www.buienradar...\n"
 "Search city and find citycode in internetlink.\n"
 "\n"
-"Go back to \"Location+\" and add cityname-number e.g.\n"
+"Go back to \"Location +\" and add cityname-number e.g.\n"
 "\"Dusseldorf-2934246\" or \"Dusseld-2934246\"\n"
 "Don't forget the \"-\" sign."
 msgstr ""
@@ -195,9 +125,90 @@ msgstr ""
 "Ga naar www.buienradar...\n"
 "Zoek stad en vind stadscode in de internetlink.\n"
 "\n"
-"Ga terug naar \"Locatie+\" en voeg de stadsnaam-number b.v.\n"
+"Ga terug naar \"Locatie +\" en voeg de stadsnaam-number b.v.\n"
 "\"Dusseldorf-2934246\" of \"Dusseld-2934246\" toe.\n"
 "Vergeet het \"-\" teken niet."
 
-msgid "Enter cityname e.g. london or london/gb or london_us"
-msgstr "Vul stad in b.v. london of london/gb of london_us"
+msgid "Mist radar"
+msgstr "Mistradar"
+
+msgid "Mostly clear"
+msgstr "Overwegend   helder"
+
+msgid "Mostly sunny"
+msgstr "Overwegend   zonnig"
+
+msgid "N"
+msgstr "N"
+
+msgid "NE"
+msgstr "NO"
+
+msgid "NW"
+msgstr "NW"
+
+msgid "Rainfall radar"
+msgstr "Buienradar"
+
+msgid "RainfallRadar & WeatherInfo"
+msgstr "BuienRadar & WeerInfo"
+
+msgid "S"
+msgstr "Z"
+
+msgid "SE"
+msgstr "ZO"
+
+msgid "SW"
+msgstr "ZW"
+
+msgid "Satellite"
+msgstr "Satelliet"
+
+msgid "Showers and chance of thunder"
+msgstr "Buien en kans op onweer"
+
+msgid "Snow radar"
+msgstr "Sneeuwradar"
+
+msgid "Sun radar"
+msgstr "Zonradar"
+
+msgid "Sunny / Clear"
+msgstr "Zonnig / Helder"
+
+msgid "Sunny and chance of mist"
+msgstr "Zon met kans op nevel"
+
+msgid "Sunny and chance of showers"
+msgstr "Zonnig met kans op buien"
+
+msgid "Sunny and chance of thundershowers"
+msgstr "Zon met kans op buien of onweer"
+
+msgid "Sunny few clouds"
+msgstr "Zon met (lichte) bewolking"
+
+msgid "Sunpower-UV"
+msgstr "Zonkracht-UV"
+
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgid "The Netherlands"
+msgstr "Nederland"
+
+msgid "TheWeather"
+msgstr "HetWeer"
+
+msgid "Thunder radar"
+msgstr "Onweerradar"
+
+msgid "W"
+msgstr "W"
+
+msgid "Weather forecast-nl"
+msgstr "Weerbericht"
+
+msgid "Wind direction: "
+msgstr "Windrichting: "
