@@ -53,7 +53,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             if 'Version: ' not in versie:
                 continue
             try:
-                versienummer = versie.split('+')[1]
+                versienummer = " (%s)" % versie.split('+')[1]
             except IndexError:
                 print
 
