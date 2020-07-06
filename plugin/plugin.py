@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5.7r01
+#HetWeer5.7r02
 import os
 import re 
 import time
@@ -58,13 +58,13 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.7r01
+#WeerInfoCurVer = 5.7r02
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
     text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace('&#214;', '\xc3\x96').replace('&#220;', '\xc3\x9c').replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc')
     text = text.replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'").replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
-    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', '°').replace('&ordm;', '°').replace('&euml;', 'e').replace('<em>', '').replace('</em>', '').replace('&aacute;', 'a').replace('&oacute;', 'o')
+    text = text.replace('<u>', '').replace('</u>', '').replace('<b>', '').replace('</b>', '').replace('&deg;', '\xb0').replace('&ordm;', '\xb0').replace('&euml;', 'e').replace('<em>', '').replace('</em>', '').replace('&aacute;', 'a').replace('&oacute;', 'o')
     return text
 
 def icontotext(icon):
@@ -536,7 +536,7 @@ class weeroverview(Screen):
         self["yellowdot"] = MovingPixmap()
         for uur in range(0, 8):
             self["dayhour3"+str(uur)] = Label(_("00h"))
-            self["daytemp3"+str(uur)] = Label("--°C")
+            self["daytemp3"+str(uur)] = Label("--\xb0C")
             self["sunpercent3"+str(uur)] = Label("--%")
             self["daypercent3"+str(uur)] = Label("--%")
             self["hrdayper3"+str(uur)] = Label("--%")
@@ -563,17 +563,17 @@ class weeroverview(Screen):
                 info1 += str(strftime("%A", localtime(unixtimecode))).title()[:2]
                 info1 += str(strftime(" %d", localtime(unixtimecode)))
             if dagen.get("mintemp"):
-                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"°")
+                info2 += '{:>3}'.format(str("%.0f" % dagen["mintemp"])+"\xb0")
             elif dagen.get("mintemperature"):
-                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"°")
+                info2 += '{:>3}'.format( str("%.0f" % dagen["mintemperature"])+"\xb0")
             else:
-                info2 += "--.-°C"
+                info2 += "--.-\xb0C"
             if dagen.get("maxtemp"):
-                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"°")
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemp"])+"\xb0")
             elif dagen.get("maxtemperature"):
-                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"°")
+                info3 += '{:>3}'.format(str("%.0f" % dagen["maxtemperature"])+"\xb0")
             else:
-                info3 += "--.-°C"
+                info3 += "--.-\xb0C"
             if dagen.get("beaufort"):
                 info4 += str(dagen["beaufort"])
             else:
@@ -618,11 +618,11 @@ class weeroverview(Screen):
         dataPerUur = weatherData["days"][0]["hours"]
         self["bigtemp1"].setText("NA")
         self["bigweathertype1"].setText("na")
-        self["GevoelsTemp1"].setText(_("Feels Like: ") + "NA°C")
+        self["GevoelsTemp1"].setText(_("Feels Like: ") + "NA\xb0C")
         self["winddir1"].setText(_("Wind direction: ") + "NA")
         try:
             self["bigtemp1"].setText('{:>4}'.format(str("%.1f" % dataPerUur[(0)]["temperature"])))
-            self["GevoelsTemp1"].setText(_("Feels Like: ")+str("%.1f" % dataPerUur[(0)]["feeltemperature"])+"°C")
+            self["GevoelsTemp1"].setText(_("Feels Like: ")+str("%.1f" % dataPerUur[(0)]["feeltemperature"])+"\xb0C")
             self["winddir1"].setText(_("Wind direction: ")+str(winddirtext(dataPerUur[(0)]["winddirection"])))		
             self["bigweathertype1"].setText(icontotext(str(dataPerUur[(0)]["iconcode"])))
         except:
@@ -658,7 +658,7 @@ class weeroverview(Screen):
             
                 if (perUurUpdate*jumppoint) < len(dataPerUur):
                     self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["hour"])+_("h"))
-                    self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
+                    self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"\xb0C"))
                     self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipation"])+"%")
                     self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+_("Km/h"))
                     self["sunpercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["sunshine"])+"%")
@@ -675,7 +675,7 @@ class weeroverview(Screen):
                 try:
                     if (perUurUpdate*jumppoint) < len(dataPerUur):
                         self["dayhour3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["hour"])+_("h"))
-                        self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"°C"))
+                        self["daytemp3"+str(perUurUpdate)].setText('{:>4}'.format(str("%.0f" % dataPerUur[(perUurUpdate*jumppoint)]["temperature"])+"\xb0C"))
                         self["daypercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["precipitation"])+"%")
                         self["dayspeed3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["windspeed"])+_("Km/h"))
                         self["sunpercent3"+str(perUurUpdate)].setText(str(dataPerUur[(perUurUpdate*jumppoint)]["sunshine"])+"%")
