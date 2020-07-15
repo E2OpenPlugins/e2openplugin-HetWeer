@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5.7r02
+#HetWeer5.8
 import os
 import re 
 import time
@@ -58,7 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.7r02
+#WeerInfoCurVer = 5.8
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -1186,7 +1186,7 @@ class localcityscreen(Screen):
         list = []
         global SavedLokaleWeer
         for x in SavedLokaleWeer:
-            list.append((str(x)))
+            list.append((str(x).split("-")[0]))
         self["list"] = MenuList(list)
         self["actions"] = ActionMap(["WizardActions"], {"ok": self.go, "back": self.close}, -1)
         self["ColorActions"] = HelpableActionMap(self, "ColorActions", {"red": self.exit, "yellow": self.removeLoc, "green": self.addLoc, "blue": self.addcityinf}, -1)
