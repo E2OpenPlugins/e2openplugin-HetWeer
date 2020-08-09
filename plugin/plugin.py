@@ -56,7 +56,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             try:
                 versienummer = versie.split('+')[1]
             except IndexError:
-                print
+                print()
 
 #WeerInfoCurVer = 6.0
 def transhtml(text):
@@ -390,8 +390,8 @@ class weeroverview(Screen):
             peocpic = "temphot.png"
         else:
             peocpic = "tempeven.png"
-        print "GE0-------->"+str(protemp[0])
-        print "GE1-------->"+str(protemp[1])
+        print("GE0-------->"+str(protemp[0]))
+        print("GE1-------->"+str(protemp[1]))
         peocpichd = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/windhd/%s" position="1112,143" size="90,80" zPosition="2" transparent="0" alphatest="blend"/>""" % (peocpic)
         peocpicsd = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/wind/%s" position="752,99" size="60,53" zPosition="2" transparent="0" alphatest="blend"/>""" % (peocpic)
         if sz_w > 1800:
@@ -447,13 +447,13 @@ class weeroverview(Screen):
                             blocks = 8
                         if data.get("hour") and ((data["hour"]-1)%math.ceil(blocks/8)) == 0:
                             dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,749" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
-                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            print("maak : "+ str(day)+"|"+str(uurcount))
                             uurcount += 1
                 else:
                     for data in dataUrr:
                         if data.get("hour") and (data["hour"]-1)%3 == 0:
                             dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(120 + (216 * uurcount)) + """,749" size="72,72" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/iconhd/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
-                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            print("maak : "+ str(day)+"|"+str(uurcount))
                             uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
@@ -519,13 +519,13 @@ class weeroverview(Screen):
                             blocks = 8
                         if data.get("hour") and (data["hour"]-1)%math.ceil(blocks/8) == 0:
                             dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,494" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
-                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            print("maak : "+ str(day)+"|"+str(uurcount))
                             uurcount += 1
                 else:
                     for data in dataUrr:
                         if data.get("hour") and (data["hour"]-1)%3 == 0:
                             dayinfoblok += """<widget name="dayIcon""" + str(day)+""+str(uurcount)+ """" position=\"""" + str(80 + (144 * uurcount)) + """,494" size="48,48" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/icon/"""+data["iconcode"]+""".png" zPosition="1" alphatest="on"/>"""
-                            print "maak : "+ str(day)+"|"+str(uurcount)
+                            print("maak : "+ str(day)+"|"+str(uurcount))
                             uurcount += 1
             for uur in range(0, 8):
                 dayinfoblok += """
@@ -1104,7 +1104,7 @@ class weatherMenuSub(Screen):
                     turl = time.strftime("20%y%m%d%H%M", time.localtime(tt))
                     dir = "/tmp/HetWeer/%02d.png" % (aantalfotos - (x + 1))
                     tt += tijdstap * 60
-                    print picturedownloadurl+ turl
+                    print(picturedownloadurl+ turl)
                     urllib.urlretrieve(picturedownloadurl + turl, dir)
 
                 if os.path.exists('/tmp/HetWeer/00.png'):
@@ -1113,7 +1113,7 @@ class weatherMenuSub(Screen):
                     except:
                         return
                 else:
-                    print '00.png doenst exists, go back!'
+                    print('00.png doenst exists, go back!')
                     return
         except:
             self.session.open(MessageBox, _("Download error: Server disconnected while calling, try again later."), MessageBox.TYPE_INFO)
@@ -1432,14 +1432,14 @@ class localcityscreen(Screen):
             for x in SavedLokaleWeer:
                 file.write((str(x)+ "\n"))
             file.close()
-            print searchterm
+            print(searchterm)
             self.close()
             self.close()
 
     def go(self):
         if len(SavedLokaleWeer)>0:
             index = self["list"].getSelectedIndex()
-            print "index: "+ str(index)
+            print("index: "+ str(index))
             try:
                 if getLocWeer(SavedLokaleWeer[index].rstrip()):
                     time.sleep(1)
@@ -1471,7 +1471,7 @@ def main(session, **kwargs):
             for line in open(locdirsave):
                 location = line.rstrip()
                 SavedLokaleWeer.append(location)
-        print "start-----------:" + str(SavedLokaleWeer)
+        print("start-----------:" + str(SavedLokaleWeer))
         try:
             response = urllib2.urlopen("https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php?data")
             ids = int(response.read())
