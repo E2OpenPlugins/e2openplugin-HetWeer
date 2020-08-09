@@ -42,10 +42,10 @@ gettext.textdomain("enigma2")
 gettext.bindtextdomain("HetWeer", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/HetWeer/locale/"))
 
 def _(txt):
-	t = gettext.dgettext("HetWeer", txt)
-	if t == txt:
-		t = gettext.gettext(txt)
-	return t
+    t = gettext.dgettext("HetWeer", txt)
+    if t == txt:
+        t = gettext.gettext(txt)
+    return t
 
 versienummer = ''
 if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'):
@@ -1205,7 +1205,7 @@ class radarScreenoatv(Screen):
         sz_w = getDesktop(0).size().width()
         legendinfo = ''
         if sz_w > 1800:
-	    if legend:
+            if legend:
                 legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legende.png" zPosition="6" position="705,545" size="270,333" alphatest="on"/>"""
             skin = """
             <screen position="fill" title="HetWeer">
@@ -1213,8 +1213,8 @@ class radarScreenoatv(Screen):
             <widget name="radarname" position="center,290" size="550,64" zPosition="7" halign="center" transparent="1" font="Regular;30" borderColor="black" borderWidth="2"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/framehdatv.png" zPosition="6" position="center,center" size="1920,1080" alphatest="on"/>
             </screen>"""
-	
-        else:	
+
+        else:
             if legend:
                 legendinfo = """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lo/legendehd.png" zPosition="6" position="370,222" size="270,333" alphatest="on"/>"""
             skin = """
@@ -1223,7 +1223,7 @@ class radarScreenoatv(Screen):
             <widget name="radarname" position="center,94" size="550,64" zPosition="6" halign="center" transparent="1" font="Regular;30" borderColor="black" borderWidth="2"/>
             <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/borders/framesdatv.png" zPosition="6" position="0,80" size="1280,523" alphatest="on"/>
             </screen>"""
-		
+
         self.session = session
         self.skin = skin
         Screen.__init__(self, session)
@@ -1238,8 +1238,8 @@ class radarScreenoatv(Screen):
         global pos
         if sz_w > 1800:
             self['picd'].moveTo((pos * -550)+685, 284, 1)
-	else:
-	    global picadjust
+        else:
+            global picadjust
             postt=(pos * -550)+365
             if postt<-8000:
                 pos=0
@@ -1333,7 +1333,7 @@ class radarScreenop(Screen):
             self["picd"].moveTo((pos*(-550*self.scaler)-15+415),28,1)
                          
         else:
-	    global picadjust
+            global picadjust
             postt=(pos * -687.5)
             if postt<-8000:
                 pos=0
@@ -1481,9 +1481,9 @@ def main(session, **kwargs):
             with open('/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt', 'rb') as f:
                 data = f.read()
             if not int(data) == ids:
-                urllib.urlretrieve('https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png')
-                urllib.urlretrieve('https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php?small', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png')
-	        urllib.urlretrieve('https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
+                urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png')
+                urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?small', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png')
+                urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
         except:
             None    
         session.open(startScreen)
