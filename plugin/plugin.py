@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5.8r01
+#HetWeer5.9
 import os
 import re 
 import time
@@ -58,7 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.8r01
+#WeerInfoCurVer = 5.9
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -196,9 +196,14 @@ SavedLokaleWeer = []
 weatherData = ["ohka"]
 lockaaleStad = ""
 selectedWeerDay = 0
+
+
+citynamedisplay = ""
+
+
 def getLocWeer(iscity = None):
     inputCity = iscity
-    global lockaaleStad
+    global lockaaleStad, citynamedisplay
     mydata = []
     
     lockaaleStad = inputCity
@@ -212,29 +217,44 @@ def getLocWeer(iscity = None):
         antw = response.read()
         global weatherData
         weatherData = json.loads(antw)
+        citynamedisplay = str(mydata.split("-")[0])
         return True
     except:
         try:
+            snewy = inputCity.replace(" ", "%20").split("_")
+            countycodenewy = ""
+            citynamenewy = snewy[0]
+            if len(snewy) >= 2:
+                print(snewy)
+                countycodenewy = snewy[1]
             text = mydata.replace(' ', '%20')
-            req = urllib2.Request("http://claudck193.193.axc.nl/hetweer.php?cn="+text)
-            response = urllib2.urlopen(req)
+            print("cityname lookup", citynamenewy)
+            response = urllib.urlopen("https://locationxxxxxxx.buienradar.nl/1.1/location/search?query="+citynamenewy)
             antw = response.read()
-            regx = '''(.*?),(.*?),'''
-            match = re.findall(regx, antw, re.DOTALL)     
-        except:
-            return False
-
-    if match:
-        try:
-            response = urllib.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+match[0][0])
+            staddata = json.loads(antw)   
+            entryselect = 0
+            entrselect =0
+            if citynamenewy:
+                for ecpts in staddata:
+                    countcode = str(ecpts["countrycode"]).lower()
+                    if countcode == countycodenewy.lower():
+                        entryselect = entrselect
+                        break
+                    entrselect += 1
+            print("cipt id find", staddata[entryselect]["id"])
+            response = urllib.urlopen("https://forecast.buienradar.nl/2.0/forecast/"+str(staddata[entryselect]["id"]))
             antw = response.read()
             global weatherData
             weatherData = json.loads(antw)
+            
+            
+            citynamedisplay = staddata[entryselect]["name"]+"  "+staddata[entryselect]["countrycode"]
+            
             return True
-        except:
-            return False   
-    else:
-        return False
+        except Exception,e:
+            print(e)
+            return False
+
 
 def weatherchat(country):
     req = urllib2.Request("http://www.buienradar."+country+"/weerbericht")
@@ -523,7 +543,11 @@ class weeroverview(Screen):
         self.session = session
         Screen.__init__(self, session)
         self.skin = skin
-        self["city1"] = Label(lockaaleStad.split("-")[0])
+        
+        print(citynamedisplay, lockaaleStad.split("-")[0])
+        
+        
+        self["city1"] = Label(str(citynamedisplay))
         for day in range(0, 7):
             self["bigWeerIcon1"+str(day)] = Pixmap()
             self["bigWeerIcon1"+str(day)].hide()
@@ -1195,7 +1219,7 @@ class localcityscreen(Screen):
         self.close()
 
     def addLoc(self):
-        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=(_("Enter cityname e.g. london or london/gb or london_us")), text="")
+        self.session.openWithCallback(self.searchCity, VirtualKeyBoard, title=(_("Enter cityname e.g. london or london_gb or london-2643743")), text="")
 
     def addcityinf(self):
         self.session.open(MessageBox, _("Manual adding Citynumbers:\nGo to www.buienradar...\nSearch city and find citycode in internetlink.\n\nGo back to \"Location +\" and add cityname-number e.g.\n\"Dusseldorf-2934246\" or \"Dusseld-2934246\"\nDon't forget the \"-\" sign."), MessageBox.TYPE_INFO)
@@ -1249,14 +1273,14 @@ def main(session, **kwargs):
                 SavedLokaleWeer.append(location)
         print "start-----------:" + str(SavedLokaleWeer)
         try:
-            response = urllib2.urlopen("http://claudck193.193.axc.nl/wallpapers/daa.php?data")
+            response = urllib2.urlopen("https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php?data")
             ids = int(response.read())
             with open('/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt', 'rb') as f:
                 data = f.read()
             if not int(data) == ids:
-                urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png')
-                urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?small', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png')
-	        urllib.urlretrieve('http://claudck193.193.axc.nl/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
+                urllib.urlretrieve('https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/backgroundhd.png')
+                urllib.urlretrieve('https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php?small', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.png')
+	        urllib.urlretrieve('https://www.luxsat.be/hpengine/download_files/plugins/wallpapers/daa.php?data', '/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/background.txt')
         except:
             None    
         session.open(startScreen)
