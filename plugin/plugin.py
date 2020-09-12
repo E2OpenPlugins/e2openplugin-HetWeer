@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#HetWeer5.9
+#HetWeer5.9r01
 import os
 import re 
 import time
@@ -58,7 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
             except IndexError:
                 print
 
-#WeerInfoCurVer = 5.9
+#WeerInfoCurVer = 5.9r01
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
     text = text.replace('&copy;.*', ' ').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6').replace('&eacute;', 'e').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
@@ -229,7 +229,7 @@ def getLocWeer(iscity = None):
                 countycodenewy = snewy[1]
             text = mydata.replace(' ', '%20')
             print("cityname lookup", citynamenewy)
-            response = urllib.urlopen("https://locationxxxxxxx.buienradar.nl/1.1/location/search?query="+citynamenewy)
+            response = urllib.urlopen("https://location.buienradar.nl/1.1/location/search?query="+citynamenewy)
             antw = response.read()
             staddata = json.loads(antw)   
             entryselect = 0
