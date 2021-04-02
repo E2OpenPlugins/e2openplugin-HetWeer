@@ -1,4 +1,5 @@
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/HetWeer/plugin.py
+# -*- coding: utf-8 -*-
+#HetWeer5.9r01
 import os
 import re
 import time
