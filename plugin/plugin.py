@@ -839,7 +839,7 @@ class weatherMenuSub(Screen):
                 elif type == _("Snow radar"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=0&forc=22&step=1&w=550&h=512', '/tmp/HetWeer/00.png')
                 elif type == _("Satellite"):
-                    urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/SatVisual?height=512&width=550&history=8&skip=0', '/tmp/HetWeer/00.png')
+                    urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/SatCombined?height=512&width=550&history=8&skip=0', '/tmp/HetWeer/00.png')
                     legend = False
                 elif type == _("Sunpower-UV"):
                     urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/WeatherMapUVIndexNL?extension=png&l=2&hist=0&forc=10&step=0&width=550&height=512', '/tmp/HetWeer/00.png')
@@ -873,7 +873,7 @@ class weatherMenuSub(Screen):
                 elif type == _("Hail radar"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/hailnl/?ext=png&l=2&hist=0&forc=10&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 elif type == _("Satellite"):
-                    urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/SatVisual?height=512&width=550&history=8&skip=0', '/tmp/HetWeer/00.png')
+                    urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/SatCombined?height=512&width=550&history=8&skip=0', '/tmp/HetWeer/00.png')
                     legend = False
                 elif type == _("Sunpower-UV"):
                     urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/WeatherMapUVIndexNL?extension=png&l=2&hist=0&forc=10&step=0&width=550&height=512', '/tmp/HetWeer/00.png')
@@ -890,7 +890,7 @@ class weatherMenuSub(Screen):
                 elif type == _("Thunder radar"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarcloudseu/?ext=png&l=2&hist=0&forc=8&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
                 elif type == _("Satellite"):
-                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/satvisual2/?ext=png&l=2&hist=8&forc=0&step=0&type=eu&w=550&h=512', '/tmp/HetWeer/00.png')
+                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/SatCombined/?ext=png&l=2&hist=8&forc=0&step=0&type=eu&w=550&h=512', '/tmp/HetWeer/00.png')
                     legend = False
                 elif type == _("Sunpower-UV"):
                     urllib.urlretrieve('https://image.buienradar.nl/2.0/image/sprite/WeatherMapUVIndexNL?extension=png&l=2&hist=0&forc=10&step=0&width=550&height=512', '/tmp/HetWeer/00.png')
