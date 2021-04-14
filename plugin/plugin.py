@@ -40,6 +40,7 @@ gettext.bindtextdomain('enigma2', resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain('enigma2')
 gettext.bindtextdomain('HetWeer', '%s%s' % (resolveFilename(SCOPE_PLUGINS), 'Extensions/HetWeer/locale/'))
 
+
 def _(txt):
     t = gettext.dgettext('HetWeer', txt)
     if t == txt:
@@ -57,6 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
                 versienummer = versie.split('+')[1]
             except IndexError:
                 print
+
 
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
@@ -208,6 +210,7 @@ weatherData = ['ohka']
 lockaaleStad = ''
 selectedWeerDay = 0
 citynamedisplay = ''
+
 
 def getLocWeer(iscity=None):
     global lockaaleStad
@@ -1084,6 +1087,7 @@ class localcityscreen(Screen):
 
 
 pos = 0
+
 
 def main(session, **kwargs):
     global SavedLokaleWeer
