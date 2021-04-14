@@ -7,8 +7,10 @@ import json
 import math
 import struct
 import gettext
-import datetime, time
-import urllib2, urllib
+import datetime
+import time
+import urllib2
+import urllib
 from Screens.Console import Console
 from Components.Language import language
 from Plugins.Plugin import PluginDescriptor
