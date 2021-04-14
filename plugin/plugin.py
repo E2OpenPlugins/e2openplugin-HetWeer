@@ -236,7 +236,7 @@ def getLocWeer(iscity=None):
                 print snewy
                 countycodenewy = snewy[1]
             text = mydata.replace(' ', '%20')
-            print ('cityname lookup', citynamenewy)
+            print('cityname lookup', citynamenewy)
             response = urllib.urlopen('https://location.buienradar.nl/1.1/location/search?query=' + citynamenewy)
             antw = response.read()
             staddata = json.loads(antw)
@@ -250,7 +250,7 @@ def getLocWeer(iscity=None):
                         break
                     entrselect += 1
 
-            print ('cipt id find', staddata[entryselect]['id'])
+            print('cipt id find', staddata[entryselect]['id'])
             response = urllib.urlopen('https://forecast.buienradar.nl/2.0/forecast/' + str(staddata[entryselect]['id']))
             antw = response.read()
             weatherData = json.loads(antw)
@@ -459,7 +459,7 @@ class weeroverview(Screen):
         self.session = session
         Screen.__init__(self, session)
         self.skin = skin
-        print (citynamedisplay, lockaaleStad.split('-')[0])
+        print(citynamedisplay, lockaaleStad.split('-')[0])
         self['city1'] = Label(str(citynamedisplay))
         for day in range(0, 7):
             self['bigWeerIcon1' + str(day)] = Pixmap()
