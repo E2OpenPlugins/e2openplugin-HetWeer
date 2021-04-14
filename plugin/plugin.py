@@ -209,7 +209,7 @@ lockaaleStad = ''
 selectedWeerDay = 0
 citynamedisplay = ''
 
-def getLocWeer(iscity = None):
+def getLocWeer(iscity=None):
     global lockaaleStad
     global weatherData
     global citynamedisplay
@@ -966,7 +966,7 @@ class radarScreenop(Screen):
         self.PicLoad.startDecode(self.picPath)
         return
 
-    def DecodePicture1(self, PicInfo = ''):
+    def DecodePicture1(self, PicInfo=''):
         if self.picPath is not None:
             ptr = self.PicLoad.getData()
             self['picd'].instance.setPixmap(ptr)
@@ -1043,7 +1043,7 @@ class localcityscreen(Screen):
     def addcityinf(self):
         self.session.open(MessageBox, _('Manual adding Citynumbers:\nGo to www.buienradar...\nSearch city and find citycode in internetlink.\n\nGo back to "Location +" and add cityname-number e.g.\n"Dusseldorf-2934246" or "Dusseld-2934246"\nDon\'t forget the "-" sign.'), MessageBox.TYPE_INFO)
 
-    def searchCity(self, searchterm = None):
+    def searchCity(self, searchterm=None):
         if searchterm is not None:
             searchterm = '' + searchterm.title()
             SavedLokaleWeer.append(str(searchterm))
