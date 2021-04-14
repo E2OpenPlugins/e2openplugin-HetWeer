@@ -7,8 +7,10 @@ import json
 import math
 import struct
 import gettext
-import datetime, time
-import urllib2, urllib
+import datetime
+import time
+import urllib2
+import urllib
 from Screens.Console import Console
 from Components.Language import language
 from Plugins.Plugin import PluginDescriptor
@@ -38,6 +40,7 @@ gettext.bindtextdomain('enigma2', resolveFilename(SCOPE_LANGUAGE))
 gettext.textdomain('enigma2')
 gettext.bindtextdomain('HetWeer', '%s%s' % (resolveFilename(SCOPE_PLUGINS), 'Extensions/HetWeer/locale/'))
 
+
 def _(txt):
     t = gettext.dgettext('HetWeer', txt)
     if t == txt:
@@ -55,6 +58,7 @@ if os.path.exists('/var/lib/opkg/info/enigma2-plugin-extensions-hetweer.control'
                 versienummer = versie.split('+')[1]
             except IndexError:
                 print
+
 
 def transhtml(text):
     text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
@@ -207,7 +211,8 @@ lockaaleStad = ''
 selectedWeerDay = 0
 citynamedisplay = ''
 
-def getLocWeer(iscity = None):
+
+def getLocWeer(iscity=None):
     global lockaaleStad
     global weatherData
     global citynamedisplay
@@ -234,7 +239,7 @@ def getLocWeer(iscity = None):
                 print snewy
                 countycodenewy = snewy[1]
             text = mydata.replace(' ', '%20')
-            print ('cityname lookup', citynamenewy)
+            print('cityname lookup', citynamenewy)
             response = urllib.urlopen('https://location.buienradar.nl/1.1/location/search?query=' + citynamenewy)
             antw = response.read()
             staddata = json.loads(antw)
@@ -248,7 +253,7 @@ def getLocWeer(iscity = None):
                         break
                     entrselect += 1
 
-            print ('cipt id find', staddata[entryselect]['id'])
+            print('cipt id find', staddata[entryselect]['id'])
             response = urllib.urlopen('https://forecast.buienradar.nl/2.0/forecast/' + str(staddata[entryselect]['id']))
             antw = response.read()
             weatherData = json.loads(antw)
@@ -457,7 +462,7 @@ class weeroverview(Screen):
         self.session = session
         Screen.__init__(self, session)
         self.skin = skin
-        print (citynamedisplay, lockaaleStad.split('-')[0])
+        print(citynamedisplay, lockaaleStad.split('-')[0])
         self['city1'] = Label(str(citynamedisplay))
         for day in range(0, 7):
             self['bigWeerIcon1' + str(day)] = Pixmap()
@@ -964,7 +969,7 @@ class radarScreenop(Screen):
         self.PicLoad.startDecode(self.picPath)
         return
 
-    def DecodePicture1(self, PicInfo = ''):
+    def DecodePicture1(self, PicInfo=''):
         if self.picPath is not None:
             ptr = self.PicLoad.getData()
             self['picd'].instance.setPixmap(ptr)
@@ -1041,7 +1046,7 @@ class localcityscreen(Screen):
     def addcityinf(self):
         self.session.open(MessageBox, _('Manual adding Citynumbers:\nGo to www.buienradar...\nSearch city and find citycode in internetlink.\n\nGo back to "Location +" and add cityname-number e.g.\n"Dusseldorf-2934246" or "Dusseld-2934246"\nDon\'t forget the "-" sign.'), MessageBox.TYPE_INFO)
 
-    def searchCity(self, searchterm = None):
+    def searchCity(self, searchterm=None):
         if searchterm is not None:
             searchterm = '' + searchterm.title()
             SavedLokaleWeer.append(str(searchterm))
@@ -1082,6 +1087,7 @@ class localcityscreen(Screen):
 
 
 pos = 0
+
 
 def main(session, **kwargs):
     global SavedLokaleWeer
