@@ -202,7 +202,7 @@ citynamedisplay = ""
 
 def getLocWeer(iscity = None):
     inputCity = iscity
-    global lockaaleStad, citynamedisplay
+    global lockaaleStad, citynamedisplay, weatherData
     mydata = []
     
     lockaaleStad = inputCity
@@ -214,7 +214,6 @@ def getLocWeer(iscity = None):
         print(citynumb)
         response = urllib.request.urlopen("http://api.buienradar.nl/data/forecast/1.1/all/"+ str(citynumb))
         antw = response.read()
-        global weatherData
         weatherData = json.loads(antw)
         citynamedisplay = str(mydata.split("-")[0])
         return True
@@ -243,7 +242,6 @@ def getLocWeer(iscity = None):
             print("cipt id find", staddata[entryselect]["id"])
             response = urllib.request.urlopen("https://forecast.buienradar.nl/2.0/forecast/"+str(staddata[entryselect]["id"]))
             antw = response.read()
-            global weatherData
             weatherData = json.loads(antw)
             
             
@@ -735,10 +733,10 @@ class weeroverview(Screen):
 
 class veertien(Screen):
     def __init__(self, session):
+        global weatherData
         sz_w = getDesktop(0).size().width()
         if sz_w > 1800:
             dayinfoblok = ""
-            global weatherData
             dataDagen = weatherData["days"]
             maxheightshift = 2000
             for day in range(0, 14):
@@ -826,7 +824,6 @@ class veertien(Screen):
                 </screen>"""
         else:
             dayinfoblok = ""
-            global weatherData
             dataDagen = weatherData["days"]
             maxheightshift = 2000
             for day in range(0, 14):
