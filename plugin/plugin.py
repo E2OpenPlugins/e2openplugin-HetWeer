@@ -165,7 +165,7 @@ def get_image_info(pic):
         width = int(w)
         height = int(h)
     else:
-        return 0
+        return 0, 0
     return width, height
 
 def is_png(data):
