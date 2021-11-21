@@ -169,7 +169,7 @@ def get_image_info(pic):
     return width, height
 
 def is_png(data):
-    return (data[:8] == "\211PNG\r\n\032\n"and (data[12:16] == "IHDR"))
+    return (data[:8] == b'\x89PNG\r\n\x1a\n' and (data[12:16] == b'IHDR'))
 
 def checkInternet():
     try:
