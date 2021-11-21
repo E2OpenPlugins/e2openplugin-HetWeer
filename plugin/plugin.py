@@ -250,7 +250,7 @@ def getLocWeer(iscity = None):
             citynamedisplay = staddata[entryselect]["name"]+"  "+staddata[entryselect]["countrycode"]
             
             return True
-        except Exception,e:
+        except Exception as e:
             print(e)
             return False
 
