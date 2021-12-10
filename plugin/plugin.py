@@ -1052,7 +1052,7 @@ class weatherMenuSub(Screen):
                     wchat = weatherchat("nl/Nederland/weerbericht")
                     self.session.open(weathertalk)
                 elif type == _("Temperature"):
-                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?ext=png&l=2&hist=2&forc=1&step=20&type=temperatuur&w=550&h=512', '/tmp/HetWeer/00.png')
+                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?ext=png&l=2&hist=12&forc=1&step=0&type=temperatuur&w=550&h=512', '/tmp/HetWeer/00.png')
                     legend = False
                 elif type == _("Rainfall radar"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=20&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
