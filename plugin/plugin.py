@@ -958,7 +958,7 @@ class weatherMenuSub(Screen):
             <widget name="key_red" position="185,643" size="220,28" zPosition="1" transparent="1" font="Regular;24" borderColor="black" borderWidth="1" halign="left"/>
         </screen>"""
           
-    listNamesnl = [_("Temperature"), _("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Mist radar"), _("Snow radar"), _("Sun radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
+    listNamesnl = [_("Rainfall radar"), _("Temperature"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Mist radar"), _("Snow radar"), _("Sun radar"), _("Sunpower-UV"), _("Satellite"), _("Weather forecast-nl")]
     listNamesbe = [_("Rainfall radar"), _("Drizzle"), _("Thunder radar"), _("Clouds radar"), _("Hail radar"), _("Snow radar"), _("Sun radar"), _("Satellite"), _("Weather forecast-nl")]
     listNameseu = [_("Rainfall radar"), _("Thunder radar"), _("Satellite"), _("Weather forecast-nl")]
     def __init__(self, session):
@@ -1023,6 +1023,9 @@ class weatherMenuSub(Screen):
                 if type == _("Weather forecast-nl"):
                     wchat = weatherchat("be/Belgie/weerbericht")
                     self.session.open(weathertalk)
+                elif type == _("Temperature"):
+                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?ext=png&l=2&hist=12&forc=1&step=0&type=temperatuur&w=550&h=512', '/tmp/HetWeer/00.png')
+                    legend = False
                 elif type == _("Rainfall radar"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapbe/?ext=png&l=2&hist=0&forc=20&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
                 elif type == _("Drizzle"):
@@ -1051,11 +1054,11 @@ class weatherMenuSub(Screen):
                 if type == _("Weather forecast-nl"):
                     wchat = weatherchat("nl/Nederland/weerbericht")
                     self.session.open(weathertalk)
+                elif type == _("Rainfall radar"):
+                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=20&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
                 elif type == _("Temperature"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?ext=png&l=2&hist=12&forc=1&step=0&type=temperatuur&w=550&h=512', '/tmp/HetWeer/00.png')
                     legend = False
-                elif type == _("Rainfall radar"):
-                    urllib.urlretrieve('http://api.buienradar.nl/image/1.0/radarmapnl/?ext=png&l=2&hist=0&forc=20&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
                 elif type == _("Drizzle"):
                     urllib.urlretrieve('http://api.buienradar.nl/image/1.0/drizzlemapnl/?ext=png&l=2&hist=30&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
                 elif type == _("Clouds radar"):
