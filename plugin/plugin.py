@@ -20,7 +20,6 @@ from Components.ScrollLabel import ScrollLabel
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Converter.ClockToText import ClockToText
 from Components.Pixmap import Pixmap, MovingPixmap
-from twisted.web.client import downloadPage, getPage
 from Screens.MessageBox import MessageBox
 from enigma import ePicLoad, getDesktop, eTimer
 from enigma import eLabel, eListboxPythonMultiContent, loadPNG, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER
