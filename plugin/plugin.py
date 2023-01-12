@@ -8,6 +8,8 @@ import math
 import struct
 import gettext
 import datetime, time
+import socket
+socket.setdefaulttimeout(10)
 import urllib
 from Screens.Console import Console
 from Components.Language import language
