@@ -255,15 +255,18 @@ def getLocWeer(iscity = None):
 
 
 def weatherchat(country):
-    req = urllib.request.Request("http://www.buienradar."+country+"/weerbericht")
+    req = urllib.request.Request("https://www.buienradar."+country+"/weerbericht")
     response = urllib.request.urlopen(req)
     antw = response.read()
+    antw = antw.decode('utf-8')
     antw = antw.replace("\t", "").replace("\r", "").replace("\n", "").replace("<strong>", "")
-    antw = antw.replace("<br />", "").replace("</strong>", "").replace("</a>", "")
+    antw = antw.replace("<br />", "").replace("</strong>", "").replace("</a>", "").replace("</span>", "")
     antw = re.sub("""<a href=".*?">""" , "", antw)
+    antw = re.sub("""<span lang=".*?">""" , "", antw)
     regx = '''<div id="readarea" class="description">(.*?)</div>'''
     match = re.findall(regx, antw, re.DOTALL)
     return match[0]
+
 
 class startScreen(Screen):
     sz_w = getDesktop(0).size().width()
@@ -1094,7 +1097,7 @@ class weatherMenuSub(Screen):
                     legend = False
                 if not type == _("Weather forecast-nl"):
                     openScreenRadar()
-        
+
             if not newView:
                 picturedownloadurl = "http://api.buienradar.nl/image/1.0/" + loctype
                 for x in range(0, aantalfotos):
@@ -1113,6 +1116,8 @@ class weatherMenuSub(Screen):
                     print('00.png doenst exists, go back!')
                     return
         except:
+            import traceback
+            traceback.print_exc()
             self.session.open(MessageBox, _("Download error: Server disconnected while calling, try again later."), MessageBox.TYPE_INFO)
     def exit(self):
         self.close(weatherMenuSub)
