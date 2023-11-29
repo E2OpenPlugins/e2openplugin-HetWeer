@@ -1061,7 +1061,7 @@ class weatherMenuSub(Screen):
                 elif type == _("Clouds radar"):
                     urllib.request.urlretrieve('http://api.buienradar.nl/image/1.0/cloudmapnl/?ext=png&l=2&hist=30&forc=0&step=0&h=512&w=550', '/tmp/HetWeer/00.png')
                 elif type == _("Snow radar"):
-                    urllib.request.request.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
+                    urllib.request.urlretrieve('http://api.buienradar.nl/image/1.0/snowmapnl/?ext=png&l=2&hist=10&forc=1&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                 elif type == _("Mist radar"):
                     urllib.request.urlretrieve('http://api.buienradar.nl/image/1.0/weathermapnl/?type=zicht&ext=png&l=2&hist=2&forc=0&step=0&w=550&h=512', '/tmp/HetWeer/00.png')
                     legend = False
