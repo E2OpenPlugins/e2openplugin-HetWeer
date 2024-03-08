@@ -744,13 +744,14 @@ class veertien(Screen):
             global weatherData
             dataDagen = weatherData["days"]
             maxheightshift = 2000
-            for day in range(0, 14):
+            for day in range(0, len(dataDagen)):
                 dagenbefore = dataDagen[day]
                 curtemp = int(round(dagenbefore["maxtemperature"]))
-                tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
                 lineheight = 0
-                if tempdiff > 0:
-                    lineheight = tempdiff*18
+                if day < len(dataDagen)-1:
+                    tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
+                    if tempdiff > 0:
+                        lineheight = tempdiff*18
                 yposline = (1200-(curtemp*18))-lineheight
                 yposline = (((yposline)+lineheight)-12)
                 if yposline < maxheightshift:
@@ -758,13 +759,14 @@ class veertien(Screen):
             print("----> maxponi",maxheightshift)
             maxheightshift = 700-maxheightshift
             print("----> shift",maxheightshift)
-            for day in range(0, 14):
+            for day in range(0, len(dataDagen)):
                 dagenbefore = dataDagen[day]
                 curtemp = int(round(dagenbefore["maxtemperature"]))
-                tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
                 lineheight = 0
-                if tempdiff > 0:
-                    lineheight = tempdiff*18
+                if day < len(dataDagen)-1:
+                    tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
+                    if tempdiff > 0:
+                        lineheight = tempdiff*18
                 yposline = (1200-(curtemp*18))-lineheight
                 shiftstart = 130
                 rainamount = (int(float(dagenbefore["precipitationmm"])*2))
@@ -793,13 +795,14 @@ class veertien(Screen):
                 self["regenval"+str(day)] = Label(str(dagenbefore["precipitationmm"])+" mm")
                 self["regenvalunit"+str(day)] = Label(str(""))
                 curtemp = int(round(dagenbefore["mintemperature"]))
-                tempdiff = int(round(dataDagen[day+1]["mintemperature"])-curtemp)
                 lineheight = 0
-                if tempdiff > 0:
-                    lineheight = tempdiff*18
+                if day < len(dataDagen):
+                    tempdiff = int(round(dataDagen[day+1]["mintemperature"])-curtemp)
+                    if tempdiff > 0:
+                        lineheight = tempdiff*18
                 yposline = (1200-(curtemp*18))-lineheight
                 yposline = yposline+maxheightshift
-                if day < 13:
+                if day < len(dataDagen)-1:
                     dayinfoblok += """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lines/b""" + str(tempdiff) + """.png" position=\"""" + str((130 + (118 * day))+59) + ""","""+str(yposline)+"""\" size="200,200" zPosition="10" transparent="0" alphatest="blend"/>"""
                 dayinfoblok += """<widget name="linetempmin""" + str(day) + """" position=\"""" + str(((130 + (118 * day))-18)+59) + ""","""+str((yposline+15)+lineheight)+"""\" size="90,54" zPosition="15" font="Regular;30" transparent="1" borderColor="black" borderWidth="1"/>"""
                 dayinfoblok += """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/lines/bdot.png" position=\"""" + str(((130 + (118 * day))+59)-12) + ""","""+str(((yposline)+lineheight)-12)+"""\" size="200,200" zPosition="10" transparent="0" alphatest="blend"/>"""
@@ -832,13 +835,14 @@ class veertien(Screen):
             global weatherData
             dataDagen = weatherData["days"]
             maxheightshift = 2000
-            for day in range(0, 14):
+            for day in range(0, len(dataDagen)):
                 dagenbefore = dataDagen[day]
                 curtemp = int(round(dagenbefore["maxtemperature"]))
-                tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
                 lineheight = 0
-                if tempdiff > 0:
-                    lineheight = tempdiff*12
+                if day < len(dataDagen)-1:
+                    tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
+                    if tempdiff > 0:
+                        lineheight = tempdiff*12
                 yposline = (800-(curtemp*12))-lineheight
                 yposline = (((yposline)+lineheight)-8)
                 if yposline < maxheightshift:
@@ -846,20 +850,21 @@ class veertien(Screen):
             print("----> maxponi",maxheightshift)
             maxheightshift = 467-maxheightshift
             print("----> shift",maxheightshift)
-            for day in range(0, 14):
+            for day in range(0, len(dataDagen)):
                 dagenbefore = dataDagen[day]
                 curtemp = int(round(dagenbefore["maxtemperature"]))
-                tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
                 lineheight = 0
-                if tempdiff > 0:
-                    lineheight = tempdiff*12
+                if day < len(dataDagen)-1:
+                    tempdiff = int(round(dataDagen[day+1]["maxtemperature"])-curtemp)
+                    if tempdiff > 0:
+                        lineheight = tempdiff*12
                 yposline = (800-(curtemp*12))-lineheight
                 shiftstart = 87
                 rainamount = (int(float(dagenbefore["precipitationmm"])*2))
                 if rainamount > 67:
                     rainamount = 67
                 yposline = yposline+maxheightshift
-                if day < 13:
+                if day < len(dataDagen)-1:
                     dayinfoblok += """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/linessd/""" + str(tempdiff) + """.png" position=\"""" + str((87 + (79 * day))+40) + ""","""+str(yposline)+"""\" size="134,134" zPosition="10" transparent="0" alphatest="blend"/>
                     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/linessd/bar.png" position=\"""" + str((87 + (79 * day))+80) + """,94" size="3,650" zPosition="10" transparent="0" alphatest="blend"/>
                 
@@ -881,13 +886,14 @@ class veertien(Screen):
                 self["windspeed"+str(day)] = Label(str(dagenbefore["windspeed"])+" km/h")
                 self["regenvalunit"+str(day)] = Label(str(""))
                 curtemp = int(round(dagenbefore["mintemperature"]))
-                tempdiff = int(round(dataDagen[day+1]["mintemperature"])-curtemp)
                 lineheight = 0
-                if tempdiff > 0:
-                    lineheight = tempdiff*12
+                if day < len(dataDagen)-1:
+                    tempdiff = int(round(dataDagen[day+1]["mintemperature"])-curtemp)
+                    if tempdiff > 0:
+                        lineheight = tempdiff*12
                 yposline = (800-(curtemp*12))-lineheight
                 yposline = yposline+maxheightshift
-                if day < 13:
+                if day < len(dataDagen)-1:
                     dayinfoblok += """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/linessd/b""" + str(tempdiff) + """.png" position=\"""" + str((87 + (79 * day))+40) + ""","""+str(yposline)+"""\" size="134,134" zPosition="10" transparent="0" alphatest="blend"/>"""
                 dayinfoblok += """<widget name="linetempmin""" + str(day) + """" position=\"""" + str(((87 + (79 * day))-12)+40) + ""","""+str((yposline+10)+lineheight)+"""\" size="60,36" zPosition="15" font="Regular;20" transparent="1" borderColor="black" borderWidth="1"/>"""
                 dayinfoblok += """<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/HetWeer/Images/linessd/bdot.png" position=\"""" + str(((87 + (79 * day))+40)-8) + ""","""+str(((yposline)+lineheight)-7)+"""\" size="134,134" zPosition="10" transparent="0" alphatest="blend"/>"""
