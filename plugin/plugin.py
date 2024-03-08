@@ -796,7 +796,7 @@ class veertien(Screen):
                 self["regenvalunit"+str(day)] = Label(str(""))
                 curtemp = int(round(dagenbefore["mintemperature"]))
                 lineheight = 0
-                if day < len(dataDagen):
+                if day < len(dataDagen)-1:
                     tempdiff = int(round(dataDagen[day+1]["mintemperature"])-curtemp)
                     if tempdiff > 0:
                         lineheight = tempdiff*18
