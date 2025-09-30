@@ -176,9 +176,11 @@ def is_png(data):
 
 def checkInternet():
     try:
-        response = urllib2.urlopen("http://google.com", None, 5)
+        response = urllib2.urlopen("https://google.com", None, 5)
         response.close()
-    except urllib2.HTTPError:
+    except urllib2.HTTPError as err:
+        if err.code < 400 or err.code == 429:
+          return True
         return False
     except urllib2.URLError:
         return False
