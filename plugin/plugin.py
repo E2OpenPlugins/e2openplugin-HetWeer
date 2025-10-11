@@ -176,7 +176,7 @@ def checkInternet():
     try:
         response = urllib.request.urlopen("https://google.com", None, 5)
         response.close()
-    except urllib2.HTTPError as err:
+    except urllib.error.HTTPError as err:
         if err.code < 400 or err.code == 429:
           return True
         return False
